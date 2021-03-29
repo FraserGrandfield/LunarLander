@@ -16,7 +16,6 @@ public class ChangeSceneComponent : MonoBehaviour
         switch (buttonName)
         {
             case "PlayButton":
-                Debug.Log("In play button");
                 StartCoroutine(ChangeScene("PlayScene"));
                 break;
             case "SettingsButton":
