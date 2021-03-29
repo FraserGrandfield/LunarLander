@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -15,22 +16,23 @@ public class ChangeSceneComponent : MonoBehaviour
         switch (buttonName)
         {
             case "PlayButton":
-                ChangeScene("PlayScene");
+                Debug.Log("In play button");
+                StartCoroutine(ChangeScene("PlayScene"));
                 break;
             case "SettingsButton":
-                ChangeScene("SettingsScene");
+                StartCoroutine(ChangeScene("SettingsScene"));
                 break;
             case "ChangePlayerButton":
-                ChangeScene("ChangePlayerScene");
+                StartCoroutine(ChangeScene("ChangePlayerScene"));
                 break;
             case "ReplaysButton":
-                ChangeScene("ReplaysScene");
+                StartCoroutine(ChangeScene("ReplaysScene"));
                 break;
             case "HighscoreButton":
-                ChangeScene("HighscoreScene");
+                StartCoroutine(ChangeScene("HighscoreScene"));
                 break;
             case "AchievementsButton":
-                ChangeScene("AchievementsScene");
+                StartCoroutine(ChangeScene("AchievementsScene"));
                 break;
             case "ExitButton":
                 Application.Quit();
@@ -41,8 +43,9 @@ public class ChangeSceneComponent : MonoBehaviour
         }
     }
 
-    private static void ChangeScene(string sceneName)
-    { 
+    private static IEnumerator ChangeScene(string sceneName)
+    {
+        yield return new WaitForSeconds(1f);
         SceneManager.LoadScene(sceneName);
     }
 }
