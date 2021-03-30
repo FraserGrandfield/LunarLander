@@ -380,6 +380,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bd9a85f56ec8214b925bb6a7f4d7d2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scoreMultiplier: 1
 --- !u!224 &565153124 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7051120229102032729, guid: 0404287ef85c1ac41a8a19a03ac4d541,
@@ -821,6 +822,7 @@ GameObject:
   - component: {fileID: 1512156641}
   - component: {fileID: 1512156642}
   - component: {fileID: 1512156643}
+  - component: {fileID: 1512156644}
   m_Layer: 6
   m_Name: PlayableShip
   m_TagString: Untagged
@@ -1047,6 +1049,18 @@ MonoBehaviour:
   xSpeed: 0
   ySpeed: 0
   score: 0
+--- !u!114 &1512156644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1512156632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5fb681e2518e20408c1e0596d723381, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1662446113
 GameObject:
   m_ObjectHideFlags: 0
