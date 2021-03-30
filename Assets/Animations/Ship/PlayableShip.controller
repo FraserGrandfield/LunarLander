@@ -11,6 +11,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: ForceApplied
     m_EventTreshold: 0
+  - m_ConditionMode: 2
+    m_ConditionEvent: Expload
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -97438124722599192}
   m_Solo: 0
@@ -65,15 +68,18 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: Expload
     m_EventTreshold: 0
+  - m_ConditionMode: 2
+    m_ConditionEvent: ForceApplied
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 8658088283251099478}
   m_Solo: 0
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.0063704844
+  m_TransitionDuration: 0.006342654
   m_TransitionOffset: 0
-  m_ExitTime: 0.000000007522989
+  m_ExitTime: 0.000000017366014
   m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -121,13 +127,13 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Expload
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -151,6 +157,9 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 2
     m_ConditionEvent: ForceApplied
+    m_EventTreshold: 0
+  - m_ConditionMode: 2
+    m_ConditionEvent: Expload
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 4376097684525480385}
@@ -186,9 +195,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.0030342937
+  m_TransitionDuration: 0.016886592
   m_TransitionOffset: 0
-  m_ExitTime: 0.516129
+  m_ExitTime: 0.99591464
   m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -204,6 +213,9 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 1
     m_ConditionEvent: ForceApplied
+    m_EventTreshold: 0
+  - m_ConditionMode: 2
+    m_ConditionEvent: Expload
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -5452701752780394294}
@@ -289,7 +301,7 @@ AnimatorStateMachine:
     m_Position: {x: 240, y: 70, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -5452701752780394294}
-    m_Position: {x: 510, y: 70, z: 0}
+    m_Position: {x: 520, y: 70, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -97438124722599192}
     m_Position: {x: 540, y: 240, z: 0}
@@ -326,9 +338,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.0026824325
-  m_TransitionOffset: 0.0059653847
-  m_ExitTime: 0.29878137
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
+  m_ExitTime: 1.0046425
   m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
