@@ -479,8 +479,10 @@ GameObject:
   - component: {fileID: 1512156638}
   - component: {fileID: 1512156640}
   - component: {fileID: 1512156635}
+  - component: {fileID: 1512156641}
+  - component: {fileID: 1512156642}
   m_Layer: 0
-  m_Name: shipSprites2_0
+  m_Name: PlayableShip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -588,7 +590,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 464b1b2fa69d18740aed59bdadf6ce53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isForReplay: 0
   gamePaused: 0
 --- !u!60 &1512156638
 PolygonCollider2D:
@@ -607,7 +608,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.2, y: 0.15}
+    oldSize: {x: 0.2, y: 0.18}
     newSize: {x: 0.2, y: 0.15}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -658,6 +659,37 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ca06eb6325a41f647a47d46e2bbb59a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!95 &1512156641
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1512156632}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5851263ef50483d448c6508d7bf5c144, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1512156642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1512156632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b9f2eaf0ad42a64c9af90ff8bb51d12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2084440311

@@ -11,6 +11,7 @@ public class ShipManager : MonoBehaviour
     public static event Action<int> RotateShip;
     public static event Action StartRecording;
     public static event Action PauseGame;
+    public static event Action AcceleratorKeyUp;
 
     [SerializeField] private bool gamePaused;
 
@@ -33,6 +34,12 @@ public class ShipManager : MonoBehaviour
             if (acceleration != 0)
             {
                 AccelerateShip?.Invoke(acceleration);
+            }
+
+            bool accelerateKeyUp = _inputReader.ReadAccelerateInputKeyUp();
+            if (accelerateKeyUp)
+            {
+                AcceleratorKeyUp?.Invoke();
             }
 
             int rotation = _inputReader.ReadRotateInput();

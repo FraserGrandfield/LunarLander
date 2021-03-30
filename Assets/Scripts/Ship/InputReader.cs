@@ -14,6 +14,11 @@ public class InputReader : MonoBehaviour
 
         return keydown;
     }
+    
+    public bool ReadAccelerateInputKeyUp()
+    {
+        return Input.GetKeyUp(KeyCode.Space);
+    }
 
     public int ReadRotateInput()
     {
