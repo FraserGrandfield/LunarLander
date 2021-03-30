@@ -10,12 +10,12 @@ public class ShipReplay : MonoBehaviour
     private BinaryWriter _binaryWriter;
     private BinaryReader _binaryReader;
     private bool startReplay;
-    private ShipManager _shipManager;
+    private ShipStats _shipStats;
 
     private void Start()
     {
         startReplay = false;
-        _shipManager = gameObject.GetComponent<ShipManager>();
+        _shipStats = gameObject.GetComponent<ShipStats>();
     }
 
     private void Awake()
@@ -45,9 +45,9 @@ public class ShipReplay : MonoBehaviour
         _binaryWriter.Write(transform.rotation.z);
         _binaryWriter.Write(transform.rotation.w);
         _binaryWriter.Write(isAccelerating);
-        _binaryWriter.Write(_shipManager.getFuel());
-        _binaryWriter.Write(_shipManager.getXSpeed());
-        _binaryWriter.Write(_shipManager.getYSpeed());
+        _binaryWriter.Write(_shipStats.getFuel());
+        _binaryWriter.Write(_shipStats.getXSpeed());
+        _binaryWriter.Write(_shipStats.getYSpeed());
     }
 
     private void StartReplay()

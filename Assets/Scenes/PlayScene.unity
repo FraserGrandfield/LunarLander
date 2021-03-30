@@ -494,6 +494,7 @@ GameObject:
   - component: {fileID: 1512156635}
   - component: {fileID: 1512156641}
   - component: {fileID: 1512156642}
+  - component: {fileID: 1512156643}
   m_Layer: 0
   m_Name: PlayableShip
   m_TagString: Untagged
@@ -603,9 +604,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 464b1b2fa69d18740aed59bdadf6ce53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fuel: 0
-  xSpeed: 0
-  ySpeed: 0
 --- !u!60 &1512156638
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -707,6 +705,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b9f2eaf0ad42a64c9af90ff8bb51d12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1512156643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1512156632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e214051d3cda94b4a81a307ae80a7f7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fuel: 0
+  xSpeed: 0
+  ySpeed: 0
+  score: 0
 --- !u!1 &2084440311
 GameObject:
   m_ObjectHideFlags: 0

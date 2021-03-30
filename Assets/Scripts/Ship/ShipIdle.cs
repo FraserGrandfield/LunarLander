@@ -15,18 +15,17 @@ public class ShipIdle : IState
         animator.SetBool("ForceApplied", false);
     }
 
-    public IState Tick(ShipManager ship, InputReader.InputKey? acceleration, InputReader.InputKey? accelerateKeyUp, InputReader.InputKey? rotation)
+    public IState Tick(ShipManager ship, InputReader.InputKey? acceleration, InputReader.InputKey? accelerateKeyUp, InputReader.InputKey? rotation, InputReader.InputKey? resume)
     {
         if (!ship.getGamePaused())
         {
             if (ship.getShipCrashed()) return new ShipCrashed();
             if (ship.getShipLanded()) return new ShipLanded();
-            if (acceleration == InputReader.InputKey.SpaceDown && ship.getFuel() > 0) return new ShipAccelerating();
+            if (acceleration == InputReader.InputKey.SpaceDown && ship.getShipStats().getFuel() > 0) return new ShipAccelerating();
             if (rotation == InputReader.InputKey.RotateClockWise)
             {
                 RotateShip?.Invoke(-1);
             }
-
             if (rotation == InputReader.InputKey.RotateAntiClockWise)
             { 
                 RotateShip?.Invoke(1);

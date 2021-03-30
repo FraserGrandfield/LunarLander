@@ -9,9 +9,10 @@ public class ShipMovment : MonoBehaviour
     private Vector2 velocity;
     private float xForce;
     private float yForce;
-    private int rotateDireciton = 0;
+    private int rotateDireciton;
     private bool gamePaused;
     private float thrust = 10;
+    private float rotateMultiplier = 2;
     private bool isAccelerating;
 
     public static event Action<bool> SaveFrame;
@@ -21,6 +22,9 @@ public class ShipMovment : MonoBehaviour
     private void Start()
     {
         gamePaused = false;
+        xForce = 0;
+        yForce = 0;
+        rotateDireciton = 0;
     }
 
     private void OnEnable()
@@ -30,29 +34,19 @@ public class ShipMovment : MonoBehaviour
         ShipIdle.RotateShip += RotateShip;
         ShipIdle.AcceleratorKeyUp += AcceleratorKeyUp;
         ShipCrashed.PauseShip += PauseGame;
+        ShipCrashed.RestartShip += restartShip;
         ShipLanded.PauseShip += PauseGame;
+        ShipLanded.RestartShip += restartShip;
     }
 
     private void AddForce()
     {
         isAccelerating = true;
-        double eularAngle = transform.localEulerAngles.z;
-        //Convert angle to +/- 180
-        if (eularAngle > 180f) 
-        { 
-            eularAngle = eularAngle - 360;
-        }
-        //Convert to raidians
-        eularAngle = eularAngle * (Math.PI / 180);
-        
-        //Break force into x and y
-        yForce += (float) Math.Cos(eularAngle) * thrust;
-        xForce += (float) Math.Sin(eularAngle) * -thrust;
     }
 
     private void RotateShip(int rotate)
     {
-        rotateDireciton += rotate;
+        rotateDireciton = rotate;
     }
 
     private void PauseGame()
@@ -70,20 +64,36 @@ public class ShipMovment : MonoBehaviour
         if (!gamePaused) 
         {
             SaveFrame?.Invoke(isAccelerating);
-            rotateShip();
             moveShip();
+            rotateShip();
             fuelUpdate();
         }
     }
 
     private void rotateShip()
     {
-        transform.Rotate(new Vector3(0, 0, 90 * Time.deltaTime * rotateDireciton));
+        transform.Rotate(new Vector3(0, 0, 90 * Time.deltaTime * rotateDireciton * rotateMultiplier));
         rotateDireciton = 0;
     }
 
     private void moveShip()
     {
+        if (isAccelerating)
+        {
+            double eularAngle = transform.localEulerAngles.z;
+            //Convert angle to +/- 180
+            if (eularAngle > 180f) 
+            { 
+                eularAngle = eularAngle - 360;
+            }
+            //Convert to raidians
+            eularAngle = eularAngle * (Math.PI / 180);
+            
+            //Break force into x and y
+            yForce += (float) Math.Cos(eularAngle) * thrust;
+            xForce += (float) Math.Sin(eularAngle) * -thrust;
+        }
+        //Add gravity
         yForce += -2.5f;
         //Calculate new velocity V = U + (F / m) t
         velocity.x = velocity.x + (xForce / shipMass) * Time.deltaTime;
@@ -103,5 +113,17 @@ public class ShipMovment : MonoBehaviour
         {
             fuelUsed?.Invoke(1);
         }
+    }
+
+    private void restartShip()
+    {
+        transform.position = new Vector3(0, 0, 0);
+        transform.rotation = new Quaternion(0, 0, 0, 0);
+        velocity = new Vector2(0, 0);
+        xForce = 0;
+        yForce = 0;
+        isAccelerating = false;
+        rotateDireciton = 0;
+        gamePaused = false;
     }
 }

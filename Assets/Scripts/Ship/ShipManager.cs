@@ -8,25 +8,25 @@ public class ShipManager : MonoBehaviour
     private InputReader _inputReader;
     public static event Action StartRecording;
     private IState currentState = new ShipIdle();
-    private bool shipLanded = false;
-    private bool shipCrashed = false;
+    private bool shipLanded;
+    private bool shipCrashed;
     private bool gamePaused = false;
-    [SerializeField] private int fuel;
-    [SerializeField] private float xSpeed;
-    [SerializeField] private float ySpeed;
+    private ShipStats _shipStats;
 
     private void Start()
     {
-        fuel = 5000;
+        shipLanded = false;
+        shipCrashed = false;
+        _shipStats = gameObject.GetComponent<ShipStats>();
         StartRecording?.Invoke();
     }
 
     private void Awake()
     {
         _inputReader = GetComponent<InputReader>();
-        ShipMovment.fuelUsed += updateFuel;
-        ShipMovment.updateVelocity += updateVelocity;
         GroundContatct.ShipTouchedGround += shipTouchedGround;
+        ShipCrashed.RestartShip += restartShip;
+        ShipLanded.RestartShip += restartShip;
     }
 
     public bool getShipLanded()
@@ -44,34 +44,9 @@ public class ShipManager : MonoBehaviour
         return gamePaused;
     }
 
-    public int getFuel()
+    public ShipStats getShipStats()
     {
-        return fuel;
-    }
-    
-    public float getXSpeed()
-    {
-        return xSpeed;
-    }
-    
-    public float getYSpeed()
-    {
-        return ySpeed;
-    }
-
-    private void updateFuel(int fuelUsed)
-    {
-        fuel -= fuelUsed;
-        if (fuel < 0)
-        {
-            fuel = 0;
-        }
-    }
-
-    private void updateVelocity(float x, float y)
-    {
-        xSpeed = x;
-        ySpeed = y;
+        return _shipStats;
     }
 
     private void shipTouchedGround(bool landed)
@@ -87,17 +62,24 @@ public class ShipManager : MonoBehaviour
         
     }
 
+    private void restartShip()
+    {
+        shipCrashed = false;
+        shipLanded = false;
+    }
+
     private void Update()
     {
         InputReader.InputKey? acceleration = _inputReader.ReadAccelerateInput();
         InputReader.InputKey? accelerateKeyUp = _inputReader.ReadAccelerateInputKeyUp();
         InputReader.InputKey? rotation = _inputReader.ReadRotateInput();
-        UpdateState(acceleration, accelerateKeyUp, rotation);
+        InputReader.InputKey? resume = _inputReader.ReadContinueInput();
+        UpdateState(acceleration, accelerateKeyUp, rotation, resume);
     }
 
-    private void UpdateState(InputReader.InputKey? acceleration, InputReader.InputKey? accelerateKeyUp, InputReader.InputKey? rotation)
+    private void UpdateState(InputReader.InputKey? acceleration, InputReader.InputKey? accelerateKeyUp, InputReader.InputKey? rotation, InputReader.InputKey? resume)
     {
-        IState newState = currentState.Tick(this, acceleration, accelerateKeyUp, rotation);
+        IState newState = currentState.Tick(this, acceleration, accelerateKeyUp, rotation, resume);
 
         if (newState != null)
         {

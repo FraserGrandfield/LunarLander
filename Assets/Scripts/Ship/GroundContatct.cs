@@ -13,8 +13,8 @@ public class GroundContatct : MonoBehaviour
         float groundRotation = transform.rotation.eulerAngles.z;
         float rotationDifference = Math.Max(shipRotation, groundRotation) - Math.Min(shipRotation, groundRotation);
         
-        float shipXSpeed = other.GetComponent<ShipManager>().getXSpeed();
-        float shipYSpeed = other.GetComponent<ShipManager>().getYSpeed();
+        float shipXSpeed = other.GetComponent<ShipStats>().getXSpeed();
+        float shipYSpeed = other.GetComponent<ShipStats>().getYSpeed();
         
         if (Math.Abs(shipXSpeed) > 1.5 || Math.Abs(shipYSpeed) > 1.5 || rotationDifference > 5)
         {

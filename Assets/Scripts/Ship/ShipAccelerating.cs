@@ -14,13 +14,13 @@ public class ShipAccelerating : IState
         animator.SetBool("ForceApplied", true);
     }
 
-    public IState Tick(ShipManager ship, InputReader.InputKey? acceleration, InputReader.InputKey? accelerateKeyUp, InputReader.InputKey? rotation)
+    public IState Tick(ShipManager ship, InputReader.InputKey? acceleration, InputReader.InputKey? accelerateKeyUp, InputReader.InputKey? rotation, InputReader.InputKey? resume)
     {
         if (!ship.getGamePaused())
         {
             if (ship.getShipCrashed()) return new ShipCrashed();
             if (ship.getShipLanded()) return new ShipLanded();
-            if (accelerateKeyUp == InputReader.InputKey.SpaceUp || ship.getFuel() < 1) return new ShipIdle();
+            if (accelerateKeyUp == InputReader.InputKey.SpaceUp || ship.getShipStats().getFuel() < 1) return new ShipIdle();
             AccelerateShip?.Invoke();
             if (rotation == InputReader.InputKey.RotateClockWise)
             {
