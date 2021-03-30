@@ -4,37 +4,41 @@ using UnityEngine;
 
 public class InputReader : MonoBehaviour
 {
-    public int ReadAccelerateInput()
+    public enum InputKey
     {
-        int keydown = 0;
+        SpaceDown,
+        SpaceUp,
+        RotateClockWise,
+        RotateAntiClockWise
+    };
+    
+    public InputKey? ReadAccelerateInput()
+    {
         if (Input.GetKey(KeyCode.Space))
         {
-            keydown = 1;
+            return InputKey.SpaceDown;
         }
-
-        return keydown;
+        return null;
     }
     
-    public bool ReadAccelerateInputKeyUp()
+    public InputKey? ReadAccelerateInputKeyUp()
     {
-        return Input.GetKeyUp(KeyCode.Space);
+        if (Input.GetKeyUp(KeyCode.Space))
+        {
+            return InputKey.SpaceUp;
+        }
+        return null;
     }
 
-    public int ReadRotateInput()
+    public InputKey? ReadRotateInput()
     {
-        int rotation = 0;
         if (Input.GetKey(KeyCode.A))
         {
-            rotation = 1;
+            return InputKey.RotateAntiClockWise;
         } else if (Input.GetKey(KeyCode.D))
-        { 
-            rotation = -1;
+        {
+            return InputKey.RotateClockWise;
         }
-        return rotation;
-    }
-
-    public bool ReadPauseGameInput()
-    {
-        return Input.GetKeyUp(KeyCode.Escape);
+        return null;
     }
 }

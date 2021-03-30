@@ -14,19 +14,17 @@ public class ShipAnimator : MonoBehaviour
 
     private void Awake()
     {
-        ShipManager.AccelerateShip += AccelerateShipAnimation;
-        ShipManager.AcceleratorKeyUp += AccelerateShipAnimationKeyUp;
+        ShipAccelerating.AccelerateShip += AccelerateShipAnimation;
+        ShipIdle.AcceleratorKeyUp += AccelerateShipAnimationKeyUp;
     }
 
-    private void AccelerateShipAnimation(float force)
+    private void AccelerateShipAnimation()
     {
-        Debug.Log("HEREREE1111");
         _animator.SetBool("ForceApplied", true);
     }
     
     private void AccelerateShipAnimationKeyUp()
     {   
-        Debug.Log("HERER222222");
         _animator.SetBool("ForceApplied", false);
     }
 }

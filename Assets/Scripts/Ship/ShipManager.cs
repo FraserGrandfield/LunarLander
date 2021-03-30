@@ -6,53 +6,71 @@ using UnityEngine;
 public class ShipManager : MonoBehaviour
 {
     private InputReader _inputReader;
-    
-    public static event Action<float> AccelerateShip;
-    public static event Action<int> RotateShip;
     public static event Action StartRecording;
-    public static event Action PauseGame;
-    public static event Action AcceleratorKeyUp;
-
-    [SerializeField] private bool gamePaused;
-
+    private IState currentState = new ShipIdle();
+    private bool shipLanded = false;
+    private bool shipCrashed = false;
+    private bool gamePaused = false;
+    [SerializeField] private int fuel;
     private void Start()
     {
+        fuel = 5000;
         StartRecording?.Invoke();
-        gamePaused = false;
     }
 
     private void Awake()
     {
         _inputReader = GetComponent<InputReader>();
+        ShipMovment.fuelUsed += updateFuel;
+    }
+
+    public bool getShipLanded()
+    {
+        return shipLanded;
+    }
+    
+    public bool getShipCrashed()
+    {
+        return shipCrashed;
+    }
+    
+    public bool getGamePaused()
+    {
+        return gamePaused;
+    }
+
+    public int getFuel()
+    {
+        return fuel;
+    }
+
+    private void updateFuel(int fuelUsed)
+    {
+        fuel -= fuelUsed;
+        if (fuel < 0)
+        {
+            fuel = 0;
+        }
     }
 
     private void Update()
     {
-        if (!gamePaused)
-        {
-            int acceleration = _inputReader.ReadAccelerateInput();
-            if (acceleration != 0)
-            {
-                AccelerateShip?.Invoke(acceleration);
-            }
+        InputReader.InputKey? acceleration = _inputReader.ReadAccelerateInput();
+        InputReader.InputKey? accelerateKeyUp = _inputReader.ReadAccelerateInputKeyUp();
+        InputReader.InputKey? rotation = _inputReader.ReadRotateInput();
+        UpdateState(acceleration, accelerateKeyUp, rotation);
+    }
 
-            bool accelerateKeyUp = _inputReader.ReadAccelerateInputKeyUp();
-            if (accelerateKeyUp)
-            {
-                AcceleratorKeyUp?.Invoke();
-            }
+    private void UpdateState(InputReader.InputKey? acceleration, InputReader.InputKey? accelerateKeyUp, InputReader.InputKey? rotation)
+    {
+        IState newState = currentState.Tick(this, acceleration, accelerateKeyUp, rotation);
 
-            int rotation = _inputReader.ReadRotateInput();
-            if (rotation != 0)
-            {
-                RotateShip?.Invoke(rotation);
-            }
-        }
-        bool escPressed = _inputReader.ReadPauseGameInput();
-        if (escPressed)
+        if (newState != null)
         {
-            gamePaused = !gamePaused;
-            PauseGame?.Invoke();
+            currentState.Exit(this);
+            currentState = newState;
+            newState.Enter(this);
         }
     }
+    
 }
