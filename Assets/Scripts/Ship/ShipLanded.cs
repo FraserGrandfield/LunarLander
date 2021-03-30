@@ -5,15 +5,11 @@ using UnityEngine;
 
 public class ShipLanded : IState
 {
-    public static event Action PauseShip;
     public static event Action shipLanded;
     public static event Action RestartShip;
 
     public void Enter(ShipManager ship)
-    { 
-        Animator animator = ship.GetComponent<Animator>();
-        animator.SetBool("ForceApplied", false);
-        PauseShip?.Invoke();
+    {
         shipLanded?.Invoke();
     }
 

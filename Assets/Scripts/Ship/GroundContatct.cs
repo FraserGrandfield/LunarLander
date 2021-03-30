@@ -16,14 +16,12 @@ public class GroundContatct : MonoBehaviour
         float shipXSpeed = other.GetComponent<ShipStats>().getXSpeed();
         float shipYSpeed = other.GetComponent<ShipStats>().getYSpeed();
         
-        if (Math.Abs(shipXSpeed) > 1.5 || Math.Abs(shipYSpeed) > 1.5 || rotationDifference > 5)
+        if (Math.Abs(shipXSpeed) > 3 || Math.Abs(shipYSpeed) > 3 || rotationDifference > 5)
         {
-            Debug.Log("Ship Crashed");
             ShipTouchedGround?.Invoke(false);
         }
         else
         {
-            Debug.Log("Ship Landed");
             ShipTouchedGround?.Invoke(true);
         }
     }

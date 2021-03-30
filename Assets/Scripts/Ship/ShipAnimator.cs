@@ -16,6 +16,10 @@ public class ShipAnimator : MonoBehaviour
     {
         ShipAccelerating.AccelerateShip += AccelerateShipAnimation;
         ShipIdle.AcceleratorKeyUp += AccelerateShipAnimationKeyUp;
+        ShipCrashed.shipCrashed += shipExpload;
+        ShipLanded.shipLanded += AccelerateShipAnimationKeyUp;
+        ShipCrashed.RestartShip += resetAnimations;
+        ShipLanded.RestartShip += resetAnimations;
     }
 
     private void AccelerateShipAnimation()
@@ -25,6 +29,19 @@ public class ShipAnimator : MonoBehaviour
     
     private void AccelerateShipAnimationKeyUp()
     {   
+        _animator.SetBool("ForceApplied", false);
+    }
+
+    private void shipExpload()
+    {
+        _animator.SetBool("Expload", true);
+        _animator.SetBool("ForceApplied", false);
+        Debug.Log("Crashed animation");
+    }
+
+    private void resetAnimations()
+    {
+        _animator.SetBool("Expload", false);
         _animator.SetBool("ForceApplied", false);
     }
 }

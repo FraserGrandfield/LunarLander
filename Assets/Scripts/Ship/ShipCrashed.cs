@@ -5,18 +5,12 @@ using UnityEngine;
 
 public class ShipCrashed : IState
 {
-    public static event Action PauseShip;
     public static event Action shipCrashed;
     public static event Action RestartShip;
 
 
     public void Enter(ShipManager ship)
     {
-        Debug.Log("Ship in crashed state");
-        Animator animator = ship.GetComponent<Animator>();
-        animator.SetBool("ForceApplied", false);
-        //TODO crash animation
-        PauseShip?.Invoke();
         shipCrashed?.Invoke();
     }
 

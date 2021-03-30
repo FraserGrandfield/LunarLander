@@ -33,9 +33,9 @@ public class ShipMovment : MonoBehaviour
         ShipAccelerating.RotateShip += RotateShip;
         ShipIdle.RotateShip += RotateShip;
         ShipIdle.AcceleratorKeyUp += AcceleratorKeyUp;
-        ShipCrashed.PauseShip += PauseGame;
+        ShipCrashed.shipCrashed += PauseGame;
         ShipCrashed.RestartShip += restartShip;
-        ShipLanded.PauseShip += PauseGame;
+        ShipLanded.shipLanded += PauseGame;
         ShipLanded.RestartShip += restartShip;
     }
 

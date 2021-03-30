@@ -32,6 +32,9 @@ TextureImporter:
   - first:
       213: -5712070718800416238
     second: shipSprites2_9
+  - first:
+      213: 8265000745622852903
+    second: shipSprites2_10
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -326,6 +329,27 @@ TextureImporter:
       bones: []
       spriteID: 212bdf1f1f5aab0b0800000000000000
       internalID: -5712070718800416238
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shipSprites2_10
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 78
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7255037636e23b270800000000000000
+      internalID: 8265000745622852903
       vertices: []
       indices: 
       edges: []

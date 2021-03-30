@@ -5,17 +5,27 @@ using UnityEngine;
 
 public class ShipStats : MonoBehaviour
 {
-    [SerializeField] public int fuel;
-    [SerializeField] public float xSpeed;
-    [SerializeField] public float ySpeed;
-    [SerializeField] public float score;
+    [SerializeField] private int fuel;
+    [SerializeField] private int xSpeed;
+    [SerializeField] private int ySpeed;
+    [SerializeField] private int score;
+    private bool shipLanded;
+    private bool shipCrashed;
     
+    public static event Action<int> FuelUpdated;
+    public static event Action<float> XSpeedUpdated;
+    public static event Action<float> YSpeedUpdated;
+    public static event Action<int> ScoreUpdated;
+
     void Start()
     {
+        updateScore(0);
         fuel = 1500;
-        xSpeed = 0f;
-        ySpeed = 0f;
-        score = 0f;
+        FuelUpdated?.Invoke(fuel);
+        xSpeed = 0;
+        ySpeed = 0;
+        shipLanded = false;
+        shipCrashed = false;
     }
 
     private void Awake()
@@ -24,6 +34,9 @@ public class ShipStats : MonoBehaviour
         ShipMovment.fuelUsed += updateFuel;
         ShipCrashed.shipCrashed += calculateShipCrashed;
         ShipLanded.shipLanded += calculateShipLanded;
+        GroundContatct.ShipTouchedGround += shipTouchedGround;
+        ShipCrashed.RestartShip += restartShip;
+        ShipLanded.RestartShip += restartShip;
     }
 
     public int getFuel()
@@ -45,7 +58,17 @@ public class ShipStats : MonoBehaviour
     {
         return score;
     }
-
+    
+    public bool getShipLanded()
+    {
+        return shipLanded;
+    }
+    
+    public bool getShipCrashed()
+    {
+        return shipCrashed;
+    }
+    
     private void updateFuel(int fuelUsed)
     {
         fuel -= fuelUsed;
@@ -53,25 +76,48 @@ public class ShipStats : MonoBehaviour
         {
             fuel = 0;
         }
+        FuelUpdated?.Invoke(fuel);
     }
 
     private void updateVelocity(float x, float y)
     {
-        xSpeed = x;
-        ySpeed = y;
+        xSpeed = (int)(x * 10);
+        ySpeed = (int)(y * 10);
+        XSpeedUpdated?.Invoke(xSpeed);
+        YSpeedUpdated?.Invoke(ySpeed);
+    }
+
+    private void updateScore(int scoreToAdd)
+    {
+        score += scoreToAdd;
+        ScoreUpdated?.Invoke(score);
     }
 
     private void calculateShipCrashed()
     {
-        fuel -= 200;
-        if (fuel < 0)
-        {
-            fuel = 0;
-        }
+        updateFuel(200);
     }
     
     private void calculateShipLanded()
     {
-        score += 100;
+        updateScore(100);
+    }
+    
+    private void shipTouchedGround(bool landed)
+    {
+        if (landed)
+        {
+            shipLanded = true;
+        }
+        else
+        {
+            shipCrashed = true;
+        }
+    }
+    
+    private void restartShip()
+    {
+        shipCrashed = false;
+        shipLanded = false;
     }
 }
