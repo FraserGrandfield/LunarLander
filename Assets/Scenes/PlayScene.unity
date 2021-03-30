@@ -475,10 +475,10 @@ GameObject:
   - component: {fileID: 1512156633}
   - component: {fileID: 1512156637}
   - component: {fileID: 1512156636}
-  - component: {fileID: 1512156635}
   - component: {fileID: 1512156639}
   - component: {fileID: 1512156638}
   - component: {fileID: 1512156640}
+  - component: {fileID: 1512156635}
   m_Layer: 0
   m_Name: shipSprites2_0
   m_TagString: Untagged
@@ -561,7 +561,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1512156632}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a543804d4d7014e47ac4a55f5cdb6d65, type: 3}
+  m_Script: {fileID: 11500000, guid: 72c0f6696a484b64db03b5a69c6d4ed1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &1512156636
@@ -588,7 +588,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 464b1b2fa69d18740aed59bdadf6ce53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  force: 10
+  isForReplay: 0
+  gamePaused: 0
 --- !u!60 &1512156638
 PolygonCollider2D:
   m_ObjectHideFlags: 0

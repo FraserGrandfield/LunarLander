@@ -30,11 +30,6 @@ public class InputReader : MonoBehaviour
 
     public bool ReadPauseGameInput()
     {
-        return Input.GetKey(KeyCode.Escape);
-    }
-
-    public bool ReadUndo()
-    {
-        return Input.GetKey(KeyCode.U);
+        return Input.GetKeyUp(KeyCode.Escape);
     }
 }
