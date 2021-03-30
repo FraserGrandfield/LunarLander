@@ -16,6 +16,7 @@ public class ShipMovment : MonoBehaviour
 
     public static event Action<bool> SaveFrame;
     public static event Action<int> fuelUsed;
+    public static event Action<float, float> updateVelocity;
 
     private void Start()
     {
@@ -28,6 +29,8 @@ public class ShipMovment : MonoBehaviour
         ShipAccelerating.RotateShip += RotateShip;
         ShipIdle.RotateShip += RotateShip;
         ShipIdle.AcceleratorKeyUp += AcceleratorKeyUp;
+        ShipCrashed.PauseShip += PauseGame;
+        ShipLanded.PauseShip += PauseGame;
     }
 
     private void AddForce()
@@ -85,6 +88,7 @@ public class ShipMovment : MonoBehaviour
         //Calculate new velocity V = U + (F / m) t
         velocity.x = velocity.x + (xForce / shipMass) * Time.deltaTime;
         velocity.y = velocity.y + (yForce / shipMass) * Time.deltaTime;
+        updateVelocity?.Invoke(velocity.x, velocity.y);
         //Calculate displacement S = 0.5 * (u + v) t
         float newX = 0.5f * velocity.x * Time.deltaTime;
         float newY = 0.5f * velocity.y * Time.deltaTime;

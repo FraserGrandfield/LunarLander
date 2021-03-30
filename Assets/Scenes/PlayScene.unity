@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 166487986}
   - component: {fileID: 166487985}
   - component: {fileID: 166487984}
+  - component: {fileID: 166487987}
   m_Layer: 0
   m_Name: Square
   m_TagString: Untagged
@@ -151,7 +152,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -233,6 +234,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &166487987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 166487983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bd9a85f56ec8214b925bb6a7f4d7d2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &565153124 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7051120229102032729, guid: 0404287ef85c1ac41a8a19a03ac4d541,
@@ -590,7 +603,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 464b1b2fa69d18740aed59bdadf6ce53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gamePaused: 0
+  fuel: 0
+  xSpeed: 0
+  ySpeed: 0
 --- !u!60 &1512156638
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -601,7 +616,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -616,18 +631,18 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.018568143, y: 0.074260145}
-      - {x: -0.07005483, y: 0.024412606}
-      - {x: -0.08002392, y: 0.00468988}
-      - {x: -0.08049791, y: -0.026141139}
-      - {x: -0.10009662, y: -0.065442815}
-      - {x: -0.099999994, y: -0.074999996}
-      - {x: 0.099999994, y: -0.074999996}
-      - {x: 0.1005629, y: -0.0648725}
-      - {x: 0.08114928, y: -0.027320893}
-      - {x: 0.08076376, y: 0.0043079797}
-      - {x: 0.0702416, y: 0.023949392}
-      - {x: 0.021551475, y: 0.074260145}
+    - - {x: -0.018568143, y: 0.089921676}
+      - {x: -0.07005483, y: 0.03735038}
+      - {x: -0.08002392, y: 0.017627671}
+      - {x: -0.07981698, y: -0.011841487}
+      - {x: -0.10009662, y: -0.050462224}
+      - {x: -0.1, y: -0.060019396}
+      - {x: 0.099319056, y: -0.060019407}
+      - {x: 0.09988197, y: -0.051253784}
+      - {x: 0.07910647, y: -0.010978432}
+      - {x: 0.07940188, y: 0.0179267}
+      - {x: 0.06956067, y: 0.040291853}
+      - {x: 0.01746586, y: 0.089921676}
 --- !u!50 &1512156639
 Rigidbody2D:
   serializedVersion: 4

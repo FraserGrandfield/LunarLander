@@ -18,9 +18,9 @@ public class ShipAccelerating : IState
     {
         if (!ship.getGamePaused())
         {
-            if (accelerateKeyUp == InputReader.InputKey.SpaceUp || ship.getFuel() < 1) return new ShipIdle();
             if (ship.getShipCrashed()) return new ShipCrashed();
             if (ship.getShipLanded()) return new ShipLanded();
+            if (accelerateKeyUp == InputReader.InputKey.SpaceUp || ship.getFuel() < 1) return new ShipIdle();
             AccelerateShip?.Invoke();
             if (rotation == InputReader.InputKey.RotateClockWise)
             {

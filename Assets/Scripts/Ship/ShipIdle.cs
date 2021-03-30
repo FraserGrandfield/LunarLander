@@ -19,9 +19,9 @@ public class ShipIdle : IState
     {
         if (!ship.getGamePaused())
         {
-            if (acceleration == InputReader.InputKey.SpaceDown && ship.getFuel() > 0) return new ShipAccelerating();
             if (ship.getShipCrashed()) return new ShipCrashed();
             if (ship.getShipLanded()) return new ShipLanded();
+            if (acceleration == InputReader.InputKey.SpaceDown && ship.getFuel() > 0) return new ShipAccelerating();
             if (rotation == InputReader.InputKey.RotateClockWise)
             {
                 RotateShip?.Invoke(-1);

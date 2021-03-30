@@ -46,6 +46,8 @@ public class ShipReplay : MonoBehaviour
         _binaryWriter.Write(transform.rotation.w);
         _binaryWriter.Write(isAccelerating);
         _binaryWriter.Write(_shipManager.getFuel());
+        _binaryWriter.Write(_shipManager.getXSpeed());
+        _binaryWriter.Write(_shipManager.getYSpeed());
     }
 
     private void StartReplay()
@@ -65,6 +67,8 @@ public class ShipReplay : MonoBehaviour
         float rotw = _binaryReader.ReadSingle();
         bool isAccelerating = _binaryReader.ReadBoolean();
         int fuel = _binaryReader.ReadInt32();
+        float xSpeed = _binaryReader.ReadSingle();
+        float ySpeed = _binaryReader.ReadSingle();
         transform.position = new Vector3(posX, posY, 0);
         transform.rotation = new Quaternion(rotx, roty, rotz, rotw);
         if (_memoryStream.Position >= _memoryStream.Length)

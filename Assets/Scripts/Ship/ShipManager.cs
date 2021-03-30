@@ -12,6 +12,9 @@ public class ShipManager : MonoBehaviour
     private bool shipCrashed = false;
     private bool gamePaused = false;
     [SerializeField] private int fuel;
+    [SerializeField] private float xSpeed;
+    [SerializeField] private float ySpeed;
+
     private void Start()
     {
         fuel = 5000;
@@ -22,6 +25,8 @@ public class ShipManager : MonoBehaviour
     {
         _inputReader = GetComponent<InputReader>();
         ShipMovment.fuelUsed += updateFuel;
+        ShipMovment.updateVelocity += updateVelocity;
+        GroundContatct.ShipTouchedGround += shipTouchedGround;
     }
 
     public bool getShipLanded()
@@ -43,6 +48,16 @@ public class ShipManager : MonoBehaviour
     {
         return fuel;
     }
+    
+    public float getXSpeed()
+    {
+        return xSpeed;
+    }
+    
+    public float getYSpeed()
+    {
+        return ySpeed;
+    }
 
     private void updateFuel(int fuelUsed)
     {
@@ -51,6 +66,25 @@ public class ShipManager : MonoBehaviour
         {
             fuel = 0;
         }
+    }
+
+    private void updateVelocity(float x, float y)
+    {
+        xSpeed = x;
+        ySpeed = y;
+    }
+
+    private void shipTouchedGround(bool landed)
+    {
+        if (landed)
+        {
+            shipLanded = true;
+        }
+        else
+        {
+            shipCrashed = true;
+        }
+        
     }
 
     private void Update()
