@@ -18,6 +18,7 @@ public class MainMenuButton : MonoBehaviour
 
     private void RaiseOnButtonClick()
     {
+        Debug.Log("Button clicked");
         if (OnUIButtonClick != null)
         {
             OnUIButtonClick?.Invoke(button.name);

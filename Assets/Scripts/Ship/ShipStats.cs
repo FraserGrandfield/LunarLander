@@ -8,13 +8,13 @@ public class ShipStats : MonoBehaviour
     [SerializeField] private int fuel;
     [SerializeField] private int xSpeed;
     [SerializeField] private int ySpeed;
+    [SerializeField] private Vector2 realVelocity;
     [SerializeField] private int score;
     private bool shipLanded;
     private bool shipCrashed;
     
     public static event Action<int> FuelUpdated;
-    public static event Action<float> XSpeedUpdated;
-    public static event Action<float> YSpeedUpdated;
+    public static event Action<int, int> speedUpdated;
     public static event Action<int> ScoreUpdated;
 
     void Start()
@@ -28,13 +28,22 @@ public class ShipStats : MonoBehaviour
         shipCrashed = false;
     }
 
-    private void Awake()
+    private void OnEnable()
     {
         ShipMovment.updateVelocity += updateVelocity;
         ShipMovment.fuelUsed += updateFuel;
         ShipTouchGround.updateLanded += updateTouchedGround;
         ShipCrashed.RestartShip += restartShip;
         ShipLanded.RestartShip += restartShip;
+    }
+
+    private void OnDisable()
+    {
+        ShipMovment.updateVelocity -= updateVelocity;
+        ShipMovment.fuelUsed -= updateFuel;
+        ShipTouchGround.updateLanded -= updateTouchedGround;
+        ShipCrashed.RestartShip -= restartShip;
+        ShipLanded.RestartShip -= restartShip;
     }
 
     public int getFuel()
@@ -51,8 +60,13 @@ public class ShipStats : MonoBehaviour
     {
         return ySpeed;
     }
+
+    public Vector2 getRealVelocity()
+    {
+        return realVelocity;
+    }
     
-    public float getScore()
+    public int getScore()
     {
         return score;
     }
@@ -77,12 +91,12 @@ public class ShipStats : MonoBehaviour
         FuelUpdated?.Invoke(fuel);
     }
 
-    private void updateVelocity(float x, float y)
+    private void updateVelocity(Vector2 velocity)
     {
-        xSpeed = (int)(x * 10);
-        ySpeed = (int)(y * 10);
-        XSpeedUpdated?.Invoke(xSpeed);
-        YSpeedUpdated?.Invoke(ySpeed);
+        xSpeed = (int)(velocity.x * 10);
+        ySpeed = (int)(velocity.y * 10);
+        realVelocity = velocity;
+        speedUpdated?.Invoke(xSpeed, ySpeed);
     }
 
     private void updateScore(int scoreToAdd)

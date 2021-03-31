@@ -7,6 +7,8 @@ public class ShipManager : MonoBehaviour
 {
     private InputReader _inputReader;
     public static event Action StartRecording;
+    public static event Action<GameObject> CheckCameraPosition;
+
     private IState currentState = new ShipIdle();
     private bool gamePaused = false;
     private ShipStats _shipStats;
@@ -17,7 +19,7 @@ public class ShipManager : MonoBehaviour
         StartRecording?.Invoke();
     }
 
-    private void Awake()
+    private void OnEnable()
     {
         _inputReader = GetComponent<InputReader>();
     }
@@ -34,6 +36,8 @@ public class ShipManager : MonoBehaviour
 
     private void Update()
     {
+        //TODO could change all update data about ship to this even
+        CheckCameraPosition?.Invoke(gameObject);
         InputReader.InputKey? acceleration = _inputReader.ReadAccelerateInput();
         InputReader.InputKey? accelerateKeyUp = _inputReader.ReadAccelerateInputKeyUp();
         InputReader.InputKey? rotation = _inputReader.ReadRotateInput();

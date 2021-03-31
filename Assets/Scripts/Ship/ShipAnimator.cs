@@ -12,7 +12,7 @@ public class ShipAnimator : MonoBehaviour
         _animator = gameObject.GetComponent<Animator>();
     }
 
-    private void Awake()
+    private void OnEnable()
     {
         ShipAccelerating.AccelerateShip += AccelerateShipAnimation;
         ShipIdle.AcceleratorKeyUp += AccelerateShipAnimationKeyUp;
@@ -20,6 +20,16 @@ public class ShipAnimator : MonoBehaviour
         ShipLanded.shipLanded += AccelerateShipAnimationKeyUp;
         ShipCrashed.RestartShip += resetAnimations;
         ShipLanded.RestartShip += resetAnimations;
+    }
+
+    private void OnDisable()
+    {
+        ShipAccelerating.AccelerateShip -= AccelerateShipAnimation;
+        ShipIdle.AcceleratorKeyUp -= AccelerateShipAnimationKeyUp;
+        ShipCrashed.shipCrashed -= shipExpload;
+        ShipLanded.shipLanded -= AccelerateShipAnimationKeyUp;
+        ShipCrashed.RestartShip -= resetAnimations;
+        ShipLanded.RestartShip -= resetAnimations;
     }
 
     private void AccelerateShipAnimation()

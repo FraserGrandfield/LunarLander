@@ -31,12 +31,18 @@ public class ShipStatsUI : MonoBehaviour
         }
     }
 
-    private void Awake()
+    private void OnEnable()
     {
         ShipStats.FuelUpdated += updateFuel;
         ShipStats.ScoreUpdated += updateScore;
-        ShipStats.XSpeedUpdated += horizontalSpeedUpdate;
-        ShipStats.YSpeedUpdated += verticalSpeedUpdate;
+        ShipStats.speedUpdated += speedUpdated;
+    }
+    
+     private void OnDisable()
+    {
+        ShipStats.FuelUpdated -= updateFuel;
+        ShipStats.ScoreUpdated -= updateScore;
+        ShipStats.speedUpdated -= speedUpdated;
     }
 
     private void updateFuel(int fuel)
@@ -49,13 +55,10 @@ public class ShipStatsUI : MonoBehaviour
         scoreText.text = "Score: " + score;
     }
     
-    private void horizontalSpeedUpdate(float speed)
+    private void speedUpdated(int xSpeed, int ySpeed)
     {
-        horizontalSpeedText.text = "Horizontal Speed: " + (int)speed;
-    }
-    
-    private void verticalSpeedUpdate(float speed)
-    {
-        verticalSpeedText.text = "Vertical Speed: " + (int)speed;
+        horizontalSpeedText.text = "Horizontal Speed: " + xSpeed;
+        verticalSpeedText.text = "Vertical Speed: " + ySpeed;
+
     }
 }

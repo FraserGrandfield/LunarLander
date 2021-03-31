@@ -3,12 +3,16 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-
 public class ChangeSceneComponent : MonoBehaviour
 {
-    private void OnEnable()
+    private void Start()
     {
         MainMenuButton.OnUIButtonClick += GetButtonType;
+    }
+
+    private void OnDestroy()
+    {
+        MainMenuButton.OnUIButtonClick -= GetButtonType;
     }
 
     private void GetButtonType(String buttonName)

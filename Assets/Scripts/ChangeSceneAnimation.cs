@@ -10,6 +10,11 @@ public class ChangeSceneAnimation : MonoBehaviour
     {
         MainMenuButton.OnUIButtonClick += StartChangeSceneAnimation;
     }
+    
+     private void OnDisable()
+    {
+        MainMenuButton.OnUIButtonClick -= StartChangeSceneAnimation;
+    }
 
     void Start()
     {

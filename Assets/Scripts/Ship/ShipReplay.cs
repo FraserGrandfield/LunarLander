@@ -18,13 +18,18 @@ public class ShipReplay : MonoBehaviour
         _shipStats = gameObject.GetComponent<ShipStats>();
     }
 
-    private void Awake()
+    private void OnEnable()
     {
         ShipMovment.SaveFrame += SaveShip;
         ShipManager.StartRecording += startRecording;
         ShipReplayManager.StartReplay += StartReplay;
-        
     }
+
+    private void OnDisable()
+    {
+        ShipMovment.SaveFrame -= SaveShip;
+        ShipManager.StartRecording -= startRecording;
+        ShipReplayManager.StartReplay -= StartReplay;    }
 
     private void startRecording()
     {
