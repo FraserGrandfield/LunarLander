@@ -9,12 +9,14 @@ public class Notification : MonoBehaviour
     private void Start()
     {
         PlayerListManager.ShowNotificaiton += ShowNotification;
+        SaveSettingsButton.ShowNotification += ShowNotification;
         gameObject.SetActive(false);
     }
 
     private void OnDestroy()
     {
         PlayerListManager.ShowNotificaiton -= ShowNotification;
+        SaveSettingsButton.ShowNotification -= ShowNotification;
     }
 
     private void ShowNotification(string notificationText)

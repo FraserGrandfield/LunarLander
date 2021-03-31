@@ -694,8 +694,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cf6a34c10083654785bf3fd5090e72f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AccelerateShip: {fileID: 8300000, guid: b4ac4cbc85be29542bff863c8b6d1e83, type: 3}
-  ShipExplosion: {fileID: 8300000, guid: 1770793a7b1dff8439819cd83febda06, type: 3}
+  AccelerateShipAudio: {fileID: 8300000, guid: 69660ed3693224e419eff464e301b6ed, type: 3}
+  ShipExplosionAudio: {fileID: 8300000, guid: 1770793a7b1dff8439819cd83febda06, type: 3}
+  ShipLandedAudio: {fileID: 8300000, guid: b81d93d1c2d0c504fa5a949791b3d04c, type: 3}
 --- !u!1001 &1512489394
 PrefabInstance:
   m_ObjectHideFlags: 0
