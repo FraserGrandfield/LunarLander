@@ -1,0 +1,92 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PlayerListManager : MonoBehaviour
+{
+    [SerializeField] private GameObject button;
+    private ArrayList players = new ArrayList();
+    private PlayerData selectedPlayer = null;
+    public static event Action<PlayerData> AddNewPlayer;
+    
+    private void OnEnable()
+    {
+        AddPlayerButton.AddPlayerName += addPlayer;
+        ReadPlayerData.AllPlayerData += addAllPlayersToList;
+        SetPlayer.SetPlayerButtonClicked += setActivePlayer;
+        SelectPlayerButton.PlayerSelected += setSelectedPlayer;
+    }
+    
+    private void OnDisable()
+    {
+        AddPlayerButton.AddPlayerName -= addPlayer;
+        ReadPlayerData.AllPlayerData -= addAllPlayersToList;
+        SetPlayer.SetPlayerButtonClicked -= setActivePlayer;
+        SelectPlayerButton.PlayerSelected -= setSelectedPlayer;
+    }
+
+    private void addPlayer(string pName)
+    {
+        Debug.Log("addName: " + pName);
+        if (checkName(pName))
+        {
+            PlayerData pd = new PlayerData(pName, 100);
+            addPlayerToList(pd);
+            AddNewPlayer?.Invoke(pd);
+        }
+    }
+
+    private void addAllPlayersToList(ArrayList playerDataList)
+    {
+        
+        Debug.Log(playerDataList.Count);
+        for (int i = 0; i < playerDataList.Count; i++)
+        {
+            players.Add(playerDataList[i]);
+            addPlayerToList(((PlayerData)playerDataList[i]));
+        }
+    }
+
+    private void addPlayerToList(PlayerData player)
+    {
+        players.Add(player);
+        GameObject newButton = Instantiate(button);
+        newButton.SetActive(true);
+        newButton.GetComponent<SelectPlayerButton>().SetPlayer(player);
+        newButton.transform.SetParent(transform);
+        newButton.transform.localScale = new Vector3(1, 1, 1);
+    }
+
+    private bool checkName(string pName)
+    {
+        if ( pName.Length > 10 || pName == "")
+        {
+            return false;
+        }
+        for (int i = 0; i < players.Count; i++)
+        {
+            if (pName == ((PlayerData) players[i]).getName())
+            {
+                return false;
+            }
+        }
+        return true;
+
+    }
+
+    private void setSelectedPlayer(PlayerData player)
+    {
+        selectedPlayer = player;
+    }
+
+    private void setActivePlayer()
+    {
+        
+        if (selectedPlayer != null)
+        {
+            PlayerPrefs.SetString("name", selectedPlayer.getName());
+            PlayerPrefs.SetInt("volume", selectedPlayer.getVolume());
+        }
+    }
+}
