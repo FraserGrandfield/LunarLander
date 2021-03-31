@@ -17,7 +17,6 @@ public class EndGameUI : MonoBehaviour
                 scoreText = gameObject.transform.GetChild(i).GetComponent<TextMeshProUGUI>();
             } 
         }
-        MainMenuButton.OnUIButtonClick += GetButtonType;
         ShipLanded.EndGame += showEndGameUI;
         ShipCrashed.EndGame += showEndGameUI;
         gameObject.SetActive(false);
@@ -25,7 +24,6 @@ public class EndGameUI : MonoBehaviour
     
     private void OnDestroy()
     { 
-        MainMenuButton.OnUIButtonClick -= GetButtonType;
         ShipLanded.EndGame -= showEndGameUI;
         ShipCrashed.EndGame -= showEndGameUI;
     }
@@ -34,22 +32,6 @@ public class EndGameUI : MonoBehaviour
     {
         gameObject.SetActive(true);
         scoreText.text = "Score: " + score;
-    }
-
-    private void GetButtonType(String buttonName)
-    {
-        switch (buttonName)
-        {
-            case "PlayAgainButton":
-                StartCoroutine(ChangeScene("PlayScene"));
-                break;
-            case "MainMenuButton":
-                StartCoroutine(ChangeScene("HomeScreen"));
-                break;
-            default:
-                Debug.Log("Error no button " + buttonName);
-                break;
-        }
     }
 
     private static IEnumerator ChangeScene(string sceneName)

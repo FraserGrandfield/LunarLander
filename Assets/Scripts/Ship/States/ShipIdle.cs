@@ -13,12 +13,13 @@ public class ShipIdle : IState
         AcceleratorKeyUp?.Invoke();
     }
 
-    public IState Tick(ShipManager ship, InputReader.InputKey? acceleration, InputReader.InputKey? accelerateKeyUp, InputReader.InputKey? rotation, InputReader.InputKey? resume)
+    public IState Tick(ShipManager ship, InputReader.InputKey? acceleration, InputReader.InputKey? accelerateKeyUp, InputReader.InputKey? rotation, InputReader.InputKey? resume, InputReader.InputKey? pause)
     {
         if (!ship.getGamePaused())
         {
             if (ship.gameObject.GetComponent<ShipStats>().getShipCrashed()) return new ShipCrashed();
             if (ship.gameObject.GetComponent<ShipStats>().getShipLanded()) return new ShipLanded();
+            if (pause == InputReader.InputKey.Escape) return new ShipPaused();
             if (acceleration == InputReader.InputKey.SpaceDown && ship.getShipStats().getFuel() > 0) return new ShipAccelerating();
             if (rotation == InputReader.InputKey.RotateClockWise)
             {

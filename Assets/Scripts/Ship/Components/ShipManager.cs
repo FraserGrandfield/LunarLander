@@ -36,18 +36,19 @@ public class ShipManager : MonoBehaviour
 
     private void Update()
     {
-        //TODO could change all update data about ship to this even
         CheckCameraPosition?.Invoke(gameObject);
         InputReader.InputKey? acceleration = _inputReader.ReadAccelerateInput();
         InputReader.InputKey? accelerateKeyUp = _inputReader.ReadAccelerateInputKeyUp();
         InputReader.InputKey? rotation = _inputReader.ReadRotateInput();
         InputReader.InputKey? resume = _inputReader.ReadContinueInput();
-        UpdateState(acceleration, accelerateKeyUp, rotation, resume);
+        InputReader.InputKey? pause = _inputReader.ReadPauseInput();
+        UpdateState(acceleration, accelerateKeyUp, rotation, resume, pause);
     }
 
-    private void UpdateState(InputReader.InputKey? acceleration, InputReader.InputKey? accelerateKeyUp, InputReader.InputKey? rotation, InputReader.InputKey? resume)
+    private void UpdateState(InputReader.InputKey? acceleration, InputReader.InputKey? accelerateKeyUp, 
+        InputReader.InputKey? rotation, InputReader.InputKey? resume, InputReader.InputKey? pause)
     {
-        IState newState = currentState.Tick(this, acceleration, accelerateKeyUp, rotation, resume);
+        IState newState = currentState.Tick(this, acceleration, accelerateKeyUp, rotation, resume, pause);
 
         if (newState != null)
         {

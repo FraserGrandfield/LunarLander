@@ -43,6 +43,9 @@ public class ChangeSceneComponent : MonoBehaviour
             case "MainMenuButton":
                 StartCoroutine(ChangeScene("HomeScreen"));
                 break;
+            case "PlayAgainButton":
+                StartCoroutine(ChangeScene("PlayScene"));
+                break;
             default:
                 Debug.Log("Error no button " + buttonName);
                 break;

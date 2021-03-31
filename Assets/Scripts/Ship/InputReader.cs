@@ -10,7 +10,8 @@ public class InputReader : MonoBehaviour
         SpaceUp,
         RotateClockWise,
         RotateAntiClockWise,
-        Resume
+        Resume,
+        Escape
     };
     
     public InputKey? ReadAccelerateInput()
@@ -48,6 +49,15 @@ public class InputReader : MonoBehaviour
         if (Input.GetKey(KeyCode.E))
         {
             return InputKey.Resume;
+        } 
+        return null;
+    }
+    
+    public InputKey? ReadPauseInput()
+    {
+        if (Input.GetKeyUp(KeyCode.Escape))
+        {
+            return InputKey.Escape;
         } 
         return null;
     }

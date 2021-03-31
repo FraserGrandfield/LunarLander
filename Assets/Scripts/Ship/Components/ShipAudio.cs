@@ -26,6 +26,7 @@ public class ShipAudio : MonoBehaviour
         ShipCrashed.RestartShip += stopSound;
         ShipLanded.shipLanded += playShipLandedSound;
         ShipLanded.RestartShip += stopSound;
+        ShipPaused.PauseShip += stopSound;
     }
 
     private void OnDisable()
@@ -38,6 +39,7 @@ public class ShipAudio : MonoBehaviour
         ShipCrashed.RestartShip -= stopSound;
         ShipLanded.shipLanded -= playShipLandedSound;
         ShipLanded.RestartShip -= stopSound;
+        ShipPaused.PauseShip -= stopSound;
     }
 
     private void playAccelerateSound()
@@ -45,6 +47,7 @@ public class ShipAudio : MonoBehaviour
         if (!source.isPlaying)
         {
             source.clip = AccelerateShipAudio;
+            source.loop = true;
             source.Play();
         }
     }
@@ -57,12 +60,14 @@ public class ShipAudio : MonoBehaviour
     private void playShipExploadSound()
     {
         source.clip = ShipExplosionAudio;
+        source.loop = false;
         source.Play();
     }
 
     private void playShipLandedSound()
     {
         source.clip = ShipLandedAudio;
+        source.loop = false;
         source.Play();
     }
 }

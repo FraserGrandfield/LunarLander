@@ -37,6 +37,8 @@ public class ShipMovment : MonoBehaviour
         ShipCrashed.RestartShip += restartShip;
         ShipLanded.shipLanded += PauseGame;
         ShipLanded.RestartShip += restartShip;
+        ShipPaused.PauseShip += PauseGame;
+        ShipPaused.UnPauseShip += PauseGame;
     }
 
     private void OnDisable()
@@ -49,6 +51,8 @@ public class ShipMovment : MonoBehaviour
         ShipCrashed.RestartShip -= restartShip;
         ShipLanded.shipLanded -= PauseGame;
         ShipLanded.RestartShip -= restartShip;
+        ShipPaused.PauseShip -= PauseGame;
+        ShipPaused.UnPauseShip -= PauseGame;
     }
 
     private void AddForce()
