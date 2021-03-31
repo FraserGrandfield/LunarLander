@@ -11,7 +11,7 @@ public class ShipStatsUI : MonoBehaviour
     private TextMeshProUGUI horizontalSpeedText;
     private TextMeshProUGUI verticalSpeedText;
 
-    private void Start()
+    private void OnEnable()
     {
         for (int i = 0; i < gameObject.transform.childCount; i++)
         {
@@ -29,10 +29,6 @@ public class ShipStatsUI : MonoBehaviour
                 verticalSpeedText = gameObject.transform.GetChild(i).GetComponent<TextMeshProUGUI>();
             }
         }
-    }
-
-    private void OnEnable()
-    {
         ShipStats.FuelUpdated += updateFuel;
         ShipStats.ScoreUpdated += updateScore;
         ShipStats.speedUpdated += speedUpdated;

@@ -90,9 +90,7 @@ public class Camera : MonoBehaviour
 
             if (changed)
             {
-                Debug.Log(cameraPos.y);
                 cameraPos.y = Mathf.Clamp(cameraPos.y, yClampValue, 99999f);
-                Debug.Log("after: " + cameraPos.y);
                 Vector3 tempShipVelocity = new Vector3(shipVelocity.x, shipVelocity.y, 0);
                 if (cameraPos.y == -1f)
                 {
