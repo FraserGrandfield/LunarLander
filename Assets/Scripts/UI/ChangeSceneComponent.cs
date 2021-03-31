@@ -40,6 +40,9 @@ public class ChangeSceneComponent : MonoBehaviour
             case "ExitButton":
                 Application.Quit();
                 break;
+            case "MainMenuButton":
+                StartCoroutine(ChangeScene("HomeScreen"));
+                break;
             default:
                 Debug.Log("Error no button " + buttonName);
                 break;
