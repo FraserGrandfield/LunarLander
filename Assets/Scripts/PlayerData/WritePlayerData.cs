@@ -10,10 +10,12 @@ public class WritePlayerData : MonoBehaviour
     private void OnEnable()
     {
         PlayerListManager.AddNewPlayer += savePlayerData;
+        VolumeUI.UpdatePlayerData += savePlayerData;
     }
     private void OnDisable()
     {
         PlayerListManager.AddNewPlayer -= savePlayerData;
+        VolumeUI.UpdatePlayerData -= savePlayerData;
     }
 
     private void savePlayerData(PlayerData playerData)
@@ -24,7 +26,7 @@ public class WritePlayerData : MonoBehaviour
 
         if (File.Exists(filePath))
         {
-            file = File.OpenWrite(filePath);
+            file = File.Open(filePath, FileMode.Create, FileAccess.Write, FileShare.None);
         }
         else
         {

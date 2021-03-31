@@ -8,6 +8,8 @@ public class VolumeUI : MonoBehaviour
 {
     private Slider slider;
 
+    public static event Action<PlayerData> UpdatePlayerData; 
+
     private void OnEnable()
     {
         SaveSettingsButton.SaveSettings += saveVolume;
@@ -28,5 +30,7 @@ public class VolumeUI : MonoBehaviour
     private void saveVolume()
     {
         PlayerPrefs.SetInt("volume", (int)slider.value);
+        PlayerData pd = new PlayerData(PlayerPrefs.GetString("name"), PlayerPrefs.GetInt("volume"));
+        UpdatePlayerData?.Invoke(pd);
     }
 }
