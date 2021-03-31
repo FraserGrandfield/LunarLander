@@ -9,7 +9,8 @@ public class PlayerListManager : MonoBehaviour
     private ArrayList players = new ArrayList();
     private PlayerData selectedPlayer = null;
     public static event Action<PlayerData> AddNewPlayer;
-    
+    public static event Action<string> ShowNotificaiton;
+
     private void OnEnable()
     {
         AddPlayerButton.AddPlayerName += addPlayer;
@@ -62,17 +63,18 @@ public class PlayerListManager : MonoBehaviour
     {
         if ( pName.Length > 10 || pName == "")
         {
+            ShowNotificaiton?.Invoke("Player Name cannot be empty or longer than 10 characters");
             return false;
         }
         for (int i = 0; i < players.Count; i++)
         {
             if (pName == ((PlayerData) players[i]).getName())
             {
+                ShowNotificaiton?.Invoke(pName + " already exists");
                 return false;
             }
         }
         return true;
-
     }
 
     private void setSelectedPlayer(PlayerData player)
@@ -82,11 +84,15 @@ public class PlayerListManager : MonoBehaviour
 
     private void setActivePlayer()
     {
-        
         if (selectedPlayer != null)
         {
             PlayerPrefs.SetString("name", selectedPlayer.getName());
             PlayerPrefs.SetInt("volume", selectedPlayer.getVolume());
+            ShowNotificaiton?.Invoke("Player set Too: " + selectedPlayer.getName());
+        }
+        else
+        {
+            ShowNotificaiton?.Invoke("Please select a player");
         }
     }
 }
