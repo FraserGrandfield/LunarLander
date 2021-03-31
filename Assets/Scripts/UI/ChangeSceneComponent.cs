@@ -29,7 +29,7 @@ public class ChangeSceneComponent : MonoBehaviour
                 StartCoroutine(ChangeScene("ChangePlayerScene"));
                 break;
             case "ReplaysButton":
-                StartCoroutine(ChangeScene("ReplaysScene"));
+                StartCoroutine(ChangeScene("ChooseReplayScene"));
                 break;
             case "HighscoreButton":
                 StartCoroutine(ChangeScene("HighscoreScene"));
