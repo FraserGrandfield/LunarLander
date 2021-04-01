@@ -10,10 +10,12 @@ public class ShipLanded : IState
     public static event Action<int> EndGame;
     public static event Action<bool> EndRound;
 
-    
+    public static event Action<bool> SaveShipLanded;
+
     public void Enter(ShipManager ship)
     {
         shipLanded?.Invoke();
+        SaveShipLanded?.Invoke(false);
         if (ship.gameObject.GetComponent<ShipStats>().getFuel() < 1)
         {
             EndGame?.Invoke(ship.gameObject.GetComponent<ShipStats>().getScore());

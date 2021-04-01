@@ -33,10 +33,4 @@ public class EndGameUI : MonoBehaviour
         gameObject.SetActive(true);
         scoreText.text = "Score: " + score;
     }
-
-    private static IEnumerator ChangeScene(string sceneName)
-    {
-        yield return new WaitForSeconds(1f);
-        SceneManager.LoadScene(sceneName);
-    }
 }

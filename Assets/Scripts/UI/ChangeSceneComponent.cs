@@ -9,12 +9,16 @@ public class ChangeSceneComponent : MonoBehaviour
     {
         MainMenuButton.OnUIButtonClick += GetButtonType;
         HomeScreenPlayButton.OnUIButtonClick += GetButtonType;
+        ShipRecordReplay.LoadNewScene += GetButtonType;
+        ReplaysListManager.ChangeScene += GetButtonType;
     }
 
     private void OnDestroy()
     {
         MainMenuButton.OnUIButtonClick -= GetButtonType;
         HomeScreenPlayButton.OnUIButtonClick -= GetButtonType;
+        ShipRecordReplay.LoadNewScene -= GetButtonType;
+        ReplaysListManager.ChangeScene -= GetButtonType;
     }
 
     private void GetButtonType(String buttonName)
@@ -47,6 +51,9 @@ public class ChangeSceneComponent : MonoBehaviour
                 break;
             case "PlayAgainButton":
                 StartCoroutine(ChangeScene("PlayScene"));
+                break;
+            case "ReplayScene":
+                StartCoroutine(ChangeScene("ReplayScene"));
                 break;
             default:
                 Debug.Log("Error no button " + buttonName);

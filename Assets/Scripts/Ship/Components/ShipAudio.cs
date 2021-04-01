@@ -27,6 +27,10 @@ public class ShipAudio : MonoBehaviour
         ShipLanded.shipLanded += playShipLandedSound;
         ShipLanded.RestartShip += stopSound;
         ShipPaused.PauseShip += stopSound;
+        ShipPlayReplay.IsAccelerating += playAccelerateSound;
+        ShipPlayReplay.StopedAccelerating += stopSound;
+        ShipPlayReplay.HasCrashed += playShipExploadSound;
+        ShipPlayReplay.HasLanded += playShipLandedSound;
     }
 
     private void OnDisable()
@@ -40,6 +44,10 @@ public class ShipAudio : MonoBehaviour
         ShipLanded.shipLanded -= playShipLandedSound;
         ShipLanded.RestartShip -= stopSound;
         ShipPaused.PauseShip -= stopSound;
+        ShipPlayReplay.IsAccelerating -= playAccelerateSound;
+        ShipPlayReplay.StopedAccelerating -= stopSound;
+        ShipPlayReplay.HasCrashed -= playShipExploadSound;
+        ShipPlayReplay.HasLanded -= playShipLandedSound;
     }
 
     private void playAccelerateSound()

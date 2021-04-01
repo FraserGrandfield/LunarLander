@@ -9,10 +9,12 @@ public class ShipCrashed : IState
     public static event Action RestartShip;
     public static event Action<int> EndGame;
     public static event Action<bool> EndRound;
-    
+    public static event Action<bool> SaveShipCrashed;
+
     public void Enter(ShipManager ship)
     {
         shipCrashed?.Invoke();
+        SaveShipCrashed?.Invoke(false);
         if (ship.gameObject.GetComponent<ShipStats>().getFuel() < 1)
         {
             EndGame?.Invoke(ship.gameObject.GetComponent<ShipStats>().getScore());

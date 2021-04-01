@@ -19,7 +19,7 @@ public class ShipStats : MonoBehaviour
 
     void Start()
     {
-        updateScore(0);
+        AddToScore(0);
         fuel = 1500;
         FuelUpdated?.Invoke(fuel);
         xSpeed = 0;
@@ -31,19 +31,31 @@ public class ShipStats : MonoBehaviour
     private void OnEnable()
     {
         ShipMovment.updateVelocity += updateVelocity;
-        ShipMovment.fuelUsed += updateFuel;
+        ShipMovment.fuelUsed += updateUsedFuel;
         ShipTouchGround.updateLanded += updateTouchedGround;
         ShipCrashed.RestartShip += restartShip;
         ShipLanded.RestartShip += restartShip;
+        
+        ShipPlayReplay.UpdateFuel += updateFuel;
+        ShipPlayReplay.UpdateVelocity += updateVelocity;
+        ShipPlayReplay.UpdateScore += updateScore;
+        ShipPlayReplay.UpdateHasCrashed += updateHasCrashed;
+        ShipPlayReplay.UpdateHasLanded += updateHasLanded;
     }
 
     private void OnDisable()
     {
         ShipMovment.updateVelocity -= updateVelocity;
-        ShipMovment.fuelUsed -= updateFuel;
+        ShipMovment.fuelUsed -= updateUsedFuel;
         ShipTouchGround.updateLanded -= updateTouchedGround;
         ShipCrashed.RestartShip -= restartShip;
         ShipLanded.RestartShip -= restartShip;
+        
+        ShipPlayReplay.UpdateFuel -= updateFuel;
+        ShipPlayReplay.UpdateVelocity -= updateVelocity;
+        ShipPlayReplay.UpdateScore -= updateScore;
+        ShipPlayReplay.UpdateHasCrashed -= updateHasCrashed;
+        ShipPlayReplay.UpdateHasLanded -= updateHasLanded;
     }
 
     public int getFuel()
@@ -81,13 +93,19 @@ public class ShipStats : MonoBehaviour
         return shipCrashed;
     }
     
-    private void updateFuel(int fuelUsed)
+    private void updateUsedFuel(int fuelUsed)
     {
         fuel -= fuelUsed;
         if (fuel < 0)
         {
             fuel = 0;
         }
+        FuelUpdated?.Invoke(fuel);
+    }
+
+    private void updateFuel(int currentFuel)
+    {
+        fuel = currentFuel;
         FuelUpdated?.Invoke(fuel);
     }
 
@@ -99,10 +117,26 @@ public class ShipStats : MonoBehaviour
         speedUpdated?.Invoke(xSpeed, ySpeed);
     }
 
-    private void updateScore(int scoreToAdd)
+    private void AddToScore(int scoreToAdd)
     {
         score += scoreToAdd;
         ScoreUpdated?.Invoke(score);
+    }
+
+    private void updateScore(int newScore)
+    {
+        score = newScore;
+        ScoreUpdated?.Invoke(score);
+    }
+    
+    private void updateHasCrashed(bool hasCrashed)
+    {
+        shipCrashed = hasCrashed;
+    }
+    
+    private void updateHasLanded(bool hasLanded)
+    {
+        shipLanded = hasLanded;
     }
 
     private void updateTouchedGround(bool landed, int multiplier)
@@ -110,12 +144,12 @@ public class ShipStats : MonoBehaviour
         if (landed)
         {
             shipLanded = true;
-            updateScore(100 * multiplier);
+            AddToScore(100 * multiplier);
         }
         else
         {
             shipCrashed = true;
-            updateFuel(200);
+            updateUsedFuel(200);
         }
     }
     

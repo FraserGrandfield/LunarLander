@@ -18,8 +18,12 @@ public class ShipAnimator : MonoBehaviour
         ShipIdle.AcceleratorKeyUp += AccelerateShipAnimationKeyUp;
         ShipCrashed.shipCrashed += shipExpload;
         ShipLanded.shipLanded += AccelerateShipAnimationKeyUp;
-        ShipCrashed.RestartShip += resetAnimations;
+        ShipCrashed.RestartShip += resetAnimations; 
         ShipLanded.RestartShip += resetAnimations;
+        ShipPlayReplay.IsAccelerating += AccelerateShipAnimation;
+        ShipPlayReplay.StopedAccelerating += AccelerateShipAnimationKeyUp;
+        ShipPlayReplay.HasCrashed += shipExpload;
+        ShipPlayReplay.ResetAnimations += resetAnimations;
     }
 
     private void OnDisable()
@@ -30,6 +34,10 @@ public class ShipAnimator : MonoBehaviour
         ShipLanded.shipLanded -= AccelerateShipAnimationKeyUp;
         ShipCrashed.RestartShip -= resetAnimations;
         ShipLanded.RestartShip -= resetAnimations;
+        ShipPlayReplay.IsAccelerating -= AccelerateShipAnimation;
+        ShipPlayReplay.StopedAccelerating -= AccelerateShipAnimationKeyUp;
+        ShipPlayReplay.HasCrashed -= shipExpload;
+        ShipPlayReplay.ResetAnimations -= resetAnimations;
     }
 
     private void AccelerateShipAnimation()
@@ -46,7 +54,6 @@ public class ShipAnimator : MonoBehaviour
     {
         _animator.SetBool("Expload", true);
         _animator.SetBool("ForceApplied", false);
-        Debug.Log("Crashed animation");
     }
 
     private void resetAnimations()

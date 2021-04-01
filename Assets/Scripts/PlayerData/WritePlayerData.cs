@@ -21,7 +21,6 @@ public class WritePlayerData : MonoBehaviour
     private void savePlayerData(PlayerData playerData)
     {
         string filePath = Application.persistentDataPath + "/" + playerData.getName() + "PlayerData.dat";
-        Debug.Log(filePath);
         FileStream file;
 
         if (File.Exists(filePath))

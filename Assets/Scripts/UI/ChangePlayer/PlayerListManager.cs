@@ -40,11 +40,10 @@ public class PlayerListManager : MonoBehaviour
 
     private void addAllPlayersToList(ArrayList playerDataList)
     {
-        
-        Debug.Log(playerDataList.Count);
         for (int i = 0; i < playerDataList.Count; i++)
         {
-            players.Add(playerDataList[i]);
+            //TODO check if line below is need as it called in other function!
+            //players.Add(playerDataList[i]);
             addPlayerToList(((PlayerData)playerDataList[i]));
         }
     }
