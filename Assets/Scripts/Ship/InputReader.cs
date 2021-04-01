@@ -11,7 +11,9 @@ public class InputReader : MonoBehaviour
         RotateClockWise,
         RotateAntiClockWise,
         Resume,
-        Escape
+        Escape,
+        LeftArrowKey,
+        RightArrowKey
     };
     
     public InputKey? ReadAccelerateInput()
@@ -58,6 +60,24 @@ public class InputReader : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Escape))
         {
             return InputKey.Escape;
+        } 
+        return null;
+    }
+    
+    public InputKey? ReadLeftArrowKey()
+    {
+        if (Input.GetKey(KeyCode.LeftArrow))
+        {
+            return InputKey.Resume;
+        } 
+        return null;
+    }
+    
+    public InputKey? ReadRightArrowKey()
+    {
+        if (Input.GetKey(KeyCode.RightArrow))
+        {
+            return InputKey.Resume;
         } 
         return null;
     }

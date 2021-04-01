@@ -12,6 +12,8 @@ public class ShipPlayReplay : MonoBehaviour
     private bool endOfReplay;
     private bool shipTouchedGround;
     private bool gamePaused;
+    private ArrayList replayData = new ArrayList();
+    private int pointer;
     
     public static event Action<int> UpdateFuel;
     public static event Action<Vector2> UpdateVelocity;
@@ -30,6 +32,7 @@ public class ShipPlayReplay : MonoBehaviour
         startReplay = false;
         shipTouchedGround = false;
         gamePaused = false;
+        pointer = 0;
     }
 
     private void OnEnable()
@@ -49,8 +52,8 @@ public class ShipPlayReplay : MonoBehaviour
     private void StartReplay(MemoryStream memoryStream)
     {
         _memoryStream = memoryStream;
-        _memoryStream.Seek(0, SeekOrigin.Begin);
-        _binaryReader = new BinaryReader(_memoryStream);
+        
+        PopulateReplayDataList();
         startReplay = true;
     }
 
@@ -63,27 +66,38 @@ public class ShipPlayReplay : MonoBehaviour
     {
         gamePaused = false;
     }
+
+    private void PopulateReplayDataList()
+    {
+        _memoryStream.Seek(0, SeekOrigin.Begin);
+        _binaryReader = new BinaryReader(_memoryStream);
+        while (_memoryStream.Position < _memoryStream.Length)
+        {
+            ReplayData rp = new ReplayData();
+            rp.posx = _binaryReader.ReadSingle();
+            rp.posy = _binaryReader.ReadSingle();
+            rp.rotx = _binaryReader.ReadSingle();
+            rp.roty = _binaryReader.ReadSingle();
+            rp.rotz = _binaryReader.ReadSingle();
+            rp.rotw = _binaryReader.ReadSingle();
+            rp.isAccelerating = _binaryReader.ReadBoolean();
+            rp.fuel = _binaryReader.ReadInt32();
+            rp.xSpeed = _binaryReader.ReadSingle();
+            rp.ySpeed = _binaryReader.ReadSingle();
+            rp.score = _binaryReader.ReadInt32();
+            rp.hasShipCrashed = _binaryReader.ReadBoolean();
+            rp.hasShipLanded = _binaryReader.ReadBoolean();
+            replayData.Add(rp);
+        }
+    }
     
     private void ReplayShip()
     {
-        float posX = _binaryReader.ReadSingle();
-        float posY = _binaryReader.ReadSingle();
-        float rotx = _binaryReader.ReadSingle();
-        float roty = _binaryReader.ReadSingle();
-        float rotz = _binaryReader.ReadSingle();
-        float rotw = _binaryReader.ReadSingle();
-        bool isAccelerating = _binaryReader.ReadBoolean();
-        int fuel = _binaryReader.ReadInt32();
-        float xSpeed = _binaryReader.ReadSingle();
-        float ySpeed = _binaryReader.ReadSingle();
-        int score = _binaryReader.ReadInt32();
-        bool hasShipCrashed = _binaryReader.ReadBoolean();
-        bool hasShipLanded = _binaryReader.ReadBoolean();
-        
-        transform.position = new Vector3(posX, posY, 0);
-        transform.rotation = new Quaternion(rotx, roty, rotz, rotw);
+        ReplayData rd = (ReplayData)replayData[pointer];
+        transform.position = new Vector3(rd.posx, rd.posy, 0);
+        transform.rotation = new Quaternion(rd.rotx, rd.roty, rd.rotz, rd.rotw);
 
-        if (isAccelerating)
+        if (rd.isAccelerating)
         {
             IsAccelerating?.Invoke();
         }
@@ -91,29 +105,31 @@ public class ShipPlayReplay : MonoBehaviour
         {
             StopedAccelerating?.Invoke();
         }
-        if (hasShipCrashed)
+        if (rd.hasShipCrashed)
         {
             HasCrashed?.Invoke();
             shipTouchedGround = true;
         }
 
-        if (hasShipLanded)
+        if (rd.hasShipLanded)
         {
             HasLanded?.Invoke();
             shipTouchedGround = true;
         }
 
-        UpdateFuel?.Invoke(fuel);
-        UpdateVelocity?.Invoke(new Vector2(xSpeed / 10, ySpeed / 10));
-        UpdateScore?.Invoke(score);
-        UpdateHasCrashed?.Invoke(hasShipCrashed);
-        UpdateHasLanded?.Invoke(hasShipLanded);
-        
-        if (_memoryStream.Position >= _memoryStream.Length)
+        UpdateFuel?.Invoke(rd.fuel);
+        UpdateVelocity?.Invoke(new Vector2(rd.xSpeed / 10, rd.ySpeed / 10));
+        UpdateScore?.Invoke(rd.score);
+        UpdateHasCrashed?.Invoke(rd.hasShipCrashed);
+        UpdateHasLanded?.Invoke(rd.hasShipLanded);
+        if (pointer >= replayData.Count - 1)
         {
+            Debug.Log("pointer end");
             startReplay = false;
             endOfReplay = true;
+            EndOfReplay?.Invoke(0);
         }
+        pointer++;
     }
 
     private IEnumerator WaitforShipTouchGround()
@@ -131,9 +147,6 @@ public class ShipPlayReplay : MonoBehaviour
         } else if (shipTouchedGround && !endOfReplay)
         {
             StartCoroutine(WaitforShipTouchGround());
-        } else if (endOfReplay)
-        {
-            EndOfReplay?.Invoke(0);
-        }
+        } 
     }
 }
