@@ -10,6 +10,7 @@ public class Notification : MonoBehaviour
     {
         PlayerListManager.ShowNotificaiton += ShowNotification;
         SaveSettingsButton.ShowNotification += ShowNotification;
+        HomeScreenPlayButton.ShowNotification += ShowNotification;
         gameObject.SetActive(false);
     }
 
@@ -17,6 +18,7 @@ public class Notification : MonoBehaviour
     {
         PlayerListManager.ShowNotificaiton -= ShowNotification;
         SaveSettingsButton.ShowNotification -= ShowNotification;
+        HomeScreenPlayButton.ShowNotification -= ShowNotification;
     }
 
     private void ShowNotification(string notificationText)

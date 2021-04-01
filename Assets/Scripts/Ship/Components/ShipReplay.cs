@@ -53,6 +53,9 @@ public class ShipReplay : MonoBehaviour
         _binaryWriter.Write(_shipStats.getFuel());
         _binaryWriter.Write(_shipStats.getXSpeed());
         _binaryWriter.Write(_shipStats.getYSpeed());
+        _binaryWriter.Write(_shipStats.getScore());
+        _binaryWriter.Write(_shipStats.getShipCrashed());
+        _binaryWriter.Write(_shipStats.getShipLanded());
     }
 
     private void StartReplay()
@@ -74,6 +77,9 @@ public class ShipReplay : MonoBehaviour
         int fuel = _binaryReader.ReadInt32();
         float xSpeed = _binaryReader.ReadSingle();
         float ySpeed = _binaryReader.ReadSingle();
+        int score = _binaryReader.ReadInt32();
+        bool hasShipCrashed = _binaryReader.ReadBoolean();
+        bool hasShipLanded = _binaryReader.ReadBoolean();
         transform.position = new Vector3(posX, posY, 0);
         transform.rotation = new Quaternion(rotx, roty, rotz, rotw);
         if (_memoryStream.Position >= _memoryStream.Length)

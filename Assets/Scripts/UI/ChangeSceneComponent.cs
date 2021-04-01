@@ -8,11 +8,13 @@ public class ChangeSceneComponent : MonoBehaviour
     private void Start()
     {
         MainMenuButton.OnUIButtonClick += GetButtonType;
+        HomeScreenPlayButton.OnUIButtonClick += GetButtonType;
     }
 
     private void OnDestroy()
     {
         MainMenuButton.OnUIButtonClick -= GetButtonType;
+        HomeScreenPlayButton.OnUIButtonClick -= GetButtonType;
     }
 
     private void GetButtonType(String buttonName)
