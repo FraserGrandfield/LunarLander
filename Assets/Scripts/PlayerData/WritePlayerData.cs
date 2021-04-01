@@ -10,12 +10,14 @@ public class WritePlayerData : MonoBehaviour
     private void OnEnable()
     {
         PlayerListManager.AddNewPlayer += savePlayerData;
-        VolumeUI.UpdatePlayerData += savePlayerData;
+        GameVolumeSlider.UpdatePlayerData += savePlayerData;
+        MusicVolumeSlider.UpdatePlayerData += savePlayerData;
     }
     private void OnDisable()
     {
         PlayerListManager.AddNewPlayer -= savePlayerData;
-        VolumeUI.UpdatePlayerData -= savePlayerData;
+        GameVolumeSlider.UpdatePlayerData -= savePlayerData;
+        MusicVolumeSlider.UpdatePlayerData -= savePlayerData;
     }
 
     private void savePlayerData(PlayerData playerData)

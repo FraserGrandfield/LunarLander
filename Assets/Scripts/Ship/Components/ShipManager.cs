@@ -16,12 +16,8 @@ public class ShipManager : MonoBehaviour
     private void Start()
     {
         _shipStats = gameObject.GetComponent<ShipStats>();
-        StartRecording?.Invoke();
-    }
-
-    private void OnEnable()
-    {
         _inputReader = GetComponent<InputReader>();
+        StartRecording?.Invoke();
     }
 
     public bool getGamePaused()

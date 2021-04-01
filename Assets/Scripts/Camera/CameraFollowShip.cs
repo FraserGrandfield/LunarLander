@@ -29,6 +29,8 @@ public class CameraFollowShip : MonoBehaviour
         ShipLanded.EndRound += RoundEnd;
         ShipLanded.RestartShip += ResetCamera;
         ShipCrashed.RestartShip += ResetCamera;
+        ShipPlayReplay.ResetReplay += ResetCamera;
+        ShipPlayReplay.EndOfReplay += GameEnd;
     }
     
     private void OnDisable()
@@ -39,6 +41,8 @@ public class CameraFollowShip : MonoBehaviour
         ShipLanded.EndRound -= RoundEnd;
         ShipLanded.RestartShip -= ResetCamera;
         ShipCrashed.RestartShip -= ResetCamera;
+        ShipPlayReplay.ResetReplay -= ResetCamera;
+        ShipPlayReplay.EndOfReplay -= GameEnd;
     }
 
     private void GameEnd(int val)

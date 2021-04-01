@@ -9,6 +9,8 @@ public class PauseGameUI : MonoBehaviour
     {
         ShipPaused.PauseShip += ShowPauseGame;
         ShipPaused.UnPauseShip += HidePauseGame;
+        ShipReplayManager.PauseReplay += ShowPauseGame;
+        ShipReplayManager.UnPauseReplay += HidePauseGame;
         gameObject.SetActive(false);
     }
 
@@ -16,6 +18,8 @@ public class PauseGameUI : MonoBehaviour
     {
         ShipPaused.PauseShip -= ShowPauseGame;
         ShipPaused.UnPauseShip -= HidePauseGame;
+        ShipReplayManager.PauseReplay -= ShowPauseGame;
+        ShipReplayManager.UnPauseReplay -= HidePauseGame;
     }
 
     private void ShowPauseGame()

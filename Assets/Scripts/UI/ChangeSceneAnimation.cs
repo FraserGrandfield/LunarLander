@@ -10,12 +10,14 @@ public class ChangeSceneAnimation : MonoBehaviour
     {
         MainMenuButton.OnUIButtonClick += StartChangeSceneAnimation;
         HomeScreenPlayButton.OnUIButtonClick += StartChangeSceneAnimation;
+        ReplaysListManager.ChangeScene += StartChangeSceneAnimation;
     }
     
      private void OnDisable()
     {
         MainMenuButton.OnUIButtonClick -= StartChangeSceneAnimation;
         HomeScreenPlayButton.OnUIButtonClick -= StartChangeSceneAnimation;
+        ReplaysListManager.ChangeScene -= StartChangeSceneAnimation;
     }
 
     void Start()

@@ -5,12 +5,14 @@ using UnityEngine;
 public class PlayerData
 {
     private string name;
-    private int volume;
-
-    public PlayerData(string name, int volume)
+    private int gameVolume;
+    private int musicVolume;
+    
+    public PlayerData(string name, int gameVolume, int musicVolume)
     {
         this.name = name;
-        this.volume = volume;
+        this.gameVolume = gameVolume;
+        this.musicVolume = musicVolume;
     }
 
     public string getName()
@@ -18,13 +20,23 @@ public class PlayerData
         return name;
     }
 
-    public int getVolume()
+    public int getGameVolume()
     {
-        return volume;
+        return gameVolume;
     }
 
-    public void setVolume(int volume)
+    public void setGameVolume(int gameVolume)
     {
-        this.volume = volume;
+        this.gameVolume = gameVolume;
+    }
+    
+    public int getMusicVolume()
+    {
+        return musicVolume;
+    }
+
+    public void setMusicVolume(int musicVolume)
+    {
+        this.musicVolume = musicVolume;
     }
 }

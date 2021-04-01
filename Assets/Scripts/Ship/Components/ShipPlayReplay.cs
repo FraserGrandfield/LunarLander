@@ -9,8 +9,10 @@ public class ShipPlayReplay : MonoBehaviour
     private MemoryStream _memoryStream;
     private BinaryReader _binaryReader;
     private bool startReplay;
+    private bool endOfReplay;
     private bool shipTouchedGround;
-
+    private bool gamePaused;
+    
     public static event Action<int> UpdateFuel;
     public static event Action<Vector2> UpdateVelocity;
     public static event Action<int> UpdateScore;
@@ -20,22 +22,28 @@ public class ShipPlayReplay : MonoBehaviour
     public static event Action StopedAccelerating;
     public static event Action HasCrashed;
     public static event Action HasLanded;
-    public static event Action ResetAnimations;
+    public static event Action ResetReplay;
+    public static event Action<int> EndOfReplay;
 
     private void Start()
     {
         startReplay = false;
         shipTouchedGround = false;
+        gamePaused = false;
     }
 
     private void OnEnable()
     {
         ShipReplayReader.ReplayMemoryStream += StartReplay;
+        ShipReplayManager.PauseReplay += PauseGame;
+        ShipReplayManager.UnPauseReplay += UnPauseGame;
     }
 
     private void OnDisable()
     {
         ShipReplayReader.ReplayMemoryStream -= StartReplay;
+        ShipReplayManager.PauseReplay -= PauseGame;
+        ShipReplayManager.UnPauseReplay -= UnPauseGame;
     }
 
     private void StartReplay(MemoryStream memoryStream)
@@ -44,6 +52,16 @@ public class ShipPlayReplay : MonoBehaviour
         _memoryStream.Seek(0, SeekOrigin.Begin);
         _binaryReader = new BinaryReader(_memoryStream);
         startReplay = true;
+    }
+
+    private void PauseGame()
+    {
+        gamePaused = true;
+    }
+
+    private void UnPauseGame()
+    {
+        gamePaused = false;
     }
     
     private void ReplayShip()
@@ -86,7 +104,7 @@ public class ShipPlayReplay : MonoBehaviour
         }
 
         UpdateFuel?.Invoke(fuel);
-        UpdateVelocity?.Invoke(new Vector2(xSpeed, ySpeed));
+        UpdateVelocity?.Invoke(new Vector2(xSpeed / 10, ySpeed / 10));
         UpdateScore?.Invoke(score);
         UpdateHasCrashed?.Invoke(hasShipCrashed);
         UpdateHasLanded?.Invoke(hasShipLanded);
@@ -94,24 +112,28 @@ public class ShipPlayReplay : MonoBehaviour
         if (_memoryStream.Position >= _memoryStream.Length)
         {
             startReplay = false;
+            endOfReplay = true;
         }
     }
 
     private IEnumerator WaitforShipTouchGround()
     {
         yield return new WaitForSeconds(2);
-        ResetAnimations?.Invoke();
+        ResetReplay?.Invoke();
         shipTouchedGround = false;
     }
     
     private void FixedUpdate()
     {
-        if (startReplay && !shipTouchedGround)
+        if (startReplay && !shipTouchedGround && !endOfReplay && !gamePaused)
         { 
             ReplayShip();
-        } else if (shipTouchedGround)
+        } else if (shipTouchedGround && !endOfReplay)
         {
             StartCoroutine(WaitforShipTouchGround());
+        } else if (endOfReplay)
+        {
+            EndOfReplay?.Invoke(0);
         }
     }
 }

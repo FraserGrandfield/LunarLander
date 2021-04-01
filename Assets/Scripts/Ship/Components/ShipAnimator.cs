@@ -23,7 +23,7 @@ public class ShipAnimator : MonoBehaviour
         ShipPlayReplay.IsAccelerating += AccelerateShipAnimation;
         ShipPlayReplay.StopedAccelerating += AccelerateShipAnimationKeyUp;
         ShipPlayReplay.HasCrashed += shipExpload;
-        ShipPlayReplay.ResetAnimations += resetAnimations;
+        ShipPlayReplay.ResetReplay += resetAnimations;
     }
 
     private void OnDisable()
@@ -37,7 +37,7 @@ public class ShipAnimator : MonoBehaviour
         ShipPlayReplay.IsAccelerating -= AccelerateShipAnimation;
         ShipPlayReplay.StopedAccelerating -= AccelerateShipAnimationKeyUp;
         ShipPlayReplay.HasCrashed -= shipExpload;
-        ShipPlayReplay.ResetAnimations -= resetAnimations;
+        ShipPlayReplay.ResetReplay -= resetAnimations;
     }
 
     private void AccelerateShipAnimation()

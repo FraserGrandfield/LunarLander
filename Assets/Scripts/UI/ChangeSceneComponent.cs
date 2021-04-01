@@ -55,6 +55,9 @@ public class ChangeSceneComponent : MonoBehaviour
             case "ReplayScene":
                 StartCoroutine(ChangeScene("ReplayScene"));
                 break;
+            case "PlayReplayAgainButton":
+                StartCoroutine(ChangeScene("ReplayScene"));
+                break;
             default:
                 Debug.Log("Error no button " + buttonName);
                 break;

@@ -13,7 +13,7 @@ public class ShipAudio : MonoBehaviour
     void Start()
     {
         source = GetComponent<AudioSource>();
-        source.volume = (float)PlayerPrefs.GetInt("volume") / 100;
+        source.volume = (float)PlayerPrefs.GetInt("gameVolume") / 100;
     }
 
     private void OnEnable()
@@ -31,6 +31,7 @@ public class ShipAudio : MonoBehaviour
         ShipPlayReplay.StopedAccelerating += stopSound;
         ShipPlayReplay.HasCrashed += playShipExploadSound;
         ShipPlayReplay.HasLanded += playShipLandedSound;
+        ShipReplayManager.PauseReplay += stopSound;
     }
 
     private void OnDisable()
@@ -48,6 +49,7 @@ public class ShipAudio : MonoBehaviour
         ShipPlayReplay.StopedAccelerating -= stopSound;
         ShipPlayReplay.HasCrashed -= playShipExploadSound;
         ShipPlayReplay.HasLanded -= playShipLandedSound;
+        ShipReplayManager.PauseReplay -= stopSound;
     }
 
     private void playAccelerateSound()
