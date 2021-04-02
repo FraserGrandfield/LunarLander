@@ -66,7 +66,7 @@ public class InputReader : MonoBehaviour
     
     public InputKey? ReadLeftArrowKey()
     {
-        if (Input.GetKey(KeyCode.LeftArrow))
+        if (Input.GetKeyUp(KeyCode.LeftArrow))
         {
             return InputKey.Resume;
         } 
@@ -75,7 +75,7 @@ public class InputReader : MonoBehaviour
     
     public InputKey? ReadRightArrowKey()
     {
-        if (Input.GetKey(KeyCode.RightArrow))
+        if (Input.GetKeyUp(KeyCode.RightArrow))
         {
             return InputKey.Resume;
         } 

@@ -138,25 +138,25 @@ public class ShipPlayReplay : MonoBehaviour
 
     private void RewindReplay()
     {
-        if (pointer - 1 < 0)
+        if (pointer - 50 < 0)
         {
             pointer = 0;
         }
         else
         {
-            pointer -= 1;
+            pointer -= 50;
         }
     }
 
     private void FastForwardReplay()
     {
-        if (pointer + 1 > replayData.Count - 1)
+        if (pointer + 50 > replayData.Count - 1)
         {
             pointer = replayData.Count - 1;
         }
         else
         {
-            pointer += 1;
+            pointer += 50;
         }
     }
 
