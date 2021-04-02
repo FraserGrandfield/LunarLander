@@ -3000,6 +3000,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2136516498}
   - component: {fileID: 2136516499}
+  - component: {fileID: 2136516500}
+  - component: {fileID: 2136516501}
   m_Layer: 5
   m_Name: PlayTutorial
   m_TagString: Untagged
@@ -3076,6 +3078,30 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_IsOn: 1
+--- !u!114 &2136516500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2136516497}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 210d6ee19c788744ea7556c07b68f1d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2136516501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2136516497}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b0082767234924587bdd3de8fac9a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7051120228492954012
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3091,7 +3117,7 @@ PrefabInstance:
     - target: {fileID: 7051120229102032728, guid: 0404287ef85c1ac41a8a19a03ac4d541,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7051120229102032728, guid: 0404287ef85c1ac41a8a19a03ac4d541,
         type: 3}

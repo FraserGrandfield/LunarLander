@@ -8,7 +8,7 @@ public class BackgroundMusic : MonoBehaviour
     private AudioSource audioSource;
     private void Start()
     {
-        SaveSettingsButton.SaveSettings += audioChanged;
+        MusicVolumeSlider.UpdatePlayerData += audioChanged;
         DontDestroyOnLoad(transform.gameObject);
         audioSource = gameObject.GetComponent<AudioSource>();
         audioSource.volume = (float)PlayerPrefs.GetInt("musicVolume") / 100;
@@ -17,10 +17,10 @@ public class BackgroundMusic : MonoBehaviour
 
     private void OnDestroy()
     {
-        SaveSettingsButton.SaveSettings -= audioChanged;
+        MusicVolumeSlider.UpdatePlayerData -= audioChanged;
     }
 
-    private void audioChanged()
+    private void audioChanged(PlayerData pd)
     {
         audioSource.volume = (float)PlayerPrefs.GetInt("musicVolume") / 100;
     }

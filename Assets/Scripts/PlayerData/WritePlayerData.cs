@@ -12,19 +12,21 @@ public class WritePlayerData : MonoBehaviour
         PlayerListManager.AddNewPlayer += savePlayerData;
         GameVolumeSlider.UpdatePlayerData += savePlayerData;
         MusicVolumeSlider.UpdatePlayerData += savePlayerData;
+        PlayTutorialToggal.UpdatePlayerData += savePlayerData;
     }
     private void OnDisable()
     {
         PlayerListManager.AddNewPlayer -= savePlayerData;
         GameVolumeSlider.UpdatePlayerData -= savePlayerData;
         MusicVolumeSlider.UpdatePlayerData -= savePlayerData;
+        PlayTutorialToggal.UpdatePlayerData -= savePlayerData;
     }
 
     private void savePlayerData(PlayerData playerData)
     {
         string filePath = Application.persistentDataPath + "/" + playerData.getName() + "PlayerData.dat";
         FileStream file;
-
+        Debug.Log("Change player tutorial toggle " + playerData.getPlayTutorial());
         if (File.Exists(filePath))
         {
             file = File.Open(filePath, FileMode.Create, FileAccess.Write, FileShare.None);

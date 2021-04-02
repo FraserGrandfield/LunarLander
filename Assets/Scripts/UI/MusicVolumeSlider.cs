@@ -30,7 +30,8 @@ public class MusicVolumeSlider : MonoBehaviour
     private void saveVolume()
     {
         PlayerPrefs.SetInt("musicVolume", (int)slider.value);
-        PlayerData pd = new PlayerData(PlayerPrefs.GetString("name"), PlayerPrefs.GetInt("gameVolume"), PlayerPrefs.GetInt("musicVolume"));
+        PlayerData pd = new PlayerData(PlayerPrefs.GetString("name"), PlayerPrefs.GetInt("gameVolume"),
+            PlayerPrefs.GetInt("musicVolume"), PlayerPrefs.GetInt("playTutorial"));
         UpdatePlayerData?.Invoke(pd);
     }
 }
