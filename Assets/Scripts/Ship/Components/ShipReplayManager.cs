@@ -11,7 +11,9 @@ public class ShipReplayManager : MonoBehaviour
     private bool endOfReplay;
     public static event Action PauseReplay;
     public static event Action UnPauseReplay;
-    
+    public static event Action LeftKeyPressed;
+    public static event Action RightKeyPressed;
+
     private void Start()
     {
         _inputReader = GetComponent<InputReader>();
@@ -49,7 +51,19 @@ public class ShipReplayManager : MonoBehaviour
                 PauseReplay?.Invoke();
                 gamePaused = true;
             }
-            
+        }
+        else
+        {
+            InputReader.InputKey? leftKey = _inputReader.ReadLeftArrowKey();
+            if (leftKey != null)
+            {
+                LeftKeyPressed?.Invoke();
+            }
+            InputReader.InputKey? rightKey = _inputReader.ReadRightArrowKey();
+            if (rightKey != null)
+            {
+                RightKeyPressed?.Invoke();
+            }
         }
     }
 }

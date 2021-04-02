@@ -40,6 +40,8 @@ public class ShipPlayReplay : MonoBehaviour
         ShipReplayReader.ReplayMemoryStream += StartReplay;
         ShipReplayManager.PauseReplay += PauseGame;
         ShipReplayManager.UnPauseReplay += UnPauseGame;
+        ShipReplayManager.LeftKeyPressed += RewindReplay;
+        ShipReplayManager.RightKeyPressed += FastForwardReplay;
     }
 
     private void OnDisable()
@@ -47,6 +49,8 @@ public class ShipPlayReplay : MonoBehaviour
         ShipReplayReader.ReplayMemoryStream -= StartReplay;
         ShipReplayManager.PauseReplay -= PauseGame;
         ShipReplayManager.UnPauseReplay -= UnPauseGame;
+        ShipReplayManager.LeftKeyPressed -= RewindReplay;
+        ShipReplayManager.RightKeyPressed -= FastForwardReplay;
     }
 
     private void StartReplay(MemoryStream memoryStream)
@@ -130,6 +134,30 @@ public class ShipPlayReplay : MonoBehaviour
             EndOfReplay?.Invoke(0);
         }
         pointer++;
+    }
+
+    private void RewindReplay()
+    {
+        if (pointer - 1 < 0)
+        {
+            pointer = 0;
+        }
+        else
+        {
+            pointer -= 1;
+        }
+    }
+
+    private void FastForwardReplay()
+    {
+        if (pointer + 1 > replayData.Count - 1)
+        {
+            pointer = replayData.Count - 1;
+        }
+        else
+        {
+            pointer += 1;
+        }
     }
 
     private IEnumerator WaitforShipTouchGround()
