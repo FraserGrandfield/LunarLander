@@ -9,8 +9,7 @@ public class ShipManager : MonoBehaviour
     public static event Action StartRecording;
     public static event Action<GameObject> CheckCameraPosition;
 
-    private IState currentState = new ShipIdle();
-    private bool gamePaused = false;
+    private IState currentState;
     private ShipStats _shipStats;
 
     private void Start()
@@ -18,11 +17,14 @@ public class ShipManager : MonoBehaviour
         _shipStats = gameObject.GetComponent<ShipStats>();
         _inputReader = GetComponent<InputReader>();
         StartRecording?.Invoke();
-    }
-
-    public bool getGamePaused()
-    {
-        return gamePaused;
+        if (_shipStats.getPlayTutorial())
+        {
+            currentState = new TutorialRotateRight();
+        }
+        else
+        {
+            currentState = new ShipIdle();
+        }
     }
 
     public ShipStats getShipStats()

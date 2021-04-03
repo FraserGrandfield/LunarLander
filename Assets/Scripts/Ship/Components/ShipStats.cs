@@ -12,6 +12,9 @@ public class ShipStats : MonoBehaviour
     [SerializeField] private int score;
     private bool shipLanded;
     private bool shipCrashed;
+    private bool playTutorial;
+    private bool hasCrashedOnce;
+    private bool hasLandedOnce; 
     
     public static event Action<int> FuelUpdated;
     public static event Action<int, int> speedUpdated;
@@ -26,6 +29,16 @@ public class ShipStats : MonoBehaviour
         ySpeed = 0;
         shipLanded = false;
         shipCrashed = false;
+        hasCrashedOnce = false;
+        hasLandedOnce = false;
+        if (PlayerPrefs.GetInt("playTutorial") == 1)
+        {
+            playTutorial = true;
+        }
+        else
+        {
+            playTutorial = false;
+        }
     }
 
     private void OnEnable()
@@ -91,6 +104,21 @@ public class ShipStats : MonoBehaviour
     public bool getShipCrashed()
     {
         return shipCrashed;
+    }
+    
+    public bool getPlayTutorial()
+    {
+        return playTutorial;
+    }
+    
+    public bool getHashCrashedOnce()
+    {
+        return hasCrashedOnce;
+    }
+    
+    public bool getHasLandedOnce()
+    {
+        return hasLandedOnce;
     }
     
     private void updateUsedFuel(int fuelUsed)

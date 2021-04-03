@@ -65,27 +65,30 @@ public class ShipRecordReplay : MonoBehaviour
 
     private void SaveData(bool playAgain)
     {
-        string dateTime = DateTime.Now.ToString();
-        dateTime = dateTime.Replace('/', '-');
-        dateTime = dateTime.Replace(' ', '-');
-        dateTime = dateTime.Replace(':', '-');
-        string filePathStr = "/" + dateTime + "Replay" + PlayerPrefs.GetString("name") + ".dat";
-        string filePath = Application.persistentDataPath + filePathStr;
-        Debug.Log(filePath);
-        FileStream file;
-
-        if (File.Exists(filePath))
+        if (PlayerPrefs.GetInt("playTutorial") != 1)
         {
-            file = File.Open(filePath, FileMode.Create, FileAccess.Write, FileShare.None);
-        }
-        else
-        {
-            file = File.Create(filePath);
-        }
+            string dateTime = DateTime.Now.ToString();
+            dateTime = dateTime.Replace('/', '-');
+            dateTime = dateTime.Replace(' ', '-');
+            dateTime = dateTime.Replace(':', '-');
+            string filePathStr = "/" + dateTime + "Replay" + PlayerPrefs.GetString("name") + ".dat";
+            string filePath = Application.persistentDataPath + filePathStr;
+            Debug.Log(filePath);
+            FileStream file;
 
-        BinaryFormatter bf = new BinaryFormatter();
-        bf.Serialize(file, _memoryStream);
-        file.Close();
+            if (File.Exists(filePath))
+            {
+                file = File.Open(filePath, FileMode.Create, FileAccess.Write, FileShare.None);
+            }
+            else
+            {
+                file = File.Create(filePath);
+            }
+
+            BinaryFormatter bf = new BinaryFormatter();
+            bf.Serialize(file, _memoryStream);
+            file.Close();
+        }
         if (playAgain)
         {
             LoadNewScene?.Invoke("PlayAgainButton");

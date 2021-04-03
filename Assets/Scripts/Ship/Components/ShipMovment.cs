@@ -38,7 +38,16 @@ public class ShipMovment : MonoBehaviour
         ShipLanded.shipLanded += PauseGame;
         ShipLanded.RestartShip += restartShip;
         ShipPaused.PauseShip += PauseGame;
-        ShipPaused.UnPauseShip += PauseGame;
+        ShipPaused.UnPauseShip += UnPauseGame;
+        TutorialRotateLeft.RotateShip += RotateShip;
+        TutorialRotateLeft.PauseShip += PauseGame;
+        TutorialRotateLeft.UnPauseShip += UnPauseGame;
+        TutorialRotateRight.RotateShip += RotateShip;
+        TutorialRotateRight.PauseShip += PauseGame;
+        TutorialRotateRight.UnPauseShip += UnPauseGame;
+        TutorialAccelerate.AccelerateShip += AddForce;
+        TutorialAccelerate.PauseShip += PauseGame;
+        TutorialAccelerate.UnPauseShip += UnPauseGame;
     }
 
     private void OnDisable()
@@ -52,7 +61,16 @@ public class ShipMovment : MonoBehaviour
         ShipLanded.shipLanded -= PauseGame;
         ShipLanded.RestartShip -= restartShip;
         ShipPaused.PauseShip -= PauseGame;
-        ShipPaused.UnPauseShip -= PauseGame;
+        ShipPaused.UnPauseShip -= UnPauseGame;
+        TutorialRotateLeft.RotateShip -= RotateShip;
+        TutorialRotateLeft.PauseShip -= PauseGame;
+        TutorialRotateLeft.UnPauseShip -= UnPauseGame;
+        TutorialRotateRight.RotateShip -= RotateShip;
+        TutorialRotateRight.PauseShip -= PauseGame;
+        TutorialRotateRight.UnPauseShip -= UnPauseGame;
+        TutorialAccelerate.AccelerateShip -= AddForce;
+        TutorialAccelerate.PauseShip -= PauseGame;
+        TutorialAccelerate.UnPauseShip -= UnPauseGame;
     }
 
     private void AddForce()
@@ -67,7 +85,12 @@ public class ShipMovment : MonoBehaviour
 
     private void PauseGame()
     {
-        gamePaused = !gamePaused;
+        gamePaused = true;
+    }
+
+    private void UnPauseGame()
+    {
+        gamePaused = false;
     }
 
     private void AcceleratorKeyUp()
