@@ -13,9 +13,7 @@ public class ShipStats : MonoBehaviour
     private bool shipLanded;
     private bool shipCrashed;
     private bool playTutorial;
-    private bool hasCrashedOnce;
-    private bool hasLandedOnce; 
-    
+
     public static event Action<int> FuelUpdated;
     public static event Action<int, int> speedUpdated;
     public static event Action<int> ScoreUpdated;
@@ -29,8 +27,6 @@ public class ShipStats : MonoBehaviour
         ySpeed = 0;
         shipLanded = false;
         shipCrashed = false;
-        hasCrashedOnce = false;
-        hasLandedOnce = false;
         if (PlayerPrefs.GetInt("playTutorial") == 1)
         {
             playTutorial = true;
@@ -110,17 +106,7 @@ public class ShipStats : MonoBehaviour
     {
         return playTutorial;
     }
-    
-    public bool getHashCrashedOnce()
-    {
-        return hasCrashedOnce;
-    }
-    
-    public bool getHasLandedOnce()
-    {
-        return hasLandedOnce;
-    }
-    
+
     private void updateUsedFuel(int fuelUsed)
     {
         fuel -= fuelUsed;
