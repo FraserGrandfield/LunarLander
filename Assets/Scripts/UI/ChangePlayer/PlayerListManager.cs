@@ -105,19 +105,23 @@ public class PlayerListManager : MonoBehaviour
     {
         if (selectedPlayer != null)
         {
+            Debug.Log("Before " + players.Count);
             DeletePlayer?.Invoke(selectedPlayer);
             if (selectedPlayer.getName() == PlayerPrefs.GetString("name"))
             {
                 PlayerPrefs.DeleteAll();
             }
+
             for (int i = 0; i < players.Count; i++)
             {
                 if (selectedPlayer.getName() == ((GameObject)players[i]).gameObject.GetComponent<SelectPlayerButton>().GetPlayerData().getName())
                 {
-                    Destroy((GameObject)players[i]);
-                    players.Remove(i);
+                    Destroy((GameObject) players[i]);
+                    players.RemoveAt(i);
                 }
             }
+            selectedPlayer = null;
+            Debug.Log("After " + players.Count);
         }
         else
         {

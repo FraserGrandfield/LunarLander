@@ -79,8 +79,10 @@ public class ReplaysListManager : MonoBehaviour
                     selectedReplayPath)
                 {
                     Destroy((GameObject)replays[i]);
+                    replays.RemoveAt(i);
                 }
             }
+            selectedReplayPath = null;
         }
         else
         {

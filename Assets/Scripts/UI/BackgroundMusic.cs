@@ -11,7 +11,14 @@ public class BackgroundMusic : MonoBehaviour
         MusicVolumeSlider.UpdatePlayerData += audioChanged;
         DontDestroyOnLoad(transform.gameObject);
         audioSource = gameObject.GetComponent<AudioSource>();
-        audioSource.volume = (float)PlayerPrefs.GetInt("musicVolume") / 100;
+        if (PlayerPrefs.HasKey("musicVolume"))
+        {
+            audioSource.volume = (float)PlayerPrefs.GetInt("musicVolume") / 100;
+        }
+        else
+        {
+            audioSource.volume = 0.5f;
+        }
         audioSource.Play();
     }
 
