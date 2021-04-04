@@ -24,7 +24,7 @@ public class ShipTouchGround : MonoBehaviour
         
         float shipXSpeed = GetComponent<ShipStats>().getXSpeed();
         float shipYSpeed = GetComponent<ShipStats>().getYSpeed();
-        if (Math.Abs(shipXSpeed) > 5 || Math.Abs(shipYSpeed) > 5 || rotationDifference > 5)
+        if (Math.Abs(shipXSpeed) > 7 || Math.Abs(shipYSpeed) > 7 || rotationDifference > 7)
         {
             updateLanded?.Invoke(false, multiplier);
         }
