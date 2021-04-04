@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ShipMovment : MonoBehaviour
 {
-    private float shipMass = 10;
+    private float shipMass = 20;
     private Vector2 velocity;
     private float xForce;
     private float yForce;
@@ -14,6 +14,8 @@ public class ShipMovment : MonoBehaviour
     private float thrust = 10;
     private float rotateMultiplier = 2;
     private bool isAccelerating;
+    private Vector3 spawnPosition = new Vector3(-5, 0, 0);
+    private Vector2 spawnVelocity = new Vector2(2, 0);
 
     public static event Action<bool> SaveFrame;
     public static event Action<int> fuelUsed;
@@ -25,6 +27,8 @@ public class ShipMovment : MonoBehaviour
         xForce = 0;
         yForce = 0;
         rotateDireciton = 0;
+        transform.position = spawnPosition;
+        velocity = spawnVelocity;
     }
 
     private void OnEnable()
@@ -156,9 +160,9 @@ public class ShipMovment : MonoBehaviour
 
     private void restartShip()
     {
-        transform.position = new Vector3(0, 0, 0);
+        transform.position = spawnPosition;
         transform.rotation = new Quaternion(0, 0, 0, 0);
-        velocity = new Vector2(0, 0);
+        velocity = spawnVelocity;
         xForce = 0;
         yForce = 0;
         isAccelerating = false;

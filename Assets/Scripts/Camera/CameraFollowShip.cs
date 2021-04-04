@@ -6,11 +6,11 @@ using UnityEngine;
 public class CameraFollowShip : MonoBehaviour
 {
     private Vector2 shipVelocity;
-    private int cameraBoundry = 250;
+    private int cameraBoundry = 420;
     private float smoothTime = 20f;
     private Vector2 shipPos;
     private bool gameStopped;
-    private float yClampValue = -1f;
+    private float yClampValue = -12f;
     [SerializeField] private GameObject ship;
     [SerializeField] private UnityEngine.Camera main;
 
@@ -96,7 +96,7 @@ public class CameraFollowShip : MonoBehaviour
             {
                 cameraPos.y = Mathf.Clamp(cameraPos.y, yClampValue, 99999f);
                 Vector3 tempShipVelocity = new Vector3(shipVelocity.x, shipVelocity.y, 0);
-                if (cameraPos.y == -1f)
+                if (cameraPos.y == yClampValue)
                 {
                     tempShipVelocity.y = 0;
                 }
