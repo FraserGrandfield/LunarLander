@@ -29,6 +29,11 @@ public class SelectReplayButton : UIButton
         gameObject.GetComponentInChildren<TextMeshProUGUI>().text = "Replay: " + replayNumber;
     }
 
+    public string GetReplayPath()
+    {
+        return replayFilePath;
+    }
+
     protected override void RaiseOnButtonClick()
     {
         gameObject.GetComponent<Image>().color = Color.gray;

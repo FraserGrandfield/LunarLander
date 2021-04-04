@@ -9,11 +9,13 @@ public class DeleteReplayData : MonoBehaviour
     private void OnEnable()
     {
         DeletePlayer.DeletePlayerReplay += DeleteAllReplays;
+        ReplaysListManager.DeleteReplayFile += DeleteReplay;
     }
 
     private void OnDisable()
     { 
         DeletePlayer.DeletePlayerReplay -= DeleteAllReplays;
+        ReplaysListManager.DeleteReplayFile -= DeleteReplay;
     }
 
     private void DeleteAllReplays(PlayerData player)
