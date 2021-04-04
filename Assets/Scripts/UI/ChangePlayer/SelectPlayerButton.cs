@@ -28,6 +28,11 @@ public class SelectPlayerButton : UIButton
         gameObject.GetComponentInChildren<TextMeshProUGUI>().text = player.getName();
     }
 
+    public PlayerData GetPlayerData()
+    {
+        return player;
+    }
+
     protected override void RaiseOnButtonClick()
     {
         gameObject.GetComponent<Image>().color = Color.gray;

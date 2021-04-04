@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerListManager : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class PlayerListManager : MonoBehaviour
     private PlayerData selectedPlayer = null;
     public static event Action<PlayerData> AddNewPlayer;
     public static event Action<string> ShowNotificaiton;
+    
+    public static event Action<PlayerData> DeletePlayer;
 
     private void OnEnable()
     {
@@ -17,6 +20,7 @@ public class PlayerListManager : MonoBehaviour
         ReadPlayerData.AllPlayerData += addAllPlayersToList;
         SetPlayer.SetPlayerButtonClicked += setActivePlayer;
         SelectPlayerButton.PlayerSelected += setSelectedPlayer;
+        DeletePlayerButton.DeletePlayer += DeleteSelectedPlayer;
     }
     
     private void OnDisable()
@@ -25,6 +29,7 @@ public class PlayerListManager : MonoBehaviour
         ReadPlayerData.AllPlayerData -= addAllPlayersToList;
         SetPlayer.SetPlayerButtonClicked -= setActivePlayer;
         SelectPlayerButton.PlayerSelected -= setSelectedPlayer;
+        DeletePlayerButton.DeletePlayer -= DeleteSelectedPlayer;
     }
 
     private void addPlayer(string pName)
@@ -42,16 +47,14 @@ public class PlayerListManager : MonoBehaviour
     {
         for (int i = 0; i < playerDataList.Count; i++)
         {
-            //TODO check if line below is need as it called in other function!
-            //players.Add(playerDataList[i]);
             addPlayerToList(((PlayerData)playerDataList[i]));
         }
     }
 
     private void addPlayerToList(PlayerData player)
     {
-        players.Add(player);
         GameObject newButton = Instantiate(button);
+        players.Add(newButton);
         newButton.SetActive(true);
         newButton.GetComponent<SelectPlayerButton>().SetPlayer(player);
         newButton.transform.SetParent(transform);
@@ -67,7 +70,7 @@ public class PlayerListManager : MonoBehaviour
         }
         for (int i = 0; i < players.Count; i++)
         {
-            if (pName == ((PlayerData) players[i]).getName())
+            if (pName == ((GameObject)players[i]).gameObject.GetComponent<SelectPlayerButton>().GetPlayerData().getName())
             {
                 ShowNotificaiton?.Invoke(pName + " already exists");
                 return false;
@@ -91,6 +94,30 @@ public class PlayerListManager : MonoBehaviour
             PlayerPrefs.SetInt("playTutorial", selectedPlayer.getPlayTutorial());
             Debug.Log("Change player tutorial toggle " + selectedPlayer.getPlayTutorial());
             ShowNotificaiton?.Invoke("Player set Too: " + selectedPlayer.getName());
+        }
+        else
+        {
+            ShowNotificaiton?.Invoke("Please select a player");
+        }
+    }
+
+    private void DeleteSelectedPlayer()
+    {
+        if (selectedPlayer != null)
+        {
+            DeletePlayer?.Invoke(selectedPlayer);
+            if (selectedPlayer.getName() == PlayerPrefs.GetString("name"))
+            {
+                PlayerPrefs.DeleteAll();
+            }
+            for (int i = 0; i < players.Count; i++)
+            {
+                if (selectedPlayer.getName() == ((GameObject)players[i]).gameObject.GetComponent<SelectPlayerButton>().GetPlayerData().getName())
+                {
+                    Destroy((GameObject)players[i]);
+                    players.Remove(i);
+                }
+            }
         }
         else
         {
