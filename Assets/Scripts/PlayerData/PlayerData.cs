@@ -8,13 +8,15 @@ public class PlayerData
     private int gameVolume;
     private int musicVolume;
     private int playTutorial;
+    private int highScore;
 
-    public PlayerData(string name, int gameVolume, int musicVolume, int playTutorial)
+    public PlayerData(string name, int gameVolume, int musicVolume, int playTutorial, int highScore)
     {
         this.name = name;
         this.gameVolume = gameVolume;
         this.musicVolume = musicVolume;
         this.playTutorial = playTutorial;
+        this.highScore = highScore;
     }
 
     public string getName()
@@ -50,5 +52,15 @@ public class PlayerData
     public void setPlayTutorial(int playTutorial)
     {
         this.playTutorial = playTutorial;
+    }
+
+    public int getHighScore()
+    {
+        return highScore;
+    }
+
+    public void setHighScore(int score)
+    {
+        highScore = score;
     }
 }

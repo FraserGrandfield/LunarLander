@@ -37,7 +37,7 @@ public class PlayerListManager : MonoBehaviour
         Debug.Log("addName: " + pName);
         if (checkName(pName))
         {
-            PlayerData pd = new PlayerData(pName, 100, 100, 1);
+            PlayerData pd = new PlayerData(pName, 100, 100, 1, 0);
             addPlayerToList(pd);
             AddNewPlayer?.Invoke(pd);
         }
@@ -92,6 +92,7 @@ public class PlayerListManager : MonoBehaviour
             PlayerPrefs.SetInt("gameVolume", selectedPlayer.getGameVolume());
             PlayerPrefs.SetInt("musicVolume", selectedPlayer.getMusicVolume());
             PlayerPrefs.SetInt("playTutorial", selectedPlayer.getPlayTutorial());
+            PlayerPrefs.SetInt("highScore", selectedPlayer.getHighScore());
             Debug.Log("Change player tutorial toggle " + selectedPlayer.getPlayTutorial());
             ShowNotificaiton?.Invoke("Player set Too: " + selectedPlayer.getName());
         }

@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class DeletePlayer : MonoBehaviour
 {
-    public static event Action<PlayerData> DeletePlayerReplay;
+    public static event Action<PlayerData> DeletePlayerInfo;
     private void OnEnable()
     {
         PlayerListManager.DeletePlayer += DeleteAllPlayerData;
@@ -19,7 +19,7 @@ public class DeletePlayer : MonoBehaviour
 
     private void DeleteAllPlayerData(PlayerData player)
     {
-        DeletePlayerReplay?.Invoke(player);
+        DeletePlayerInfo?.Invoke(player);
         string[] files = Directory.GetFiles(Application.persistentDataPath, player.getName() + "PlayerData.dat", SearchOption.TopDirectoryOnly);
         for (int i = 0; i < files.Length; i++)
         {

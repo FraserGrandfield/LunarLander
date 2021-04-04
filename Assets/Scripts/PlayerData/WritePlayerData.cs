@@ -13,6 +13,7 @@ public class WritePlayerData : MonoBehaviour
         GameVolumeSlider.UpdatePlayerData += savePlayerData;
         MusicVolumeSlider.UpdatePlayerData += savePlayerData;
         PlayTutorialToggal.UpdatePlayerData += savePlayerData;
+        CheckNewHighScore.SavePlayerData += savePlayerData;
     }
     private void OnDisable()
     {
@@ -20,6 +21,7 @@ public class WritePlayerData : MonoBehaviour
         GameVolumeSlider.UpdatePlayerData -= savePlayerData;
         MusicVolumeSlider.UpdatePlayerData -= savePlayerData;
         PlayTutorialToggal.UpdatePlayerData -= savePlayerData;
+        CheckNewHighScore.SavePlayerData -= savePlayerData;
     }
 
     private void savePlayerData(PlayerData playerData)

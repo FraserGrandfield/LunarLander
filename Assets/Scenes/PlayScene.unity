@@ -1059,6 +1059,7 @@ GameObject:
   - component: {fileID: 1012495678}
   - component: {fileID: 1012495677}
   - component: {fileID: 1012495681}
+  - component: {fileID: 1012495682}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1166,6 +1167,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 442767b9839180949a39a8f409869714, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1012495682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1012495676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60c4ca27cb02b354fb51eacfc565e7f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1195745645
@@ -1767,6 +1780,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4579540835756158004, guid: b71f3b5a8ca9be64e866a423f7701d25, type: 3}
+    - {fileID: 4579540833935884154, guid: b71f3b5a8ca9be64e866a423f7701d25, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b71f3b5a8ca9be64e866a423f7701d25, type: 3}
 --- !u!224 &1512489395 stripped
 RectTransform:
@@ -1834,6 +1848,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &1512489402 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4579540833935884156, guid: b71f3b5a8ca9be64e866a423f7701d25,
+    type: 3}
+  m_PrefabInstance: {fileID: 1512489394}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1512489403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1512489402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f59854bc78c92aa4ca967f2680e20165, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1644958993
