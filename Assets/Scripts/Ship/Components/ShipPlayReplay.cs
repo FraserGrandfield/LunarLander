@@ -14,6 +14,7 @@ public class ShipPlayReplay : MonoBehaviour
     private bool gamePaused;
     private ArrayList replayData = new ArrayList();
     private int pointer;
+    private Camera camera;
     
     public static event Action<int> UpdateFuel;
     public static event Action<Vector2> UpdateVelocity;
@@ -33,6 +34,7 @@ public class ShipPlayReplay : MonoBehaviour
         shipTouchedGround = false;
         gamePaused = false;
         pointer = 0;
+        camera = Camera.main;
     }
 
     private void OnEnable()
@@ -91,6 +93,8 @@ public class ShipPlayReplay : MonoBehaviour
             rp.score = _binaryReader.ReadInt32();
             rp.hasShipCrashed = _binaryReader.ReadBoolean();
             rp.hasShipLanded = _binaryReader.ReadBoolean();
+            rp.cameraX = _binaryReader.ReadSingle();
+            rp.cameraY = _binaryReader.ReadSingle();
             replayData.Add(rp);
         }
     }
@@ -100,7 +104,6 @@ public class ShipPlayReplay : MonoBehaviour
         ReplayData rd = (ReplayData)replayData[pointer];
         transform.position = new Vector3(rd.posx, rd.posy, 0);
         transform.rotation = new Quaternion(rd.rotx, rd.roty, rd.rotz, rd.rotw);
-
         if (rd.isAccelerating)
         {
             IsAccelerating?.Invoke();
@@ -120,6 +123,8 @@ public class ShipPlayReplay : MonoBehaviour
             HasLanded?.Invoke();
             shipTouchedGround = true;
         }
+
+        camera.gameObject.transform.position = new Vector3(rd.cameraX, rd.cameraY, -10);
 
         UpdateFuel?.Invoke(rd.fuel);
         UpdateVelocity?.Invoke(new Vector2(rd.xSpeed / 10, rd.ySpeed / 10));

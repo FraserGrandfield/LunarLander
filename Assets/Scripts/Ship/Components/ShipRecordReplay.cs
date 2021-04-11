@@ -10,11 +10,13 @@ public class ShipRecordReplay : MonoBehaviour
     private MemoryStream _memoryStream;
     private BinaryWriter _binaryWriter;
     private ShipStats _shipStats;
+    private Camera camera;
 
     public static event Action<string> LoadNewScene; 
     private void Start()
     {
         _shipStats = gameObject.GetComponent<ShipStats>();
+        camera = Camera.main;
     }
     
     private void OnEnable()
@@ -61,6 +63,8 @@ public class ShipRecordReplay : MonoBehaviour
         _binaryWriter.Write(_shipStats.getScore());
         _binaryWriter.Write(_shipStats.getShipCrashed());
         _binaryWriter.Write(_shipStats.getShipLanded());
+        _binaryWriter.Write(camera.gameObject.transform.position.x);
+        _binaryWriter.Write(camera.gameObject.transform.position.y);
     }
 
     private void SaveData(bool playAgain)

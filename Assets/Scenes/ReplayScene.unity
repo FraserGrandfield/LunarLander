@@ -530,7 +530,8 @@ PrefabInstance:
       propertyPath: ship
       value: 
       objectReference: {fileID: 2050311194482589987}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4434652520653410630, guid: f58262a2a1b78a440a56450bdba61f02, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f58262a2a1b78a440a56450bdba61f02, type: 3}
 --- !u!20 &865200949 stripped
 Camera:

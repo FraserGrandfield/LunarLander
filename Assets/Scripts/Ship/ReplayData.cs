@@ -17,4 +17,6 @@ public class ReplayData
     public int score { get; set; }
     public bool hasShipCrashed { get; set; }
     public bool hasShipLanded { get; set; }
+    public float cameraX { get; set; }
+    public float cameraY { get; set; }
 }
