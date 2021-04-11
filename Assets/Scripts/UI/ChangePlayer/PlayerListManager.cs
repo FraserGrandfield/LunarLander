@@ -92,7 +92,7 @@ public class PlayerListManager : MonoBehaviour
             PlayerPrefs.SetInt("gameVolume", selectedPlayer.getGameVolume());
             PlayerPrefs.SetInt("musicVolume", selectedPlayer.getMusicVolume());
             PlayerPrefs.SetInt("playTutorial", selectedPlayer.getPlayTutorial());
-            PlayerPrefs.SetInt("highScore", selectedPlayer.getHighScore());
+            PlayerPrefs.SetInt("highscore", selectedPlayer.getHighScore());
             Debug.Log("Change player tutorial toggle " + selectedPlayer.getPlayTutorial());
             ShowNotificaiton?.Invoke("Player set Too: " + selectedPlayer.getName());
         }

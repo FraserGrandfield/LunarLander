@@ -25,7 +25,7 @@ public class SelectPlayerButton : UIButton
     public void SetPlayer(PlayerData player)
     {
         this.player = player;
-        gameObject.GetComponentInChildren<TextMeshProUGUI>().text = player.getName();
+        gameObject.GetComponentInChildren<TextMeshProUGUI>().text = player.getName() + " HighScore: " + player.getHighScore();
     }
 
     public PlayerData GetPlayerData()

@@ -23,10 +23,10 @@ public class CheckNewHighScore : MonoBehaviour
 
     private void CheckIfNewHighScore(int score)
     {
-        Debug.Log("here" + score + " " + PlayerPrefs.GetInt("highScore"));
-        if (score > PlayerPrefs.GetInt("highScore") && PlayerPrefs.GetInt("playTutorial") == 0)
+        Debug.Log("here" + score + " " + PlayerPrefs.GetInt("highscore"));
+        if (score > PlayerPrefs.GetInt("highscore") && PlayerPrefs.GetInt("playTutorial") == 0)
         {
-            PlayerPrefs.SetInt("highScore", score);
+            PlayerPrefs.SetInt("highscore", score);
             BinaryFormatter bf = new BinaryFormatter();
             string filePath = Application.persistentDataPath + "/highscores.dat";
             Dictionary<string, int> highScores = new Dictionary<string, int>();
@@ -61,11 +61,12 @@ public class CheckNewHighScore : MonoBehaviour
                 file = File.Create(filePath);
             }
             Debug.Log("here6");
+            //TODO Issue not saving data
             bf.Serialize(file, highScores);
-            file.Close();
             PlayerData pd = new PlayerData(PlayerPrefs.GetString("name"), PlayerPrefs.GetInt("gameVolume"),
-                PlayerPrefs.GetInt("musicVolume"), PlayerPrefs.GetInt("playTutorial"), PlayerPrefs.GetInt("highScore"));
+                PlayerPrefs.GetInt("musicVolume"), PlayerPrefs.GetInt("playTutorial"), PlayerPrefs.GetInt("highscore"));
             SavePlayerData?.Invoke(pd);
+            file.Close();
         }
     }
 }
