@@ -17,6 +17,7 @@ public class ShipStats : MonoBehaviour
     public static event Action<int> FuelUpdated;
     public static event Action<int, int> speedUpdated;
     public static event Action<int> ScoreUpdated;
+    public static event Action<bool> LowFuel;
 
     void Start()
     {
@@ -114,12 +115,29 @@ public class ShipStats : MonoBehaviour
         {
             fuel = 0;
         }
+
+        if (fuel < 200)
+        {
+            LowFuel?.Invoke(true);
+        }
+        else
+        {
+            LowFuel?.Invoke(false);
+        }
         FuelUpdated?.Invoke(fuel);
     }
 
     private void updateFuel(int currentFuel)
     {
         fuel = currentFuel;
+        if (fuel < 200)
+        {
+            LowFuel?.Invoke(true);
+        }
+        else
+        {
+            LowFuel?.Invoke(false);
+        }
         FuelUpdated?.Invoke(fuel);
     }
 
