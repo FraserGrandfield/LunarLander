@@ -21,7 +21,8 @@ public class AddPlayerButton : UIButton
         {
             if (gameObject.transform.GetChild(i).name == "CreateUserTextField")
             {
-               playerName  = gameObject.transform.GetChild(i).GetComponent<TMP_InputField>().text;;
+               playerName  = gameObject.transform.GetChild(i).GetComponent<TMP_InputField>().text;
+               gameObject.transform.GetChild(i).GetComponent<TMP_InputField>().text = "";
             } 
         }
         Debug.Log("AddPlayerButton: " + playerName);
