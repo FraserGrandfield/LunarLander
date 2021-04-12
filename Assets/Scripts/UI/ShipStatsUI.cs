@@ -43,18 +43,18 @@ public class ShipStatsUI : MonoBehaviour
 
     private void updateFuel(int fuel)
     {
-        fuelText.text = "Fuel: " + fuel;
+        fuelText.text = "Fuel:  " + fuel;
     }
     
     private void updateScore(int score)
     {
-        scoreText.text = "Score: " + score;
+        scoreText.text = "Score:  " + score;
     }
     
     private void speedUpdated(int xSpeed, int ySpeed)
     {
-        horizontalSpeedText.text = "Horizontal Speed: " + xSpeed;
-        verticalSpeedText.text = "Vertical Speed: " + ySpeed;
+        horizontalSpeedText.text = "Horizontal  Speed:  " + xSpeed;
+        verticalSpeedText.text = "Vertical  Speed:  " + ySpeed;
 
     }
 }

@@ -64,7 +64,7 @@ public class ReplaysListManager : MonoBehaviour
         }
         else
         {
-            ShowNotificaiton?.Invoke("Please select a replay");
+            ShowNotificaiton?.Invoke("Please  select  a  replay");
         }
     }
 
@@ -86,7 +86,7 @@ public class ReplaysListManager : MonoBehaviour
         }
         else
         {
-            ShowNotificaiton?.Invoke("Please select a replay");
+            ShowNotificaiton?.Invoke("Please  select  a  replay");
         }
     }
 }

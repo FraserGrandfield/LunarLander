@@ -65,14 +65,14 @@ public class PlayerListManager : MonoBehaviour
     {
         if ( pName.Length > 10 || pName == "")
         {
-            ShowNotificaiton?.Invoke("Player Name cannot be empty or longer than 10 characters");
+            ShowNotificaiton?.Invoke("Player  Name  cannot  be  empty  or  longer  than  10  characters");
             return false;
         }
         for (int i = 0; i < players.Count; i++)
         {
             if (pName == ((GameObject)players[i]).gameObject.GetComponent<SelectPlayerButton>().GetPlayerData().getName())
             {
-                ShowNotificaiton?.Invoke(pName + " already exists");
+                ShowNotificaiton?.Invoke(pName + "  already  exists");
                 return false;
             }
         }
@@ -94,11 +94,11 @@ public class PlayerListManager : MonoBehaviour
             PlayerPrefs.SetInt("playTutorial", selectedPlayer.getPlayTutorial());
             PlayerPrefs.SetInt("highscore", selectedPlayer.getHighScore());
             Debug.Log("Change player tutorial toggle " + selectedPlayer.getPlayTutorial());
-            ShowNotificaiton?.Invoke("Player set Too: " + selectedPlayer.getName());
+            ShowNotificaiton?.Invoke("Player  set  Too:  " + selectedPlayer.getName());
         }
         else
         {
-            ShowNotificaiton?.Invoke("Please select a player");
+            ShowNotificaiton?.Invoke("Please  select  a  player");
         }
     }
 
@@ -126,7 +126,7 @@ public class PlayerListManager : MonoBehaviour
         }
         else
         {
-            ShowNotificaiton?.Invoke("Please select a player");
+            ShowNotificaiton?.Invoke("Please  select  a  player");
         }
     }
 }

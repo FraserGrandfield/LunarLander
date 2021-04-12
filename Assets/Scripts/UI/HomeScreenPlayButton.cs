@@ -15,7 +15,7 @@ public class HomeScreenPlayButton : UIButton
         }
         else
         {
-            ShowNotification?.Invoke("Please choose a player!");
+            ShowNotification?.Invoke("Please  choose  a  player!");
         }
     }
 }

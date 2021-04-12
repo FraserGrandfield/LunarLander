@@ -31,6 +31,6 @@ public class EndGameUI : MonoBehaviour
     private void showEndGameUI(int score)
     {
         gameObject.SetActive(true);
-        scoreText.text = "Score: " + score;
+        scoreText.text = "Score:  " + score;
     }
 }

@@ -10,6 +10,6 @@ public class SaveSettingsButton : UIButton
     protected override void RaiseOnButtonClick()
     {
         SaveSettings?.Invoke();
-        ShowNotification?.Invoke("Settings Saved");
+        ShowNotification?.Invoke("Settings  Saved");
     }
 }

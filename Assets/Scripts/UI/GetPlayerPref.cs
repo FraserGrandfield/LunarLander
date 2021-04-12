@@ -9,11 +9,11 @@ public class GetPlayerPref : MonoBehaviour
     {
         if (PlayerPrefs.HasKey("name"))
         {
-            gameObject.GetComponent<TextMeshProUGUI>().text = "Player: " + PlayerPrefs.GetString("name");
+            gameObject.GetComponent<TextMeshProUGUI>().text = "Player:  " + PlayerPrefs.GetString("name");
         }
         else
         {
-            gameObject.GetComponent<TextMeshProUGUI>().text = "No Player Selected";
+            gameObject.GetComponent<TextMeshProUGUI>().text = "No  Player  Selected";
         }
     }
 }

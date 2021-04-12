@@ -26,7 +26,7 @@ public class SelectReplayButton : UIButton
     {
         replayFilePath = replayPath;
         
-        gameObject.GetComponentInChildren<TextMeshProUGUI>().text = "Replay: " + replayNumber;
+        gameObject.GetComponentInChildren<TextMeshProUGUI>().text = "Replay:  " + replayNumber;
     }
 
     public string GetReplayPath()
