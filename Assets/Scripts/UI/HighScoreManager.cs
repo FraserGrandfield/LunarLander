@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 public class HighScoreManager : MonoBehaviour
 {
-    [SerializeField] private GameObject button;
+    [SerializeField] private GameObject highscoreText;
     private void OnEnable()
     {
         HighScoreReader.DisplayHighScores += DisplayHighScores;
@@ -21,13 +21,15 @@ public class HighScoreManager : MonoBehaviour
 
     private void DisplayHighScores(Dictionary<string, int> highscores)
     {
+        int place = 1;
         foreach (KeyValuePair<string, int> highscore in highscores.OrderByDescending(key => key.Value))
         {
-            GameObject newButton = Instantiate(button);
+            GameObject newButton = Instantiate(highscoreText);
             newButton.SetActive(true);
-            newButton.GetComponent<TextMeshProUGUI>().text = highscore.Key + " " + highscore.Value;
+            newButton.GetComponentInChildren<TextMeshProUGUI>().text = place + ".  " + highscore.Key + "  |  Score:  " + highscore.Value;
             newButton.transform.SetParent(transform);
             newButton.transform.localScale = new Vector3(1, 1, 1);
+            place++;
         }
     }
 }
