@@ -36,11 +36,11 @@ public class TouchedGroundUI : MonoBehaviour
         gameObject.SetActive(true);
         if (landed)
         {
-            touchGroundTypeText.text = "Good Landing!";
+            touchGroundTypeText.text = "Good  Landing!";
         }
         else
         {
-            touchGroundTypeText.text = "You Crashed!";
+            touchGroundTypeText.text = "You  Crashed!";
         }
     }
 
