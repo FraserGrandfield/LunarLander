@@ -1999,6 +1999,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayableShip
       objectReference: {fileID: 0}
+    - target: {fileID: 2050311194421702959, guid: 19df84598b5723045bc7dd8df4fa61b9,
+        type: 3}
+      propertyPath: mainCamera
+      value: 
+      objectReference: {fileID: 2084440313}
     m_RemovedComponents:
     - {fileID: 2050311194421702932, guid: 19df84598b5723045bc7dd8df4fa61b9, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 19df84598b5723045bc7dd8df4fa61b9, type: 3}

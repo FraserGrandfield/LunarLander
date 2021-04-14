@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class CameraFollowShip : MonoBehaviour
 {
@@ -27,10 +28,7 @@ public class CameraFollowShip : MonoBehaviour
         ShipCrashed.EndRound += RoundEnd;
         ShipLanded.EndGame += GameEnd;
         ShipLanded.EndRound += RoundEnd;
-        ShipLanded.RestartShip += ResetCamera;
-        ShipCrashed.RestartShip += ResetCamera;
-        ShipPlayReplay.ResetReplay += ResetCamera;
-        ShipPlayReplay.EndOfReplay += GameEnd;
+        ShipMovment.MoveCameraToSpawnPoint += ResetCamera;
     }
     
     private void OnDisable()
@@ -39,10 +37,7 @@ public class CameraFollowShip : MonoBehaviour
         ShipCrashed.EndRound -= RoundEnd;
         ShipLanded.EndGame -= GameEnd;
         ShipLanded.EndRound -= RoundEnd;
-        ShipLanded.RestartShip -= ResetCamera;
-        ShipCrashed.RestartShip -= ResetCamera;
-        ShipPlayReplay.ResetReplay -= ResetCamera;
-        ShipPlayReplay.EndOfReplay -= GameEnd;
+        ShipMovment.MoveCameraToSpawnPoint -= ResetCamera;
     }
 
     private void GameEnd(int val)
@@ -55,9 +50,9 @@ public class CameraFollowShip : MonoBehaviour
         gameStopped = true;
     }
 
-    private void ResetCamera()
+    private void ResetCamera(Vector3 pos)
     {
-        transform.position = new Vector3(0, 0, -10);
+        transform.position = pos;
         gameStopped = false;
     }
     

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class ShipMovment : MonoBehaviour
 {
@@ -14,12 +15,13 @@ public class ShipMovment : MonoBehaviour
     private float thrust = 10;
     private float rotateMultiplier = 2;
     private bool isAccelerating;
-    private Vector3 spawnPosition = new Vector3(-5, 0, 0);
     private Vector2 spawnVelocity = new Vector2(2, 0);
-
+    
     public static event Action<bool> SaveFrame;
     public static event Action<int> fuelUsed;
     public static event Action<Vector2> updateVelocity;
+    public static event Action<Vector3> MoveCameraToSpawnPoint;
+
 
     private void Start()
     {
@@ -27,7 +29,7 @@ public class ShipMovment : MonoBehaviour
         xForce = 0;
         yForce = 0;
         rotateDireciton = 0;
-        transform.position = spawnPosition;
+        spawnShip();
         velocity = spawnVelocity;
     }
 
@@ -160,7 +162,7 @@ public class ShipMovment : MonoBehaviour
 
     private void restartShip()
     {
-        transform.position = spawnPosition;
+        spawnShip();
         transform.rotation = new Quaternion(0, 0, 0, 0);
         velocity = spawnVelocity;
         xForce = 0;
@@ -168,5 +170,12 @@ public class ShipMovment : MonoBehaviour
         isAccelerating = false;
         rotateDireciton = 0;
         gamePaused = false;
+    }
+
+    private void spawnShip()
+    {
+        float spawnPositionX = Random.Range(-20f, 30f);
+        transform.position = new Vector3(spawnPositionX, 0, 0);
+        MoveCameraToSpawnPoint?.Invoke(new Vector3(spawnPositionX, 0, -10));
     }
 }
