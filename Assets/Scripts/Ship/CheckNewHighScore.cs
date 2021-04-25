@@ -23,7 +23,6 @@ public class CheckNewHighScore : MonoBehaviour
 
     private void CheckIfNewHighScore(int score)
     {
-        Debug.Log("here" + score + " " + PlayerPrefs.GetInt("highscore"));
         if (score > PlayerPrefs.GetInt("highscore") && PlayerPrefs.GetInt("playTutorial") == 0)
         {
             PlayerPrefs.SetInt("highscore", score);
@@ -31,24 +30,20 @@ public class CheckNewHighScore : MonoBehaviour
             string filePath = Application.persistentDataPath + "/highscores.dat";
             Dictionary<string, int> highScores = new Dictionary<string, int>();
             FileStream file;
-            Debug.Log("here1");
             if (File.Exists(filePath))
             {
                 file = File.OpenRead(filePath);
                 if (file.Length != 0)
                 {
-                    Debug.Log("here2");
                     Dictionary<string, int> tempHighscores = (Dictionary<string, int>)bf.Deserialize(file);
                     highScores = highScores.Concat(tempHighscores).ToDictionary(k => k.Key, v => v.Value);
                 }
                 if (highScores.ContainsKey(PlayerPrefs.GetString("name")))
                 {
-                    Debug.Log("here3");
                     highScores[PlayerPrefs.GetString("name")] = score;
                 }
                 else
                 {
-                    Debug.Log("here4");
                     highScores.Add(PlayerPrefs.GetString("name"), score);
                 }
                 file.Close();
@@ -56,12 +51,9 @@ public class CheckNewHighScore : MonoBehaviour
             }
             else
             {
-                Debug.Log("here5");
                 highScores.Add(PlayerPrefs.GetString("name"), score);
                 file = File.Create(filePath);
             }
-            Debug.Log("here6");
-            //TODO Issue not saving data
             bf.Serialize(file, highScores);
             PlayerData pd = new PlayerData(PlayerPrefs.GetString("name"), PlayerPrefs.GetInt("gameVolume"),
                 PlayerPrefs.GetInt("musicVolume"), PlayerPrefs.GetInt("playTutorial"), PlayerPrefs.GetInt("highscore"));

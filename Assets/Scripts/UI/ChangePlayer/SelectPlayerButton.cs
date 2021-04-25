@@ -25,7 +25,7 @@ public class SelectPlayerButton : UIButton
     public void SetPlayer(PlayerData player)
     {
         this.player = player;
-        gameObject.GetComponentInChildren<TextMeshProUGUI>().text = player.getName() + "  |  HighScore:  " + player.getHighScore();
+        gameObject.GetComponentInChildren<TextMeshProUGUI>().text = player.GetName() + "  |  HighScore:  " + player.GetHighScore();
     }
 
     public PlayerData GetPlayerData()
@@ -41,7 +41,7 @@ public class SelectPlayerButton : UIButton
 
     private void DifferentButtonBeenSelected(PlayerData player)
     {
-        if (this.player.getName() != player.getName())
+        if (this.player.GetName() != player.GetName())
         {
             gameObject.GetComponent<Image>().color = Color.white;
         }

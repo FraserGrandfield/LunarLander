@@ -20,7 +20,7 @@ public class DeleteReplayData : MonoBehaviour
 
     private void DeleteAllReplays(PlayerData player)
     {
-        string[] files = Directory.GetFiles(Application.persistentDataPath, "*Replay" + player.getName() + ".dat", SearchOption.TopDirectoryOnly);
+        string[] files = Directory.GetFiles(Application.persistentDataPath, "*Replay" + player.GetName() + ".dat", SearchOption.TopDirectoryOnly);
         for (int i = 0; i < files.Length; i++)
         {
             DeleteReplay(files[i]);

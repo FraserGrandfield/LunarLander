@@ -18,8 +18,8 @@ public class ShipMovment : MonoBehaviour
     private Vector2 spawnVelocity = new Vector2(2, 0);
     
     public static event Action<bool> SaveFrame;
-    public static event Action<int> fuelUsed;
-    public static event Action<Vector2> updateVelocity;
+    public static event Action<int> FuelUsed;
+    public static event Action<Vector2> UpdateVelocity;
     public static event Action<Vector3> MoveCameraToSpawnPoint;
 
 
@@ -29,7 +29,7 @@ public class ShipMovment : MonoBehaviour
         xForce = 0;
         yForce = 0;
         rotateDireciton = 0;
-        spawnShip();
+        SpawnShip();
         velocity = spawnVelocity;
     }
 
@@ -39,10 +39,10 @@ public class ShipMovment : MonoBehaviour
         ShipAccelerating.RotateShip += RotateShip;
         ShipIdle.RotateShip += RotateShip;
         ShipIdle.AcceleratorKeyUp += AcceleratorKeyUp;
-        ShipCrashed.shipCrashed += PauseGame;
-        ShipCrashed.RestartShip += restartShip;
-        ShipLanded.shipLanded += PauseGame;
-        ShipLanded.RestartShip += restartShip;
+        ShipCrashed.ShipCrashedEvent += PauseGame;
+        ShipCrashed.RestartShip += RestartShip;
+        ShipLanded.ShipLandedEvent += PauseGame;
+        ShipLanded.RestartShip += RestartShip;
         ShipPaused.PauseShip += PauseGame;
         ShipPaused.UnPauseShip += UnPauseGame;
         TutorialRotateLeft.RotateShip += RotateShip;
@@ -62,10 +62,10 @@ public class ShipMovment : MonoBehaviour
         ShipAccelerating.RotateShip -= RotateShip;
         ShipIdle.RotateShip -= RotateShip;
         ShipIdle.AcceleratorKeyUp -= AcceleratorKeyUp;
-        ShipCrashed.shipCrashed -= PauseGame;
-        ShipCrashed.RestartShip -= restartShip;
-        ShipLanded.shipLanded -= PauseGame;
-        ShipLanded.RestartShip -= restartShip;
+        ShipCrashed.ShipCrashedEvent -= PauseGame;
+        ShipCrashed.RestartShip -= RestartShip;
+        ShipLanded.ShipLandedEvent -= PauseGame;
+        ShipLanded.RestartShip -= RestartShip;
         ShipPaused.PauseShip -= PauseGame;
         ShipPaused.UnPauseShip -= UnPauseGame;
         TutorialRotateLeft.RotateShip -= RotateShip;
@@ -109,19 +109,19 @@ public class ShipMovment : MonoBehaviour
         if (!gamePaused) 
         {
             SaveFrame?.Invoke(isAccelerating);
-            moveShip();
-            rotateShip();
-            fuelUpdate();
+            MoveShip();
+            RotateShip();
+            FuelUpdate();
         }
     }
 
-    private void rotateShip()
+    private void RotateShip()
     {
         transform.Rotate(new Vector3(0, 0, 90 * Time.deltaTime * rotateDireciton * rotateMultiplier));
         rotateDireciton = 0;
     }
 
-    private void moveShip()
+    private void MoveShip()
     {
         if (isAccelerating)
         {
@@ -143,7 +143,7 @@ public class ShipMovment : MonoBehaviour
         //Calculate new velocity V = U + (F / m) t
         velocity.x = velocity.x + (xForce / shipMass) * Time.deltaTime;
         velocity.y = velocity.y + (yForce / shipMass) * Time.deltaTime;
-        updateVelocity?.Invoke(velocity);
+        UpdateVelocity?.Invoke(velocity);
         //Calculate displacement S = 0.5 * (u + v) t
         float newX = 0.5f * velocity.x * Time.deltaTime;
         float newY = 0.5f * velocity.y * Time.deltaTime;
@@ -152,17 +152,17 @@ public class ShipMovment : MonoBehaviour
         yForce = 0;
     }
 
-    private void fuelUpdate()
+    private void FuelUpdate()
     {
         if (isAccelerating)
         {
-            fuelUsed?.Invoke(1);
+            FuelUsed?.Invoke(1);
         }
     }
 
-    private void restartShip()
+    private void RestartShip()
     {
-        spawnShip();
+        SpawnShip();
         transform.rotation = new Quaternion(0, 0, 0, 0);
         velocity = spawnVelocity;
         xForce = 0;
@@ -172,7 +172,7 @@ public class ShipMovment : MonoBehaviour
         gamePaused = false;
     }
 
-    private void spawnShip()
+    private void SpawnShip()
     {
         float spawnPositionX = Random.Range(-20f, 30f);
         transform.position = new Vector3(spawnPositionX, 0, 0);

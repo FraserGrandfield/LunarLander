@@ -1195,9 +1195,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cf6a34c10083654785bf3fd5090e72f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AccelerateShipAudio: {fileID: 8300000, guid: 69660ed3693224e419eff464e301b6ed, type: 3}
-  ShipExplosionAudio: {fileID: 8300000, guid: 1770793a7b1dff8439819cd83febda06, type: 3}
-  ShipLandedAudio: {fileID: 8300000, guid: b81d93d1c2d0c504fa5a949791b3d04c, type: 3}
+  accelerateShipAudio: {fileID: 8300000, guid: 69660ed3693224e419eff464e301b6ed, type: 3}
+  shipExplosionAudio: {fileID: 8300000, guid: 1770793a7b1dff8439819cd83febda06, type: 3}
+  shipLandedAudio: {fileID: 8300000, guid: b81d93d1c2d0c504fa5a949791b3d04c, type: 3}
 --- !u!114 &1512156635
 MonoBehaviour:
   m_ObjectHideFlags: 0

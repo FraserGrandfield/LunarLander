@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class ShipLanded : IState
 {
-    public static event Action shipLanded;
-    public static event Action<string> shipLandedAchievement;
+    public static event Action ShipLandedEvent;
+    public static event Action<string> ShipLandedAchievement;
     public static event Action RestartShip;
     public static event Action<int> EndGame;
     public static event Action<bool> EndRound;
@@ -15,21 +15,21 @@ public class ShipLanded : IState
 
     public void Enter(ShipManager ship)
     {
-        shipLanded?.Invoke();
-        shipLandedAchievement?.Invoke("landed");
+        ShipLandedEvent?.Invoke();
+        ShipLandedAchievement?.Invoke("landed");
         SaveShipLanded?.Invoke(false);
         ShipStats ss = ship.gameObject.GetComponent<ShipStats>();
-        if (ss.getFuel() < 1)
+        if (ss.GetFuel() < 1)
         {
-            EndGame?.Invoke(ss.getScore());
-            if (ss.getScore() == 500)
+            EndGame?.Invoke(ss.GetScore());
+            if (ss.GetScore() == 500)
             {
-                shipLandedAchievement?.Invoke("500");
+                ShipLandedAchievement?.Invoke("500");
             }
 
-            if (ss.getScore() == 1000)
+            if (ss.GetScore() == 1000)
             {
-                shipLandedAchievement?.Invoke("1000");
+                ShipLandedAchievement?.Invoke("1000");
             }
         }
         else
@@ -40,7 +40,7 @@ public class ShipLanded : IState
 
     public IState Tick(ShipManager ship, InputReader.InputKey? acceleration, InputReader.InputKey? accelerateKeyUp, InputReader.InputKey? rotation, InputReader.InputKey? resume, InputReader.InputKey? pause)
     {
-        if (resume == InputReader.InputKey.Resume && ship.gameObject.GetComponent<ShipStats>().getFuel() > 0)
+        if (resume == InputReader.InputKey.Resume && ship.gameObject.GetComponent<ShipStats>().GetFuel() > 0)
         {
             RestartShip?.Invoke(); 
             return new ShipIdle();

@@ -7,13 +7,13 @@ public class LandedAchievementUI : MonoBehaviour
 {
     void Start()
     {
-        AchievementManager.showLandedAchievement += ShowNotification;
+        AchievementManager.ShowLandedAchievement += ShowNotification;
         gameObject.SetActive(false);
     }
 
     private void OnDestroy()
     {
-        AchievementManager.showLandedAchievement -= ShowNotification;
+        AchievementManager.ShowLandedAchievement -= ShowNotification;
     }
 
     private void ShowNotification()

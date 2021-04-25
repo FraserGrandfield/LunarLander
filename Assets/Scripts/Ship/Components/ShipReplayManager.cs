@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class ShipReplayManager : MonoBehaviour
 {
-    private InputReader _inputReader;
+    private InputReader inputReader;
     private bool gamePaused;
     private bool endOfReplay;
     public static event Action PauseReplay;
@@ -16,7 +16,7 @@ public class ShipReplayManager : MonoBehaviour
 
     private void Start()
     {
-        _inputReader = GetComponent<InputReader>();
+        inputReader = GetComponent<InputReader>();
         gamePaused = false;
         endOfReplay = false;
     }
@@ -38,7 +38,7 @@ public class ShipReplayManager : MonoBehaviour
 
     private void Update()
     {
-        InputReader.InputKey? pause = _inputReader.ReadPauseInput();
+        InputReader.InputKey? pause = inputReader.ReadPauseInput();
         if (pause != null)
         {
             if (gamePaused && !endOfReplay)
@@ -54,12 +54,12 @@ public class ShipReplayManager : MonoBehaviour
         }
         else
         {
-            InputReader.InputKey? leftKey = _inputReader.ReadLeftArrowKey();
+            InputReader.InputKey? leftKey = inputReader.ReadLeftArrowKey();
             if (leftKey != null)
             {
                 LeftKeyPressed?.Invoke();
             }
-            InputReader.InputKey? rightKey = _inputReader.ReadRightArrowKey();
+            InputReader.InputKey? rightKey = inputReader.ReadRightArrowKey();
             if (rightKey != null)
             {
                 RightKeyPressed?.Invoke();

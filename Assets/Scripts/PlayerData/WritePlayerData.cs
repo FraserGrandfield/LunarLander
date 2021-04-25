@@ -9,26 +9,26 @@ public class WritePlayerData : MonoBehaviour
 {
     private void OnEnable()
     {
-        PlayerListManager.AddNewPlayer += savePlayerData;
-        GameVolumeSlider.UpdatePlayerData += savePlayerData;
-        MusicVolumeSlider.UpdatePlayerData += savePlayerData;
-        PlayTutorialToggal.UpdatePlayerData += savePlayerData;
-        CheckNewHighScore.SavePlayerData += savePlayerData;
+        PlayerListManager.AddNewPlayer += SavePlayerData;
+        GameVolumeSlider.UpdatePlayerData += SavePlayerData;
+        MusicVolumeSlider.UpdatePlayerData += SavePlayerData;
+        PlayTutorialToggal.UpdatePlayerData += SavePlayerData;
+        CheckNewHighScore.SavePlayerData += SavePlayerData;
     }
     private void OnDisable()
     {
-        PlayerListManager.AddNewPlayer -= savePlayerData;
-        GameVolumeSlider.UpdatePlayerData -= savePlayerData;
-        MusicVolumeSlider.UpdatePlayerData -= savePlayerData;
-        PlayTutorialToggal.UpdatePlayerData -= savePlayerData;
-        CheckNewHighScore.SavePlayerData -= savePlayerData;
+        PlayerListManager.AddNewPlayer -= SavePlayerData;
+        GameVolumeSlider.UpdatePlayerData -= SavePlayerData;
+        MusicVolumeSlider.UpdatePlayerData -= SavePlayerData;
+        PlayTutorialToggal.UpdatePlayerData -= SavePlayerData;
+        CheckNewHighScore.SavePlayerData -= SavePlayerData;
     }
 
-    private void savePlayerData(PlayerData playerData)
+    private void SavePlayerData(PlayerData playerData)
     {
-        string filePath = Application.persistentDataPath + "/" + playerData.getName() + "PlayerData.dat";
+        string filePath = Application.persistentDataPath + "/" + playerData.GetName() + "PlayerData.dat";
         FileStream file;
-        Debug.Log("Save highscore" + playerData.getHighScore());
+        Debug.Log("Save highscore" + playerData.GetHighScore());
         if (File.Exists(filePath))
         {
             file = File.Open(filePath, FileMode.Create, FileAccess.Write, FileShare.None);

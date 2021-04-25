@@ -19,47 +19,47 @@ public class PlayerData
         this.highScore = highScore;
     }
 
-    public string getName()
+    public string GetName()
     {
         return name;
     }
 
-    public int getGameVolume()
+    public int GetGameVolume()
     {
         return gameVolume;
     }
 
-    public void setGameVolume(int gameVolume)
+    public void SetGameVolume(int gameVolume)
     {
         this.gameVolume = gameVolume;
     }
     
-    public int getMusicVolume()
+    public int GetMusicVolume()
     {
         return musicVolume;
     }
 
-    public void setMusicVolume(int musicVolume)
+    public void SetMusicVolume(int musicVolume)
     {
         this.musicVolume = musicVolume;
     }
     
-        public int getPlayTutorial()
+        public int GetPlayTutorial()
     {
         return playTutorial;
     }
 
-    public void setPlayTutorial(int playTutorial)
+    public void SetPlayTutorial(int playTutorial)
     {
         this.playTutorial = playTutorial;
     }
 
-    public int getHighScore()
+    public int GetHighScore()
     {
         return highScore;
     }
 
-    public void setHighScore(int score)
+    public void SetHighScore(int score)
     {
         highScore = score;
     }

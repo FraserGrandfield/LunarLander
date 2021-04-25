@@ -6,13 +6,13 @@ public class OneThousandAchievementUI : MonoBehaviour
 {
     void Start()
     {
-        AchievementManager.show1000Achievement += ShowNotification;
+        AchievementManager.Show1000Achievement += ShowNotification;
         gameObject.SetActive(false);
     }
 
     private void OnDestroy()
     {
-        AchievementManager.show1000Achievement -= ShowNotification;
+        AchievementManager.Show1000Achievement -= ShowNotification;
     }
 
     private void ShowNotification()

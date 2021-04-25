@@ -6,13 +6,13 @@ public class CrashedAchievementUI : MonoBehaviour
 {
     void Start()
     {
-        AchievementManager.showCrashedAchievement += ShowNotification;
+        AchievementManager.ShowCrashedAchievement += ShowNotification;
         gameObject.SetActive(false);
     }
 
     private void OnDestroy()
     {
-        AchievementManager.showCrashedAchievement -= ShowNotification;
+        AchievementManager.ShowCrashedAchievement -= ShowNotification;
     }
 
     private void ShowNotification()

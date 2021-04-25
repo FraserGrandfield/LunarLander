@@ -19,7 +19,7 @@ public class CameraFollowShip : MonoBehaviour
     {
         gameStopped = false;
         shipPos = main.WorldToScreenPoint(ship.transform.position);
-        shipVelocity = ship.gameObject.GetComponent<ShipStats>().getRealVelocity();
+        shipVelocity = ship.gameObject.GetComponent<ShipStats>().GetRealVelocity();
     }
 
     private void OnEnable()
@@ -60,7 +60,7 @@ public class CameraFollowShip : MonoBehaviour
     {
         if (!gameStopped)
         {
-            shipVelocity = ship.gameObject.GetComponent<ShipStats>().getRealVelocity();
+            shipVelocity = ship.gameObject.GetComponent<ShipStats>().GetRealVelocity();
             shipPos = main.WorldToScreenPoint(ship.transform.position);
             float newX = 0.5f * shipVelocity.x * Time.deltaTime;
             float newY = 0.5f * shipVelocity.y * Time.deltaTime;

@@ -31,14 +31,14 @@ public class ShipStatsUI : MonoBehaviour
         }
         ShipStats.FuelUpdated += updateFuel;
         ShipStats.ScoreUpdated += updateScore;
-        ShipStats.speedUpdated += speedUpdated;
+        ShipStats.SpeedUpdated += speedUpdated;
     }
     
      private void OnDisable()
     {
         ShipStats.FuelUpdated -= updateFuel;
         ShipStats.ScoreUpdated -= updateScore;
-        ShipStats.speedUpdated -= speedUpdated;
+        ShipStats.SpeedUpdated -= speedUpdated;
     }
 
     private void updateFuel(int fuel)

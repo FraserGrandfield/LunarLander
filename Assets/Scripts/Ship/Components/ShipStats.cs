@@ -15,7 +15,7 @@ public class ShipStats : MonoBehaviour
     private bool playTutorial;
 
     public static event Action<int> FuelUpdated;
-    public static event Action<int, int> speedUpdated;
+    public static event Action<int, int> SpeedUpdated;
     public static event Action<int> ScoreUpdated;
     public static event Action<bool> LowFuel;
 
@@ -40,75 +40,75 @@ public class ShipStats : MonoBehaviour
 
     private void OnEnable()
     {
-        ShipMovment.updateVelocity += updateVelocity;
-        ShipMovment.fuelUsed += updateUsedFuel;
-        ShipTouchGround.updateLanded += updateTouchedGround;
-        ShipCrashed.RestartShip += restartShip;
-        ShipLanded.RestartShip += restartShip;
+        ShipMovment.UpdateVelocity += UpdateVelocity;
+        ShipMovment.FuelUsed += UpdateUsedFuel;
+        ShipTouchGround.UpdateLanded += UpdateTouchedGround;
+        ShipCrashed.RestartShip += RestartShip;
+        ShipLanded.RestartShip += RestartShip;
         
-        ShipPlayReplay.UpdateFuel += updateFuel;
-        ShipPlayReplay.UpdateVelocity += updateVelocity;
-        ShipPlayReplay.UpdateScore += updateScore;
-        ShipPlayReplay.UpdateHasCrashed += updateHasCrashed;
-        ShipPlayReplay.UpdateHasLanded += updateHasLanded;
+        ShipPlayReplay.UpdateFuel += UpdateFuel;
+        ShipPlayReplay.UpdateVelocity += UpdateVelocity;
+        ShipPlayReplay.UpdateScore += UpdateScore;
+        ShipPlayReplay.UpdateHasCrashed += UpdateHasCrashed;
+        ShipPlayReplay.UpdateHasLanded += UpdateHasLanded;
     }
 
     private void OnDisable()
     {
-        ShipMovment.updateVelocity -= updateVelocity;
-        ShipMovment.fuelUsed -= updateUsedFuel;
-        ShipTouchGround.updateLanded -= updateTouchedGround;
-        ShipCrashed.RestartShip -= restartShip;
-        ShipLanded.RestartShip -= restartShip;
+        ShipMovment.UpdateVelocity -= UpdateVelocity;
+        ShipMovment.FuelUsed -= UpdateUsedFuel;
+        ShipTouchGround.UpdateLanded -= UpdateTouchedGround;
+        ShipCrashed.RestartShip -= RestartShip;
+        ShipLanded.RestartShip -= RestartShip;
         
-        ShipPlayReplay.UpdateFuel -= updateFuel;
-        ShipPlayReplay.UpdateVelocity -= updateVelocity;
-        ShipPlayReplay.UpdateScore -= updateScore;
-        ShipPlayReplay.UpdateHasCrashed -= updateHasCrashed;
-        ShipPlayReplay.UpdateHasLanded -= updateHasLanded;
+        ShipPlayReplay.UpdateFuel -= UpdateFuel;
+        ShipPlayReplay.UpdateVelocity -= UpdateVelocity;
+        ShipPlayReplay.UpdateScore -= UpdateScore;
+        ShipPlayReplay.UpdateHasCrashed -= UpdateHasCrashed;
+        ShipPlayReplay.UpdateHasLanded -= UpdateHasLanded;
     }
 
-    public int getFuel()
+    public int GetFuel()
     {
         return fuel;
     }
 
-    public float getXSpeed()
+    public float GetXSpeed()
     {
         return xSpeed;
     }
     
-    public float getYSpeed()
+    public float GetYSpeed()
     {
         return ySpeed;
     }
 
-    public Vector2 getRealVelocity()
+    public Vector2 GetRealVelocity()
     {
         return realVelocity;
     }
     
-    public int getScore()
+    public int GetScore()
     {
         return score;
     }
     
-    public bool getShipLanded()
+    public bool GetShipLanded()
     {
         return shipLanded;
     }
     
-    public bool getShipCrashed()
+    public bool GetShipCrashed()
     {
         return shipCrashed;
     }
     
-    public bool getPlayTutorial()
+    public bool GetPlayTutorial()
     {
         return playTutorial;
     }
 
-    private void updateUsedFuel(int fuelUsed)
+    private void UpdateUsedFuel(int fuelUsed)
     {
         fuel -= fuelUsed;
         if (fuel < 0)
@@ -127,7 +127,7 @@ public class ShipStats : MonoBehaviour
         FuelUpdated?.Invoke(fuel);
     }
 
-    private void updateFuel(int currentFuel)
+    private void UpdateFuel(int currentFuel)
     {
         fuel = currentFuel;
         if (fuel < 200)
@@ -141,12 +141,12 @@ public class ShipStats : MonoBehaviour
         FuelUpdated?.Invoke(fuel);
     }
 
-    private void updateVelocity(Vector2 velocity)
+    private void UpdateVelocity(Vector2 velocity)
     {
         xSpeed = (int)(velocity.x * 10);
         ySpeed = (int)(velocity.y * 10);
         realVelocity = velocity;
-        speedUpdated?.Invoke(xSpeed, ySpeed);
+        SpeedUpdated?.Invoke(xSpeed, ySpeed);
     }
 
     private void AddToScore(int scoreToAdd)
@@ -155,23 +155,23 @@ public class ShipStats : MonoBehaviour
         ScoreUpdated?.Invoke(score);
     }
 
-    private void updateScore(int newScore)
+    private void UpdateScore(int newScore)
     {
         score = newScore;
         ScoreUpdated?.Invoke(score);
     }
     
-    private void updateHasCrashed(bool hasCrashed)
+    private void UpdateHasCrashed(bool hasCrashed)
     {
         shipCrashed = hasCrashed;
     }
     
-    private void updateHasLanded(bool hasLanded)
+    private void UpdateHasLanded(bool hasLanded)
     {
         shipLanded = hasLanded;
     }
 
-    private void updateTouchedGround(bool landed, int multiplier)
+    private void UpdateTouchedGround(bool landed, int multiplier)
     {
         if (landed)
         {
@@ -181,11 +181,11 @@ public class ShipStats : MonoBehaviour
         else
         {
             shipCrashed = true;
-            updateUsedFuel(200);
+            UpdateUsedFuel(200);
         }
     }
     
-    private void restartShip()
+    private void RestartShip()
     {
         shipCrashed = false;
         shipLanded = false;

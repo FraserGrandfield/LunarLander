@@ -28,9 +28,9 @@ public class DeletePlayerHighScore : MonoBehaviour
                 BinaryFormatter bf = new BinaryFormatter();
                 Dictionary<string, int> highscores = (Dictionary<string, int>)bf.Deserialize(file);
                 file.Close();
-                if (highscores.ContainsKey(player.getName()))
+                if (highscores.ContainsKey(player.GetName()))
                 {
-                    highscores.Remove(player.getName());
+                    highscores.Remove(player.GetName());
                     file = File.Open(filePath, FileMode.Create, FileAccess.Write, FileShare.None);
                     bf.Serialize(file, highscores);
                     file.Close();

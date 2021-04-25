@@ -15,22 +15,22 @@ public class TouchedGroundUI : MonoBehaviour
                 touchGroundTypeText = gameObject.transform.GetChild(i).GetComponent<TextMeshProUGUI>();
             } 
         }
-        ShipLanded.EndRound += showEndGameUI;
-        ShipCrashed.EndRound += showEndGameUI;
-        ShipLanded.RestartShip += hideEndgameUI;
-        ShipCrashed.RestartShip += hideEndgameUI;
+        ShipLanded.EndRound += ShowEndGameUI;
+        ShipCrashed.EndRound += ShowEndGameUI;
+        ShipLanded.RestartShip += HideEndgameUI;
+        ShipCrashed.RestartShip += HideEndgameUI;
         gameObject.SetActive(false);
     }
     
     private void OnDestroy()
-    { 
-        ShipLanded.EndRound -= showEndGameUI;
-        ShipCrashed.EndRound -= showEndGameUI;
-        ShipLanded.RestartShip -= hideEndgameUI;
-        ShipCrashed.RestartShip -= hideEndgameUI;
+    {
+        ShipLanded.EndRound -= ShowEndGameUI;
+        ShipCrashed.EndRound -= ShowEndGameUI;
+        ShipLanded.RestartShip -= HideEndgameUI;
+        ShipCrashed.RestartShip -= HideEndgameUI;
     }
 
-    private void showEndGameUI(bool landed)
+    private void ShowEndGameUI(bool landed)
     {
    
         gameObject.SetActive(true);
@@ -44,7 +44,7 @@ public class TouchedGroundUI : MonoBehaviour
         }
     }
 
-    private void hideEndgameUI()
+    private void HideEndgameUI()
     {
         gameObject.SetActive(false);
     }

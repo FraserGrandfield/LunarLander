@@ -5,36 +5,36 @@ using UnityEngine;
 
 public class ShipTouchGround : MonoBehaviour
 {
-    public static event Action<bool, int> updateLanded;
-    public static event Action<string> shipX4Achievement;
+    public static event Action<bool, int> UpdateLanded;
+    public static event Action<string> ShipX4Achievement;
 
         private void OnEnable()
     {
-        GroundContatct.ShipTouchedGround += calculateTouchGround;
+        GroundContatct.ShipTouchedGround += CalculateTouchGround;
     }
 
     private void OnDisable()
     {
-        GroundContatct.ShipTouchedGround -= calculateTouchGround;
+        GroundContatct.ShipTouchedGround -= CalculateTouchGround;
     }
 
-    private void calculateTouchGround(int multiplier, float groundRotation)
+    private void CalculateTouchGround(int multiplier, float groundRotation)
     {
         float shipRotation = transform.rotation.eulerAngles.z;
         float rotationDifference = Math.Max(shipRotation, groundRotation) - Math.Min(shipRotation, groundRotation);
         
-        float shipXSpeed = GetComponent<ShipStats>().getXSpeed();
-        float shipYSpeed = GetComponent<ShipStats>().getYSpeed();
+        float shipXSpeed = GetComponent<ShipStats>().GetXSpeed();
+        float shipYSpeed = GetComponent<ShipStats>().GetYSpeed();
         if (Math.Abs(shipXSpeed) > 7 || Math.Abs(shipYSpeed) > 7 || rotationDifference > 7)
         {
-            updateLanded?.Invoke(false, multiplier);
+            UpdateLanded?.Invoke(false, multiplier);
         }
         else
         {
-            updateLanded?.Invoke(true, multiplier);
+            UpdateLanded?.Invoke(true, multiplier);
             if (multiplier == 4)
             {
-                shipX4Achievement?.Invoke("x4");
+                ShipX4Achievement?.Invoke("x4");
             }
         }
     }

@@ -15,10 +15,10 @@ public class ShipAccelerating : IState
 
     public IState Tick(ShipManager ship, InputReader.InputKey? acceleration, InputReader.InputKey? accelerateKeyUp, InputReader.InputKey? rotation, InputReader.InputKey? resume, InputReader.InputKey? pause)
     {
-        if (ship.gameObject.GetComponent<ShipStats>().getShipCrashed()) return new ShipCrashed();
-        if (ship.gameObject.GetComponent<ShipStats>().getShipLanded()) return new ShipLanded();
+        if (ship.gameObject.GetComponent<ShipStats>().GetShipCrashed()) return new ShipCrashed();
+        if (ship.gameObject.GetComponent<ShipStats>().GetShipLanded()) return new ShipLanded();
         if (pause == InputReader.InputKey.Escape) return new ShipPaused();
-        if (accelerateKeyUp == InputReader.InputKey.SpaceUp || ship.getShipStats().getFuel() < 1) return new ShipIdle();
+        if (accelerateKeyUp == InputReader.InputKey.SpaceUp || ship.getShipStats().GetFuel() < 1) return new ShipIdle();
         AccelerateShip?.Invoke();
         if (rotation == InputReader.InputKey.RotateClockWise)
         {

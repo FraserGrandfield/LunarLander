@@ -6,13 +6,13 @@ public class FiveHundredAchievementUI : MonoBehaviour
 {
     void Start()
     {
-        AchievementManager.show500Achievement += ShowNotification;
+        AchievementManager.Show500Achievement += ShowNotification;
         gameObject.SetActive(false);
     }
 
     private void OnDestroy()
     {
-        AchievementManager.show500Achievement -= ShowNotification;
+        AchievementManager.Show500Achievement -= ShowNotification;
     }
 
     private void ShowNotification()

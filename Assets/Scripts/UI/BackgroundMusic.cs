@@ -6,10 +6,21 @@ using UnityEngine;
 public class BackgroundMusic : MonoBehaviour
 {
     private AudioSource audioSource;
+    private static BackgroundMusic backgroundMusic;
+    
     private void Start()
     {
-        MusicVolumeSlider.UpdatePlayerData += audioChanged;
         DontDestroyOnLoad(transform.gameObject);
+        if (backgroundMusic == null)
+        {
+            backgroundMusic = this;
+        }
+        else
+        {
+            Destroy(transform.gameObject);
+        }
+        MusicVolumeSlider.UpdateMusicVolume += audioChanged;
+        PlayerListManager.UpdateMusicVolume += audioChanged;
         audioSource = gameObject.GetComponent<AudioSource>();
         if (PlayerPrefs.HasKey("musicVolume"))
         {
@@ -24,10 +35,11 @@ public class BackgroundMusic : MonoBehaviour
 
     private void OnDestroy()
     {
-        MusicVolumeSlider.UpdatePlayerData -= audioChanged;
+        MusicVolumeSlider.UpdateMusicVolume -= audioChanged;
+        PlayerListManager.UpdateMusicVolume -= audioChanged;
     }
 
-    private void audioChanged(PlayerData pd)
+    private void audioChanged()
     {
         audioSource.volume = (float)PlayerPrefs.GetInt("musicVolume") / 100;
     }

@@ -68,7 +68,7 @@ public class InputReader : MonoBehaviour
     {
         if (Input.GetKeyUp(KeyCode.LeftArrow))
         {
-            return InputKey.Resume;
+            return InputKey.LeftArrowKey;
         } 
         return null;
     }
@@ -77,7 +77,7 @@ public class InputReader : MonoBehaviour
     {
         if (Input.GetKeyUp(KeyCode.RightArrow))
         {
-            return InputKey.Resume;
+            return InputKey.RightArrowKey;
         } 
         return null;
     }

@@ -20,12 +20,12 @@ public class DeletePlayer : MonoBehaviour
     private void DeleteAllPlayerData(PlayerData player)
     {
         DeletePlayerInfo?.Invoke(player);
-        string[] files = Directory.GetFiles(Application.persistentDataPath, player.getName() + "PlayerData.dat", SearchOption.TopDirectoryOnly);
+        string[] files = Directory.GetFiles(Application.persistentDataPath, player.GetName() + "PlayerData.dat", SearchOption.TopDirectoryOnly);
         for (int i = 0; i < files.Length; i++)
         {
             File.Delete(files[i]);
         }
-        string filePath = Application.persistentDataPath + "/" + player.getName() + "PlayerAchievmentData.dat";
+        string filePath = Application.persistentDataPath + "/" + player.GetName() + "PlayerAchievmentData.dat";
         File.Delete(filePath);
     }
 }

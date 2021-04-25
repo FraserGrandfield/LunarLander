@@ -19,8 +19,8 @@ public class TutorialRotateLeft : IState
 
     public IState Tick(ShipManager ship, InputReader.InputKey? acceleration, InputReader.InputKey? accelerateKeyUp, InputReader.InputKey? rotation, InputReader.InputKey? resume, InputReader.InputKey? pause)
     {
-        if (ship.gameObject.GetComponent<ShipStats>().getShipCrashed()) return new ShipCrashed();
-        if (ship.gameObject.GetComponent<ShipStats>().getShipLanded()) return new ShipLanded();
+        if (ship.gameObject.GetComponent<ShipStats>().GetShipCrashed()) return new ShipCrashed();
+        if (ship.gameObject.GetComponent<ShipStats>().GetShipLanded()) return new ShipLanded();
         if (rotation == InputReader.InputKey.RotateAntiClockWise)
         {
             UnPauseShip?.Invoke();

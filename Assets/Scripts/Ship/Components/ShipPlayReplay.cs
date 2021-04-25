@@ -6,8 +6,8 @@ using UnityEngine;
 
 public class ShipPlayReplay : MonoBehaviour
 {
-    private MemoryStream _memoryStream;
-    private BinaryReader _binaryReader;
+    private MemoryStream memoryStream;
+    private BinaryReader binaryReader;
     private bool startReplay;
     private bool endOfReplay;
     private bool shipTouchedGround;
@@ -57,7 +57,7 @@ public class ShipPlayReplay : MonoBehaviour
 
     private void StartReplay(MemoryStream memoryStream)
     {
-        _memoryStream = memoryStream;
+        this.memoryStream = memoryStream;
         
         PopulateReplayDataList();
         startReplay = true;
@@ -75,26 +75,26 @@ public class ShipPlayReplay : MonoBehaviour
 
     private void PopulateReplayDataList()
     {
-        _memoryStream.Seek(0, SeekOrigin.Begin);
-        _binaryReader = new BinaryReader(_memoryStream);
-        while (_memoryStream.Position < _memoryStream.Length)
+        memoryStream.Seek(0, SeekOrigin.Begin);
+        binaryReader = new BinaryReader(memoryStream);
+        while (memoryStream.Position < memoryStream.Length)
         {
             ReplayData rp = new ReplayData();
-            rp.posx = _binaryReader.ReadSingle();
-            rp.posy = _binaryReader.ReadSingle();
-            rp.rotx = _binaryReader.ReadSingle();
-            rp.roty = _binaryReader.ReadSingle();
-            rp.rotz = _binaryReader.ReadSingle();
-            rp.rotw = _binaryReader.ReadSingle();
-            rp.isAccelerating = _binaryReader.ReadBoolean();
-            rp.fuel = _binaryReader.ReadInt32();
-            rp.xSpeed = _binaryReader.ReadSingle();
-            rp.ySpeed = _binaryReader.ReadSingle();
-            rp.score = _binaryReader.ReadInt32();
-            rp.hasShipCrashed = _binaryReader.ReadBoolean();
-            rp.hasShipLanded = _binaryReader.ReadBoolean();
-            rp.cameraX = _binaryReader.ReadSingle();
-            rp.cameraY = _binaryReader.ReadSingle();
+            rp.posx = binaryReader.ReadSingle();
+            rp.posy = binaryReader.ReadSingle();
+            rp.rotx = binaryReader.ReadSingle();
+            rp.roty = binaryReader.ReadSingle();
+            rp.rotz = binaryReader.ReadSingle();
+            rp.rotw = binaryReader.ReadSingle();
+            rp.isAccelerating = binaryReader.ReadBoolean();
+            rp.fuel = binaryReader.ReadInt32();
+            rp.xSpeed = binaryReader.ReadSingle();
+            rp.ySpeed = binaryReader.ReadSingle();
+            rp.score = binaryReader.ReadInt32();
+            rp.hasShipCrashed = binaryReader.ReadBoolean();
+            rp.hasShipLanded = binaryReader.ReadBoolean();
+            rp.cameraX = binaryReader.ReadSingle();
+            rp.cameraY = binaryReader.ReadSingle();
             replayData.Add(rp);
         }
     }

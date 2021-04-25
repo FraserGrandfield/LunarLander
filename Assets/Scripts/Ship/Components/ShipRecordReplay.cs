@@ -7,22 +7,22 @@ using UnityEngine;
 
 public class ShipRecordReplay : MonoBehaviour
 {
-    private MemoryStream _memoryStream;
-    private BinaryWriter _binaryWriter;
-    private ShipStats _shipStats;
+    private MemoryStream memoryStream;
+    private BinaryWriter binaryWriter;
+    private ShipStats shipStats;
     private Camera camera;
 
     public static event Action<string> LoadNewScene; 
     private void Start()
     {
-        _shipStats = gameObject.GetComponent<ShipStats>();
+        shipStats = gameObject.GetComponent<ShipStats>();
         camera = Camera.main;
     }
     
     private void OnEnable()
     {
         ShipMovment.SaveFrame += SaveShip;
-        ShipManager.StartRecording += startRecording;
+        ShipManager.StartRecording += StartRecording;
         SaveGameMainMenuButton.SaveGameMainMenu += SaveData;
         SaveGamePlayAgainButton.SaveGamePlayAgain += SaveData;
         ShipLanded.SaveShipLanded += SaveShip;
@@ -32,39 +32,39 @@ public class ShipRecordReplay : MonoBehaviour
     private void OnDisable()
     {
         ShipMovment.SaveFrame -= SaveShip;
-        ShipManager.StartRecording -= startRecording;
+        ShipManager.StartRecording -= StartRecording;
         SaveGameMainMenuButton.SaveGameMainMenu -= SaveData;
         SaveGamePlayAgainButton.SaveGamePlayAgain -= SaveData;
         ShipLanded.SaveShipLanded -= SaveShip;
         ShipCrashed.SaveShipCrashed -= SaveShip;
     }
     
-    private void startRecording()
+    private void StartRecording()
     {
-        _memoryStream = new MemoryStream();
-        _binaryWriter = new BinaryWriter(_memoryStream);
-        _memoryStream.SetLength(0);
-        _memoryStream.Seek(0, SeekOrigin.Begin);
-        _binaryWriter.Seek(0, SeekOrigin.Begin);
+        memoryStream = new MemoryStream();
+        binaryWriter = new BinaryWriter(memoryStream);
+        memoryStream.SetLength(0);
+        memoryStream.Seek(0, SeekOrigin.Begin);
+        binaryWriter.Seek(0, SeekOrigin.Begin);
     }
     
     private void SaveShip(bool isAccelerating)
     {
-        _binaryWriter.Write(transform.position.x);
-        _binaryWriter.Write(transform.position.y);
-        _binaryWriter.Write(transform.rotation.x);
-        _binaryWriter.Write(transform.rotation.y);
-        _binaryWriter.Write(transform.rotation.z);
-        _binaryWriter.Write(transform.rotation.w);
-        _binaryWriter.Write(isAccelerating);
-        _binaryWriter.Write(_shipStats.getFuel());
-        _binaryWriter.Write(_shipStats.getXSpeed());
-        _binaryWriter.Write(_shipStats.getYSpeed());
-        _binaryWriter.Write(_shipStats.getScore());
-        _binaryWriter.Write(_shipStats.getShipCrashed());
-        _binaryWriter.Write(_shipStats.getShipLanded());
-        _binaryWriter.Write(camera.gameObject.transform.position.x);
-        _binaryWriter.Write(camera.gameObject.transform.position.y);
+        binaryWriter.Write(transform.position.x);
+        binaryWriter.Write(transform.position.y);
+        binaryWriter.Write(transform.rotation.x);
+        binaryWriter.Write(transform.rotation.y);
+        binaryWriter.Write(transform.rotation.z);
+        binaryWriter.Write(transform.rotation.w);
+        binaryWriter.Write(isAccelerating);
+        binaryWriter.Write(shipStats.GetFuel());
+        binaryWriter.Write(shipStats.GetXSpeed());
+        binaryWriter.Write(shipStats.GetYSpeed());
+        binaryWriter.Write(shipStats.GetScore());
+        binaryWriter.Write(shipStats.GetShipCrashed());
+        binaryWriter.Write(shipStats.GetShipLanded());
+        binaryWriter.Write(camera.gameObject.transform.position.x);
+        binaryWriter.Write(camera.gameObject.transform.position.y);
     }
 
     private void SaveData(bool playAgain)
@@ -90,7 +90,7 @@ public class ShipRecordReplay : MonoBehaviour
             }
 
             BinaryFormatter bf = new BinaryFormatter();
-            bf.Serialize(file, _memoryStream);
+            bf.Serialize(file, memoryStream);
             file.Close();
         }
         if (playAgain)

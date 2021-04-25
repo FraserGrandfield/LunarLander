@@ -8,12 +8,11 @@ public class PlayerListManager : MonoBehaviour
 {
     [SerializeField] private GameObject button;
     private ArrayList players = new ArrayList();
-    private PlayerData selectedPlayer = null;
+    private PlayerData selectedPlayer;
     public static event Action<PlayerData> AddNewPlayer;
     public static event Action<Dictionary<string, bool>, string> AddNewPlayerAchievments;
-
+    public static event Action UpdateMusicVolume;
     public static event Action<string> ShowNotificaiton;
-    
     public static event Action<PlayerData> DeletePlayer;
 
     private void OnEnable()
@@ -79,7 +78,7 @@ public class PlayerListManager : MonoBehaviour
         }
         for (int i = 0; i < players.Count; i++)
         {
-            if (pName == ((GameObject)players[i]).gameObject.GetComponent<SelectPlayerButton>().GetPlayerData().getName())
+            if (pName == ((GameObject)players[i]).gameObject.GetComponent<SelectPlayerButton>().GetPlayerData().GetName())
             {
                 ShowNotificaiton?.Invoke(pName + "  already  exists");
                 return false;
@@ -97,13 +96,14 @@ public class PlayerListManager : MonoBehaviour
     {
         if (selectedPlayer != null)
         {
-            PlayerPrefs.SetString("name", selectedPlayer.getName());
-            PlayerPrefs.SetInt("gameVolume", selectedPlayer.getGameVolume());
-            PlayerPrefs.SetInt("musicVolume", selectedPlayer.getMusicVolume());
-            PlayerPrefs.SetInt("playTutorial", selectedPlayer.getPlayTutorial());
-            PlayerPrefs.SetInt("highscore", selectedPlayer.getHighScore());
-            Debug.Log("Change player tutorial toggle " + selectedPlayer.getPlayTutorial());
-            ShowNotificaiton?.Invoke("Player  set  Too:  " + selectedPlayer.getName());
+            PlayerPrefs.SetString("name", selectedPlayer.GetName());
+            PlayerPrefs.SetInt("gameVolume", selectedPlayer.GetGameVolume());
+            PlayerPrefs.SetInt("musicVolume", selectedPlayer.GetMusicVolume());
+            PlayerPrefs.SetInt("playTutorial", selectedPlayer.GetPlayTutorial());
+            PlayerPrefs.SetInt("highscore", selectedPlayer.GetHighScore());
+            Debug.Log("Change player tutorial toggle " + selectedPlayer.GetPlayTutorial());
+            ShowNotificaiton?.Invoke("Player  set  Too:  " + selectedPlayer.GetName());
+            UpdateMusicVolume?.Invoke();
         }
         else
         {
@@ -117,14 +117,14 @@ public class PlayerListManager : MonoBehaviour
         {
             Debug.Log("Before " + players.Count);
             DeletePlayer?.Invoke(selectedPlayer);
-            if (selectedPlayer.getName() == PlayerPrefs.GetString("name"))
+            if (selectedPlayer.GetName() == PlayerPrefs.GetString("name"))
             {
                 PlayerPrefs.DeleteAll();
             }
 
             for (int i = 0; i < players.Count; i++)
             {
-                if (selectedPlayer.getName() == ((GameObject)players[i]).gameObject.GetComponent<SelectPlayerButton>().GetPlayerData().getName())
+                if (selectedPlayer.GetName() == ((GameObject)players[i]).gameObject.GetComponent<SelectPlayerButton>().GetPlayerData().GetName())
                 {
                     Destroy((GameObject) players[i]);
                     players.RemoveAt(i);

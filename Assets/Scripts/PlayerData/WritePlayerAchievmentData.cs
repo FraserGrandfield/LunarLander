@@ -9,15 +9,15 @@ public class WritePlayerAchievmentData : MonoBehaviour
 {
     private void OnEnable()
     {
-        PlayerListManager.AddNewPlayerAchievments += savePlayerAchievmentData;
+        PlayerListManager.AddNewPlayerAchievments += SavePlayerAchievmentData;
     }
 
     private void OnDisable()
     {
-        PlayerListManager.AddNewPlayerAchievments -= savePlayerAchievmentData;
+        PlayerListManager.AddNewPlayerAchievments -= SavePlayerAchievmentData;
     }
     
-    private void savePlayerAchievmentData(Dictionary<string, bool> achievments, string name)
+    private void SavePlayerAchievmentData(Dictionary<string, bool> achievements, string name)
     {
         string filePath = Application.persistentDataPath + "/" + name + "PlayerAchievmentData.dat";
         FileStream file;
@@ -30,7 +30,7 @@ public class WritePlayerAchievmentData : MonoBehaviour
             file = File.Create(filePath);
         }
         BinaryFormatter bf = new BinaryFormatter();
-        bf.Serialize(file, achievments);
+        bf.Serialize(file, achievements);
         file.Close();
     }
 }

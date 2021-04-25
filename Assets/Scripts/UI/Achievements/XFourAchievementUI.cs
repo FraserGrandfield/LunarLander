@@ -6,13 +6,13 @@ public class XFourAchievementUI : MonoBehaviour
 {
     void Start()
     {
-        AchievementManager.showX4Achievement += ShowNotification;
+        AchievementManager.ShowX4Achievement += ShowNotification;
         gameObject.SetActive(false);
     }
 
     private void OnDestroy()
     {
-        AchievementManager.showX4Achievement -= ShowNotification;
+        AchievementManager.ShowX4Achievement -= ShowNotification;
     }
 
     private void ShowNotification()

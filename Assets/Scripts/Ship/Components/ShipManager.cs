@@ -5,19 +5,19 @@ using UnityEngine;
 
 public class ShipManager : MonoBehaviour
 {
-    private InputReader _inputReader;
+    private InputReader inputReader;
     public static event Action StartRecording;
     public static event Action<GameObject> CheckCameraPosition;
 
     private IState currentState;
-    private ShipStats _shipStats;
+    private ShipStats shipStats;
 
     private void Start()
     {
-        _shipStats = gameObject.GetComponent<ShipStats>();
-        _inputReader = GetComponent<InputReader>();
+        shipStats = gameObject.GetComponent<ShipStats>();
+        inputReader = GetComponent<InputReader>();
         StartRecording?.Invoke();
-        if (_shipStats.getPlayTutorial())
+        if (shipStats.GetPlayTutorial())
         {
             currentState = new TutorialRotateRight();
         }
@@ -29,17 +29,17 @@ public class ShipManager : MonoBehaviour
 
     public ShipStats getShipStats()
     {
-        return _shipStats;
+        return shipStats;
     }
 
     private void Update()
     {
         CheckCameraPosition?.Invoke(gameObject);
-        InputReader.InputKey? acceleration = _inputReader.ReadAccelerateInput();
-        InputReader.InputKey? accelerateKeyUp = _inputReader.ReadAccelerateInputKeyUp();
-        InputReader.InputKey? rotation = _inputReader.ReadRotateInput();
-        InputReader.InputKey? resume = _inputReader.ReadContinueInput();
-        InputReader.InputKey? pause = _inputReader.ReadPauseInput();
+        InputReader.InputKey? acceleration = inputReader.ReadAccelerateInput();
+        InputReader.InputKey? accelerateKeyUp = inputReader.ReadAccelerateInputKeyUp();
+        InputReader.InputKey? rotation = inputReader.ReadRotateInput();
+        InputReader.InputKey? resume = inputReader.ReadContinueInput();
+        InputReader.InputKey? pause = inputReader.ReadPauseInput();
         UpdateState(acceleration, accelerateKeyUp, rotation, resume, pause);
     }
 
@@ -55,5 +55,4 @@ public class ShipManager : MonoBehaviour
             newState.Enter(this);
         }
     }
-    
 }

@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class ShipAudio : MonoBehaviour
 {
-    [SerializeField] private AudioClip AccelerateShipAudio;
-    [SerializeField] private AudioClip ShipExplosionAudio;
-    [SerializeField] private AudioClip ShipLandedAudio;
+    [SerializeField] private AudioClip accelerateShipAudio;
+    [SerializeField] private AudioClip shipExplosionAudio;
+    [SerializeField] private AudioClip shipLandedAudio;
 
     private AudioSource source;
     void Start()
@@ -18,65 +18,65 @@ public class ShipAudio : MonoBehaviour
 
     private void OnEnable()
     {
-        ShipAccelerating.AccelerateShip += playAccelerateSound;
-        ShipIdle.AcceleratorKeyUp += stopSound;
-        ShipLanded.shipLanded += stopSound;
-        ShipCrashed.shipCrashed += stopSound;
-        ShipCrashed.shipCrashed += playShipExploadSound;
-        ShipCrashed.RestartShip += stopSound;
-        ShipLanded.shipLanded += playShipLandedSound;
-        ShipLanded.RestartShip += stopSound;
-        ShipPaused.PauseShip += stopSound;
-        ShipPlayReplay.IsAccelerating += playAccelerateSound;
-        ShipPlayReplay.StopedAccelerating += stopSound;
-        ShipPlayReplay.HasCrashed += playShipExploadSound;
-        ShipPlayReplay.HasLanded += playShipLandedSound;
-        ShipReplayManager.PauseReplay += stopSound;
+        ShipAccelerating.AccelerateShip += PlayAccelerateSound;
+        ShipIdle.AcceleratorKeyUp += StopSound;
+        ShipLanded.ShipLandedEvent += StopSound;
+        ShipCrashed.ShipCrashedEvent += StopSound;
+        ShipCrashed.ShipCrashedEvent += PlayShipExploadSound;
+        ShipCrashed.RestartShip += StopSound;
+        ShipLanded.ShipLandedEvent += PlayShipLandedSound;
+        ShipLanded.RestartShip += StopSound;
+        ShipPaused.PauseShip += StopSound;
+        ShipPlayReplay.IsAccelerating += PlayAccelerateSound;
+        ShipPlayReplay.StopedAccelerating += StopSound;
+        ShipPlayReplay.HasCrashed += PlayShipExploadSound;
+        ShipPlayReplay.HasLanded += PlayShipLandedSound;
+        ShipReplayManager.PauseReplay += StopSound;
     }
 
     private void OnDisable()
     {
-        ShipAccelerating.AccelerateShip -= playAccelerateSound;
-        ShipIdle.AcceleratorKeyUp -= stopSound;
-        ShipLanded.shipLanded -= stopSound;
-        ShipCrashed.shipCrashed -= stopSound;
-        ShipCrashed.shipCrashed -= playShipExploadSound;
-        ShipCrashed.RestartShip -= stopSound;
-        ShipLanded.shipLanded -= playShipLandedSound;
-        ShipLanded.RestartShip -= stopSound;
-        ShipPaused.PauseShip -= stopSound;
-        ShipPlayReplay.IsAccelerating -= playAccelerateSound;
-        ShipPlayReplay.StopedAccelerating -= stopSound;
-        ShipPlayReplay.HasCrashed -= playShipExploadSound;
-        ShipPlayReplay.HasLanded -= playShipLandedSound;
-        ShipReplayManager.PauseReplay -= stopSound;
+        ShipAccelerating.AccelerateShip -= PlayAccelerateSound;
+        ShipIdle.AcceleratorKeyUp -= StopSound;
+        ShipLanded.ShipLandedEvent -= StopSound;
+        ShipCrashed.ShipCrashedEvent -= StopSound;
+        ShipCrashed.ShipCrashedEvent -= PlayShipExploadSound;
+        ShipCrashed.RestartShip -= StopSound;
+        ShipLanded.ShipLandedEvent -= PlayShipLandedSound;
+        ShipLanded.RestartShip -= StopSound;
+        ShipPaused.PauseShip -= StopSound;
+        ShipPlayReplay.IsAccelerating -= PlayAccelerateSound;
+        ShipPlayReplay.StopedAccelerating -= StopSound;
+        ShipPlayReplay.HasCrashed -= PlayShipExploadSound;
+        ShipPlayReplay.HasLanded -= PlayShipLandedSound;
+        ShipReplayManager.PauseReplay -= StopSound;
     }
 
-    private void playAccelerateSound()
+    private void PlayAccelerateSound()
     {
         if (!source.isPlaying)
         {
-            source.clip = AccelerateShipAudio;
+            source.clip = accelerateShipAudio;
             source.loop = true;
             source.Play();
         }
     }
 
-    private void stopSound()
+    private void StopSound()
     {
         source.Stop();
     }
 
-    private void playShipExploadSound()
+    private void PlayShipExploadSound()
     {
-        source.clip = ShipExplosionAudio;
+        source.clip = shipExplosionAudio;
         source.loop = false;
         source.Play();
     }
 
-    private void playShipLandedSound()
+    private void PlayShipLandedSound()
     {
-        source.clip = ShipLandedAudio;
+        source.clip = shipLandedAudio;
         source.loop = false;
         source.Play();
     }

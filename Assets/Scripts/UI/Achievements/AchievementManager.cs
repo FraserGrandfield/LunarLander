@@ -9,25 +9,25 @@ public class AchievementManager : MonoBehaviour
 {
     private Queue<string> achievementQueue = new Queue<string>();
 
-    public static event Action showLandedAchievement;
-    public static event Action showCrashedAchievement;
-    public static event Action show500Achievement;
-    public static event Action show1000Achievement;
-    public static event Action showX4Achievement;
+    public static event Action ShowLandedAchievement;
+    public static event Action ShowCrashedAchievement;
+    public static event Action Show500Achievement;
+    public static event Action Show1000Achievement;
+    public static event Action ShowX4Achievement;
 
     void Start()
     {
         StartCoroutine(AchievementQueueCheck());
-        ShipCrashed.shipCrashedAchievement += CheckToUnlockAchievement;
-        ShipLanded.shipLandedAchievement += CheckToUnlockAchievement;
-        ShipTouchGround.shipX4Achievement += CheckToUnlockAchievement;
+        ShipCrashed.ShipCrashedAchievement += CheckToUnlockAchievement;
+        ShipLanded.ShipLandedAchievement += CheckToUnlockAchievement;
+        ShipTouchGround.ShipX4Achievement += CheckToUnlockAchievement;
     }
 
     private void OnDestroy()
     {
-        ShipCrashed.shipCrashedAchievement -= CheckToUnlockAchievement;
-        ShipLanded.shipLandedAchievement -= CheckToUnlockAchievement;
-        ShipTouchGround.shipX4Achievement -= CheckToUnlockAchievement;
+        ShipCrashed.ShipCrashedAchievement -= CheckToUnlockAchievement;
+        ShipLanded.ShipLandedAchievement -= CheckToUnlockAchievement;
+        ShipTouchGround.ShipX4Achievement -= CheckToUnlockAchievement;
     }
 
     private void CheckToUnlockAchievement(string achievement)
@@ -53,19 +53,19 @@ public class AchievementManager : MonoBehaviour
         switch (achievement)
         {
             case "landed":
-                showLandedAchievement?.Invoke();
+                ShowLandedAchievement?.Invoke();
                 break;
             case "crashed":
-                showCrashedAchievement?.Invoke();
+                ShowCrashedAchievement?.Invoke();
                 break;
             case "500":
-                show500Achievement?.Invoke();
+                Show500Achievement?.Invoke();
                 break;
             case "1000":
-                show1000Achievement?.Invoke();
+                Show1000Achievement?.Invoke();
                 break;
             case "x4":
-                showX4Achievement?.Invoke();
+                ShowX4Achievement?.Invoke();
                 break;
         }
     }
