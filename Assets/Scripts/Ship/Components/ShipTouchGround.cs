@@ -6,8 +6,9 @@ using UnityEngine;
 public class ShipTouchGround : MonoBehaviour
 {
     public static event Action<bool, int> updateLanded;
+    public static event Action<string> shipX4Achievement;
 
-    private void OnEnable()
+        private void OnEnable()
     {
         GroundContatct.ShipTouchedGround += calculateTouchGround;
     }
@@ -31,6 +32,10 @@ public class ShipTouchGround : MonoBehaviour
         else
         {
             updateLanded?.Invoke(true, multiplier);
+            if (multiplier == 4)
+            {
+                shipX4Achievement?.Invoke("x4");
+            }
         }
     }
 }

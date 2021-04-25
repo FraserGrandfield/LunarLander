@@ -10,6 +10,8 @@ public class PlayerListManager : MonoBehaviour
     private ArrayList players = new ArrayList();
     private PlayerData selectedPlayer = null;
     public static event Action<PlayerData> AddNewPlayer;
+    public static event Action<Dictionary<string, bool>, string> AddNewPlayerAchievments;
+
     public static event Action<string> ShowNotificaiton;
     
     public static event Action<PlayerData> DeletePlayer;
@@ -17,7 +19,7 @@ public class PlayerListManager : MonoBehaviour
     private void OnEnable()
     {
         AddPlayerButton.AddPlayerName += addPlayer;
-        ReadPlayerData.AllPlayerData += addAllPlayersToList;
+        ReadPlayersData.AllPlayerData += addAllPlayersToList;
         SetPlayer.SetPlayerButtonClicked += setActivePlayer;
         SelectPlayerButton.PlayerSelected += setSelectedPlayer;
         DeletePlayerButton.DeletePlayer += DeleteSelectedPlayer;
@@ -26,7 +28,7 @@ public class PlayerListManager : MonoBehaviour
     private void OnDisable()
     {
         AddPlayerButton.AddPlayerName -= addPlayer;
-        ReadPlayerData.AllPlayerData -= addAllPlayersToList;
+        ReadPlayersData.AllPlayerData -= addAllPlayersToList;
         SetPlayer.SetPlayerButtonClicked -= setActivePlayer;
         SelectPlayerButton.PlayerSelected -= setSelectedPlayer;
         DeletePlayerButton.DeletePlayer -= DeleteSelectedPlayer;
@@ -38,8 +40,15 @@ public class PlayerListManager : MonoBehaviour
         if (checkName(pName))
         {
             PlayerData pd = new PlayerData(pName, 100, 100, 1, 0);
+            Dictionary<string, bool> achievments = new Dictionary<string, bool>();
+            achievments.Add("landed", false);
+            achievments.Add("crashed", false);
+            achievments.Add("500", false);
+            achievments.Add("1000", false);
+            achievments.Add("x4", false);
             addPlayerToList(pd);
             AddNewPlayer?.Invoke(pd);
+            AddNewPlayerAchievments?.Invoke(achievments, pName);
         }
     }
 

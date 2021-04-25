@@ -6,6 +6,7 @@ using UnityEngine;
 public class ShipLanded : IState
 {
     public static event Action shipLanded;
+    public static event Action<string> shipLandedAchievement;
     public static event Action RestartShip;
     public static event Action<int> EndGame;
     public static event Action<bool> EndRound;
@@ -15,10 +16,21 @@ public class ShipLanded : IState
     public void Enter(ShipManager ship)
     {
         shipLanded?.Invoke();
+        shipLandedAchievement?.Invoke("landed");
         SaveShipLanded?.Invoke(false);
-        if (ship.gameObject.GetComponent<ShipStats>().getFuel() < 1)
+        ShipStats ss = ship.gameObject.GetComponent<ShipStats>();
+        if (ss.getFuel() < 1)
         {
-            EndGame?.Invoke(ship.gameObject.GetComponent<ShipStats>().getScore());
+            EndGame?.Invoke(ss.getScore());
+            if (ss.getScore() == 500)
+            {
+                shipLandedAchievement?.Invoke("500");
+            }
+
+            if (ss.getScore() == 1000)
+            {
+                shipLandedAchievement?.Invoke("1000");
+            }
         }
         else
         {

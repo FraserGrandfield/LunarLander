@@ -25,5 +25,7 @@ public class DeletePlayer : MonoBehaviour
         {
             File.Delete(files[i]);
         }
+        string filePath = Application.persistentDataPath + "/" + player.getName() + "PlayerAchievmentData.dat";
+        File.Delete(filePath);
     }
 }

@@ -28,7 +28,7 @@ public class WritePlayerData : MonoBehaviour
     {
         string filePath = Application.persistentDataPath + "/" + playerData.getName() + "PlayerData.dat";
         FileStream file;
-        Debug.Log("Save gighscore" + playerData.getHighScore());
+        Debug.Log("Save highscore" + playerData.getHighScore());
         if (File.Exists(filePath))
         {
             file = File.Open(filePath, FileMode.Create, FileAccess.Write, FileShare.None);
