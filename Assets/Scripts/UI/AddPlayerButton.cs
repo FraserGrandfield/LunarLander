@@ -10,11 +10,11 @@ public class AddPlayerButton : UIButton
     public static event Action<String> AddPlayerName;
     protected override void RaiseOnButtonClick()
     {
-        string playerName = getPlayerNameToAdd();
+        string playerName = GetPlayerNameToAdd();
         AddPlayerName?.Invoke(playerName);
     }
 
-    private string getPlayerNameToAdd()
+    private string GetPlayerNameToAdd()
     {
         string playerName = "";
         for (int i = 0; i < gameObject.transform.childCount; i++)

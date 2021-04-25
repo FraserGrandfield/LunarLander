@@ -20,7 +20,6 @@ public class TutorialTurnRightUI : MonoBehaviour
 
     private void ShowRotateRightTutorial()
     {
-        Debug.Log("display tutorial right");
         gameObject.SetActive(true);
     }
     

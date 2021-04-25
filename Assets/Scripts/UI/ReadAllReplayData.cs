@@ -25,7 +25,6 @@ public class ReadAllReplayData : MonoBehaviour
                 replayDataList.Add(filePath);
             }
         }
-        Debug.Log(replayDataList.Count);
         AllReplayData?.Invoke(replayDataList);
     }
 }

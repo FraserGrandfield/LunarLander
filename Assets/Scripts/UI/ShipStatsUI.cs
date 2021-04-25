@@ -29,32 +29,31 @@ public class ShipStatsUI : MonoBehaviour
                 verticalSpeedText = gameObject.transform.GetChild(i).GetComponent<TextMeshProUGUI>();
             }
         }
-        ShipStats.FuelUpdated += updateFuel;
-        ShipStats.ScoreUpdated += updateScore;
-        ShipStats.SpeedUpdated += speedUpdated;
+        ShipStats.FuelUpdated += UpdateFuel;
+        ShipStats.ScoreUpdated += UpdateScore;
+        ShipStats.SpeedUpdated += SpeedUpdated;
     }
     
      private void OnDisable()
     {
-        ShipStats.FuelUpdated -= updateFuel;
-        ShipStats.ScoreUpdated -= updateScore;
-        ShipStats.SpeedUpdated -= speedUpdated;
+        ShipStats.FuelUpdated -= UpdateFuel;
+        ShipStats.ScoreUpdated -= UpdateScore;
+        ShipStats.SpeedUpdated -= SpeedUpdated;
     }
 
-    private void updateFuel(int fuel)
+    private void UpdateFuel(int fuel)
     {
         fuelText.text = "Fuel:  " + fuel;
     }
     
-    private void updateScore(int score)
+    private void UpdateScore(int score)
     {
         scoreText.text = "Score:  " + score;
     }
     
-    private void speedUpdated(int xSpeed, int ySpeed)
+    private void SpeedUpdated(int xSpeed, int ySpeed)
     {
         horizontalSpeedText.text = "Horizontal  Speed:  " + xSpeed;
         verticalSpeedText.text = "Vertical  Speed:  " + ySpeed;
-
     }
 }

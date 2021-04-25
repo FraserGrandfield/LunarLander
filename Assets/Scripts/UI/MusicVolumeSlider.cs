@@ -13,12 +13,12 @@ public class MusicVolumeSlider : MonoBehaviour
     
     private void OnEnable()
     {
-        SaveSettingsButton.SaveSettings += saveVolume;
+        SaveSettingsButton.SaveSettings += SaveVolume;
     }
     
     private void OnDisable()
     {
-        SaveSettingsButton.SaveSettings -= saveVolume;
+        SaveSettingsButton.SaveSettings -= SaveVolume;
     }
 
     void Start()
@@ -28,11 +28,11 @@ public class MusicVolumeSlider : MonoBehaviour
         slider.value = volume;
     }
 
-    private void saveVolume()
+    private void SaveVolume()
     {
         PlayerPrefs.SetInt("musicVolume", (int)slider.value);
         PlayerData pd = new PlayerData(PlayerPrefs.GetString("name"), PlayerPrefs.GetInt("gameVolume"),
-            PlayerPrefs.GetInt("musicVolume"), PlayerPrefs.GetInt("playTutorial"), PlayerPrefs.GetInt("highScore"));
+            PlayerPrefs.GetInt("musicVolume"), PlayerPrefs.GetInt("playTutorial"), PlayerPrefs.GetInt("highscore"));
         UpdatePlayerData?.Invoke(pd);
         UpdateMusicVolume?.Invoke();
     }

@@ -37,7 +37,7 @@ public class PlayTutorialToggal : MonoBehaviour
                 PlayerPrefs.SetInt("playTutorial", 0);
             }
             PlayerData pd = new PlayerData(PlayerPrefs.GetString("name"), PlayerPrefs.GetInt("gameVolume"),
-            PlayerPrefs.GetInt("musicVolume"), PlayerPrefs.GetInt("playTutorial"), PlayerPrefs.GetInt("highScore"));
+            PlayerPrefs.GetInt("musicVolume"), PlayerPrefs.GetInt("playTutorial"), PlayerPrefs.GetInt("highscore"));
             UpdatePlayerData?.Invoke(pd);
         }
         else

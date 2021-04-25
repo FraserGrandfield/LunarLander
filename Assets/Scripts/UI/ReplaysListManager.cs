@@ -7,7 +7,7 @@ using UnityEngine;
 public class ReplaysListManager : MonoBehaviour
 {
     [SerializeField] private GameObject button;
-    private string selectedReplayPath = null;
+    private string selectedReplayPath;
     private ArrayList replays = new ArrayList();
     public static event Action<string> ShowNotificaiton;
     public static event Action<string> ChangeScene;
@@ -15,33 +15,30 @@ public class ReplaysListManager : MonoBehaviour
 
     private void OnEnable()
     {
-        ReadAllReplayData.AllReplayData += addAllReplaysToList;
-        SelectReplayButton.ReplaySelected += setSelectedReplay;
-        SetReplayButton.SetReplayButtonClicked += setActiveReplay;
+        ReadAllReplayData.AllReplayData += AddAllReplaysToList;
+        SelectReplayButton.ReplaySelected += SetSelectedReplay;
+        SetReplayButton.SetReplayButtonClicked += SetActiveReplay;
         DeleteReplayButton.DeleteReplayClicked += DeleteSelectedReplay;
     }
     
     private void OnDisable()
     {
-        ReadAllReplayData.AllReplayData -= addAllReplaysToList;
-        SelectReplayButton.ReplaySelected -= setSelectedReplay;
-        SetReplayButton.SetReplayButtonClicked -= setActiveReplay;
+        ReadAllReplayData.AllReplayData -= AddAllReplaysToList;
+        SelectReplayButton.ReplaySelected -= SetSelectedReplay;
+        SetReplayButton.SetReplayButtonClicked -= SetActiveReplay;
         DeleteReplayButton.DeleteReplayClicked -= DeleteSelectedReplay;
     }
 
-    private void addAllReplaysToList(ArrayList replaysList)
+    private void AddAllReplaysToList(ArrayList replaysList)
     {
-        Debug.Log("Here1");
         foreach(string replay in replaysList)
         {
-            Debug.Log("Here2");
-            addReplayToList(replay);
+            AddReplayToList(replay);
         }
     }
     
-    private void addReplayToList(string replayPath)
+    private void AddReplayToList(string replayPath)
     {
-        Debug.Log("Here3");
         GameObject newButton = Instantiate(button);
         newButton.SetActive(true);
         newButton.GetComponent<SelectReplayButton>().SetReplay(replayPath, replays.Count);
@@ -50,12 +47,12 @@ public class ReplaysListManager : MonoBehaviour
         replays.Add(newButton);
     }
     
-    private void setSelectedReplay(string replayPath)
+    private void SetSelectedReplay(string replayPath)
     {
         selectedReplayPath = replayPath;
     }
 
-    private void setActiveReplay()
+    private void SetActiveReplay()
     {
         if (selectedReplayPath != null)
         {

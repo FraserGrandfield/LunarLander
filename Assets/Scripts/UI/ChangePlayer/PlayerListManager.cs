@@ -17,26 +17,26 @@ public class PlayerListManager : MonoBehaviour
 
     private void OnEnable()
     {
-        AddPlayerButton.AddPlayerName += addPlayer;
-        ReadPlayersData.AllPlayerData += addAllPlayersToList;
-        SetPlayer.SetPlayerButtonClicked += setActivePlayer;
-        SelectPlayerButton.PlayerSelected += setSelectedPlayer;
+        AddPlayerButton.AddPlayerName += AddPlayer;
+        ReadPlayersData.AllPlayerData += AddAllPlayersToList;
+        SetPlayer.SetPlayerButtonClicked += SetActivePlayer;
+        SelectPlayerButton.PlayerSelected += SetSelectedPlayer;
         DeletePlayerButton.DeletePlayer += DeleteSelectedPlayer;
     }
     
     private void OnDisable()
     {
-        AddPlayerButton.AddPlayerName -= addPlayer;
-        ReadPlayersData.AllPlayerData -= addAllPlayersToList;
-        SetPlayer.SetPlayerButtonClicked -= setActivePlayer;
-        SelectPlayerButton.PlayerSelected -= setSelectedPlayer;
+        AddPlayerButton.AddPlayerName -= AddPlayer;
+        ReadPlayersData.AllPlayerData -= AddAllPlayersToList;
+        SetPlayer.SetPlayerButtonClicked -= SetActivePlayer;
+        SelectPlayerButton.PlayerSelected -= SetSelectedPlayer;
         DeletePlayerButton.DeletePlayer -= DeleteSelectedPlayer;
     }
 
-    private void addPlayer(string pName)
+    private void AddPlayer(string pName)
     {
         Debug.Log("addName: " + pName);
-        if (checkName(pName))
+        if (CheckName(pName))
         {
             PlayerData pd = new PlayerData(pName, 100, 100, 1, 0);
             Dictionary<string, bool> achievments = new Dictionary<string, bool>();
@@ -45,21 +45,21 @@ public class PlayerListManager : MonoBehaviour
             achievments.Add("500", false);
             achievments.Add("1000", false);
             achievments.Add("x4", false);
-            addPlayerToList(pd);
+            AddPlayerToList(pd);
             AddNewPlayer?.Invoke(pd);
             AddNewPlayerAchievments?.Invoke(achievments, pName);
         }
     }
 
-    private void addAllPlayersToList(ArrayList playerDataList)
+    private void AddAllPlayersToList(ArrayList playerDataList)
     {
         for (int i = 0; i < playerDataList.Count; i++)
         {
-            addPlayerToList(((PlayerData)playerDataList[i]));
+            AddPlayerToList(((PlayerData)playerDataList[i]));
         }
     }
 
-    private void addPlayerToList(PlayerData player)
+    private void AddPlayerToList(PlayerData player)
     {
         GameObject newButton = Instantiate(button);
         players.Add(newButton);
@@ -69,7 +69,7 @@ public class PlayerListManager : MonoBehaviour
         newButton.transform.localScale = new Vector3(1, 1, 1);
     }
 
-    private bool checkName(string pName)
+    private bool CheckName(string pName)
     {
         if ( pName.Length > 10 || pName == "")
         {
@@ -87,12 +87,12 @@ public class PlayerListManager : MonoBehaviour
         return true;
     }
 
-    private void setSelectedPlayer(PlayerData player)
+    private void SetSelectedPlayer(PlayerData player)
     {
         selectedPlayer = player;
     }
 
-    private void setActivePlayer()
+    private void SetActivePlayer()
     {
         if (selectedPlayer != null)
         {

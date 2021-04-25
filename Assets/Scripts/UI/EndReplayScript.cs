@@ -7,16 +7,16 @@ public class EndReplayScript : MonoBehaviour
 
     private void Start()
     {
-        ShipPlayReplay.EndOfReplay += showEndGameUI;
+        ShipPlayReplay.EndOfReplay += ShowEndGameUI;
         gameObject.SetActive(false);
     }
     
     private void OnDestroy()
     { 
-        ShipPlayReplay.EndOfReplay -= showEndGameUI;
+        ShipPlayReplay.EndOfReplay -= ShowEndGameUI;
     }
 
-    private void showEndGameUI(int score)
+    private void ShowEndGameUI(int score)
     {
         gameObject.SetActive(true);
     }

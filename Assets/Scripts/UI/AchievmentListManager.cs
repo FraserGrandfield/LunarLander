@@ -13,10 +13,10 @@ public class AchievmentListManager : MonoBehaviour
 
     private void Start()
     {
-        getPlayerData();
+        GetPlayerData();
     }
 
-    private void getPlayerData()
+    private void GetPlayerData()
     {
         string filePath = Application.persistentDataPath + "/" + PlayerPrefs.GetString("name") + "PlayerAchievmentData.dat";
         if (File.Exists(filePath))
@@ -25,11 +25,11 @@ public class AchievmentListManager : MonoBehaviour
             BinaryFormatter bf = new BinaryFormatter();
             achievments = (Dictionary<string, bool>) bf.Deserialize(file);
             file.Close();
-            showAchievments();
+            ShowAchievments();
         }
     }
 
-    private void showAchievments()
+    private void ShowAchievments()
     {
         if (achievments["landed"])
         {

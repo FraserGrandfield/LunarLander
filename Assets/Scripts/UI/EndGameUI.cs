@@ -17,18 +17,18 @@ public class EndGameUI : MonoBehaviour
                 scoreText = gameObject.transform.GetChild(i).GetComponent<TextMeshProUGUI>();
             } 
         }
-        ShipLanded.EndGame += showEndGameUI;
-        ShipCrashed.EndGame += showEndGameUI;
+        ShipLanded.EndGame += ShowEndGameUI;
+        ShipCrashed.EndGame += ShowEndGameUI;
         gameObject.SetActive(false);
     }
     
     private void OnDestroy()
     { 
-        ShipLanded.EndGame -= showEndGameUI;
-        ShipCrashed.EndGame -= showEndGameUI;
+        ShipLanded.EndGame -= ShowEndGameUI;
+        ShipCrashed.EndGame -= ShowEndGameUI;
     }
 
-    private void showEndGameUI(int score)
+    private void ShowEndGameUI(int score)
     {
         gameObject.SetActive(true);
         scoreText.text = "Score:  " + score;

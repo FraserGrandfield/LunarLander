@@ -19,8 +19,8 @@ public class BackgroundMusic : MonoBehaviour
         {
             Destroy(transform.gameObject);
         }
-        MusicVolumeSlider.UpdateMusicVolume += audioChanged;
-        PlayerListManager.UpdateMusicVolume += audioChanged;
+        MusicVolumeSlider.UpdateMusicVolume += AudioChanged;
+        PlayerListManager.UpdateMusicVolume += AudioChanged;
         audioSource = gameObject.GetComponent<AudioSource>();
         if (PlayerPrefs.HasKey("musicVolume"))
         {
@@ -35,11 +35,11 @@ public class BackgroundMusic : MonoBehaviour
 
     private void OnDestroy()
     {
-        MusicVolumeSlider.UpdateMusicVolume -= audioChanged;
-        PlayerListManager.UpdateMusicVolume -= audioChanged;
+        MusicVolumeSlider.UpdateMusicVolume -= AudioChanged;
+        PlayerListManager.UpdateMusicVolume -= AudioChanged;
     }
 
-    private void audioChanged()
+    private void AudioChanged()
     {
         audioSource.volume = (float)PlayerPrefs.GetInt("musicVolume") / 100;
     }
