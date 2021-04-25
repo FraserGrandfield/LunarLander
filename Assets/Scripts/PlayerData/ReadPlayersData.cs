@@ -5,7 +5,7 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
-public class ReadPlayerData : MonoBehaviour
+public class ReadPlayersData : MonoBehaviour
 {
     public static event Action<ArrayList> AllPlayerData;
 
