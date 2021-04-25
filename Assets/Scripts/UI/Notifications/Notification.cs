@@ -12,6 +12,7 @@ public class Notification : MonoBehaviour
         SaveSettingsButton.ShowNotification += ShowNotification;
         HomeScreenPlayButton.ShowNotification += ShowNotification;
         ReplaysListManager.ShowNotificaiton += ShowNotification;
+        PlayTutorialToggal.ShowNotification += ShowNotification;
         gameObject.SetActive(false);
     }
 
@@ -21,6 +22,7 @@ public class Notification : MonoBehaviour
         SaveSettingsButton.ShowNotification -= ShowNotification;
         HomeScreenPlayButton.ShowNotification -= ShowNotification;
         ReplaysListManager.ShowNotificaiton -= ShowNotification;
+        PlayTutorialToggal.ShowNotification -= ShowNotification;
     }
 
     private void ShowNotification(string notificationText)

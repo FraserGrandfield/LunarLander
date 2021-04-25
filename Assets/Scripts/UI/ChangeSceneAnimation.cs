@@ -11,6 +11,8 @@ public class ChangeSceneAnimation : MonoBehaviour
         MainMenuButton.OnUIButtonClick += StartChangeSceneAnimation;
         HomeScreenPlayButton.OnUIButtonClick += StartChangeSceneAnimation;
         ReplaysListManager.ChangeScene += StartChangeSceneAnimation;
+        SaveGameMainMenuButton.ChangeSceneAnimation += StartChangeSceneAnimation;
+        SaveGamePlayAgainButton.ChangeSceneAnimation += StartChangeSceneAnimation;
     }
     
      private void OnDisable()
@@ -18,6 +20,8 @@ public class ChangeSceneAnimation : MonoBehaviour
         MainMenuButton.OnUIButtonClick -= StartChangeSceneAnimation;
         HomeScreenPlayButton.OnUIButtonClick -= StartChangeSceneAnimation;
         ReplaysListManager.ChangeScene -= StartChangeSceneAnimation;
+        SaveGameMainMenuButton.ChangeSceneAnimation -= StartChangeSceneAnimation;
+        SaveGamePlayAgainButton.ChangeSceneAnimation -= StartChangeSceneAnimation;
     }
 
     void Start()
