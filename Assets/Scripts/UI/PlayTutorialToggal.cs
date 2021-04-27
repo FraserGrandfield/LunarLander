@@ -7,10 +7,12 @@ using UnityEngine.UI;
 public class PlayTutorialToggal : MonoBehaviour
 {
     private Toggle toggle;
+    private AudioSource audioSource;
     public static event Action<PlayerData> UpdatePlayerData;
     public static event Action<string> ShowNotification;
     void Start()
     {
+        audioSource = gameObject.GetComponent<AudioSource>();
         toggle = gameObject.GetComponent<Toggle>();
         if (PlayerPrefs.GetInt("playTutorial") == 0)
         {
@@ -25,6 +27,18 @@ public class PlayTutorialToggal : MonoBehaviour
 
     private void ToggleValueChanged(bool playTutorial)
     {
+        if (audioSource != null)
+        {
+            if (PlayerPrefs.HasKey("gameVolume"))
+            {
+                audioSource.volume = (float)PlayerPrefs.GetInt("gameVolume") / 100;
+            }
+            else
+            {
+                audioSource.volume = 0.5f;
+            }
+            audioSource.Play();
+        }
         if (PlayerPrefs.HasKey("name"))
         {
             if (playTutorial)
