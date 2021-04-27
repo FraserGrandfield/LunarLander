@@ -39,17 +39,17 @@ public class AchievementManager : MonoBehaviour
             FileStream file = File.OpenRead(filePath);
             BinaryFormatter bf = new BinaryFormatter();
             Dictionary<string, bool> achievementDic = (Dictionary<string, bool>)bf.Deserialize(file);
+            file.Close();
             if (!achievementDic[achievement])
             {
+                SaveUnlockedAchievement(achievement);
                 achievementQueue.Enqueue(achievement);
             }
-            file.Close();
         }
     }
 
-    private void UnlockAchievement(string achievement)
+    private void DisplayAchievement(string achievement)
     {
-        SaveUnlock(achievement);
         switch (achievement)
         {
             case "landed":
@@ -70,7 +70,7 @@ public class AchievementManager : MonoBehaviour
         }
     }
 
-    private void SaveUnlock(string achievement)
+    private void SaveUnlockedAchievement(string achievement)
     {
         string filePath = Application.persistentDataPath + "/" + PlayerPrefs.GetString("name") + "PlayerAchievmentData.dat";
         FileStream file;
@@ -93,7 +93,7 @@ public class AchievementManager : MonoBehaviour
         {
             if (achievementQueue.Count > 0)
             {
-                UnlockAchievement(achievementQueue.Dequeue());
+                DisplayAchievement(achievementQueue.Dequeue());
             }
             yield return new WaitForSeconds(2f);
         }
