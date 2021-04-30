@@ -30,6 +30,7 @@ public class EndGameUI : MonoBehaviour
 
     private void ShowEndGameUI(int score)
     {
+        Cursor.visible = true;
         gameObject.SetActive(true);
         scoreText.text = "Score:  " + score;
     }

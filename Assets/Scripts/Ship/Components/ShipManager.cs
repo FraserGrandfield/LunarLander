@@ -14,6 +14,7 @@ public class ShipManager : MonoBehaviour
 
     private void Start()
     {
+        Cursor.visible = false;
         shipStats = gameObject.GetComponent<ShipStats>();
         inputReader = GetComponent<InputReader>();
         StartRecording?.Invoke();

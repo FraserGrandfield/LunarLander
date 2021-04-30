@@ -24,11 +24,13 @@ public class PauseGameUI : MonoBehaviour
 
     private void ShowPauseGame()
     {
+        Cursor.visible = true;
         gameObject.SetActive(true);
     }
 
     private void HidePauseGame()
     {
+        Cursor.visible = false;
         gameObject.SetActive(false);
     }
 }
