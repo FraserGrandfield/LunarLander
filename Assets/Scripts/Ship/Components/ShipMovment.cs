@@ -13,7 +13,7 @@ public class ShipMovment : MonoBehaviour
     private int rotateDireciton;
     private bool gamePaused;
     private float thrust = 10;
-    private float rotateMultiplier = 2;
+    private float rotateMultiplier = 1.1f;
     private bool isAccelerating;
     private Vector2 spawnVelocity = new Vector2(2, 0);
     
@@ -108,6 +108,7 @@ public class ShipMovment : MonoBehaviour
     {
         if (!gamePaused) 
         {
+            Debug.Log(transform.rotation.eulerAngles.z);
             SaveFrame?.Invoke(isAccelerating);
             MoveShip();
             RotateShip();

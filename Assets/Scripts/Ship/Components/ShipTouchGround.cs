@@ -21,11 +21,11 @@ public class ShipTouchGround : MonoBehaviour
     private void CalculateTouchGround(int multiplier, float groundRotation)
     {
         float shipRotation = transform.rotation.eulerAngles.z;
-        float rotationDifference = Math.Max(shipRotation, groundRotation) - Math.Min(shipRotation, groundRotation);
+        //float rotationDifference = Math.Max(shipRotation, groundRotation) - Math.Min(shipRotation, groundRotation);
         
         float shipXSpeed = GetComponent<ShipStats>().GetXSpeed();
         float shipYSpeed = GetComponent<ShipStats>().GetYSpeed();
-        if (Math.Abs(shipXSpeed) > 7 || Math.Abs(shipYSpeed) > 7 || rotationDifference > 7)
+        if (Math.Abs(shipXSpeed) > 7 || Math.Abs(shipYSpeed) > 7 || (shipRotation >= 6  && shipRotation <= 354))
         {
             UpdateLanded?.Invoke(false, multiplier);
         }
