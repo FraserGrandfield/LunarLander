@@ -8,7 +8,6 @@ using UnityEngine;
 public class AchievementManager : MonoBehaviour
 {
     private Queue<string> achievementQueue = new Queue<string>();
-
     public static event Action ShowLandedAchievement;
     public static event Action ShowCrashedAchievement;
     public static event Action Show500Achievement;

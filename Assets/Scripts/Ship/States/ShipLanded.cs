@@ -38,7 +38,8 @@ public class ShipLanded : IState
         }
     }
 
-    public IState Tick(ShipManager ship, InputReader.InputKey? acceleration, InputReader.InputKey? accelerateKeyUp, InputReader.InputKey? rotation, InputReader.InputKey? resume, InputReader.InputKey? pause)
+    public IState Tick(ShipManager ship, InputReader.InputKey? acceleration, InputReader.InputKey? accelerateKeyUp,
+        InputReader.InputKey? rotation, InputReader.InputKey? resume, InputReader.InputKey? pause)
     {
         if (resume == InputReader.InputKey.Resume && ship.gameObject.GetComponent<ShipStats>().GetFuel() > 0)
         {

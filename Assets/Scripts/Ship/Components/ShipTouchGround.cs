@@ -23,7 +23,7 @@ public class ShipTouchGround : MonoBehaviour
         float shipRotation = transform.rotation.eulerAngles.z;
         float shipXSpeed = GetComponent<ShipStats>().GetXSpeed();
         float shipYSpeed = GetComponent<ShipStats>().GetYSpeed();
-        if (Math.Abs(shipXSpeed) > 7 || Math.Abs(shipYSpeed) > 7 || (shipRotation >= 6  && shipRotation <= 354))
+        if (Math.Abs(shipXSpeed) > 3 || Math.Abs(shipYSpeed) > 4 || (shipRotation >= 6  && shipRotation <= 354))
         {
             UpdateLanded?.Invoke(false, multiplier);
         }
