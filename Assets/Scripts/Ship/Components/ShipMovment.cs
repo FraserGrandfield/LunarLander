@@ -108,7 +108,6 @@ public class ShipMovment : MonoBehaviour
     {
         if (!gamePaused) 
         {
-            Debug.Log(transform.rotation.eulerAngles.z);
             SaveFrame?.Invoke(isAccelerating);
             MoveShip();
             RotateShip();
