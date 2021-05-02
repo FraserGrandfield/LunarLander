@@ -21,6 +21,7 @@ public class BackgroundMusic : MonoBehaviour
         }
         MusicVolumeSlider.UpdateMusicVolume += AudioChanged;
         PlayerListManager.UpdateMusicVolume += AudioChanged;
+        PlayerListManager.CurrentPlayerDeleted += AudioChanged;
         audioSource = gameObject.GetComponent<AudioSource>();
         if (PlayerPrefs.HasKey("musicVolume"))
         {
@@ -37,10 +38,18 @@ public class BackgroundMusic : MonoBehaviour
     {
         MusicVolumeSlider.UpdateMusicVolume -= AudioChanged;
         PlayerListManager.UpdateMusicVolume -= AudioChanged;
+        PlayerListManager.CurrentPlayerDeleted -= AudioChanged;
     }
 
     private void AudioChanged()
     {
-        audioSource.volume = (float)PlayerPrefs.GetInt("musicVolume") / 100;
+        if (PlayerPrefs.HasKey("musicVolume"))
+        {
+            audioSource.volume = (float)PlayerPrefs.GetInt("musicVolume") / 100;
+        }
+        else
+        {
+            audioSource.volume = 0.5f;
+        }
     }
 }

@@ -10,6 +10,7 @@ public class PlayerListManager : MonoBehaviour
     private ArrayList players = new ArrayList();
     private PlayerData selectedPlayer;
     public static event Action<PlayerData> AddNewPlayer;
+    public static event Action CurrentPlayerDeleted;
     public static event Action<Dictionary<string, bool>, string> AddNewPlayerAchievments;
     public static event Action UpdateMusicVolume;
     public static event Action<string> ShowNotificaiton;
@@ -38,7 +39,7 @@ public class PlayerListManager : MonoBehaviour
         Debug.Log("addName: " + pName);
         if (CheckName(pName))
         {
-            PlayerData pd = new PlayerData(pName, 100, 100, 1, 0);
+            PlayerData pd = new PlayerData(pName, 50, 50, 1, 0);
             Dictionary<string, bool> achievments = new Dictionary<string, bool>();
             achievments.Add("landed", false);
             achievments.Add("crashed", false);
@@ -120,6 +121,7 @@ public class PlayerListManager : MonoBehaviour
             if (selectedPlayer.GetName() == PlayerPrefs.GetString("name"))
             {
                 PlayerPrefs.DeleteAll();
+                CurrentPlayerDeleted?.Invoke();
             }
 
             for (int i = 0; i < players.Count; i++)
